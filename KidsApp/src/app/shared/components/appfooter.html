@@ -1,0 +1,38 @@
+<footer>
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="copyRight">
+        <span class="copyRight">
+          {{CopyRights}}
+        </span>
+        <ul class="footer-links">
+          <li>
+            <span class="fLink">
+              <a [routerLink]="'contactus'">{{resources?.ContactUs}}</a>
+            </span>
+          </li>
+          <li>
+            <span class="fLink">
+              <a [routerLink]="'aboutus'">{{resources?.About}}</a>
+            </span>
+          </li>
+          <li>
+            <span class="fLink">
+              <a [routerLink]="'termsandconditions'">{{resources?.TAC}}</a>
+            </span>
+          </li>
+          <li>
+            <span class="fLink">
+              <a [routerLink]="'privacy'">{{resources?.PAC }}</a>
+            </span>
+          </li>
+        </ul>
+        
+       
+      </div>
+    </div>
+  </div>
+  <div class="scrollUp" (appClick)="ScrollUp()">
+
+  </div>
+</footer>

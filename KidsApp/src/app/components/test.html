@@ -1,0 +1,20 @@
+<div class="contact-form-container">
+
+  <div class="container contact-form">
+
+
+    <div id="form-container">
+      <!-- Tap element will be here -->
+      <div id="element-container"></div>
+      <div id="error-handler" role="alert"></div>
+
+      <div id="success" style=" display: none;position: relative;float: left;">
+        Success! Your token is <span id="token"></span>
+      </div>
+
+      <!-- Tap pay button -->
+      <button id="tap-btn" (appClick)="OnSubmit()">Submit</button>
+    </div>
+
+  </div>
+</div>
