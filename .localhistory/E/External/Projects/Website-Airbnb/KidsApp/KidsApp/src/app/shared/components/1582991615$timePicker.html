@@ -1,0 +1,30 @@
+<div class="timepicker" (appClick)="OnClickInside()">
+
+  <div class="timepicker-input-wwrapper">
+    <div class="form-control" (appClick)="OnFocus()">{{DisplayTest}}</div>
+    <i class="time-icon far fa-clock" (appClick)="OnFocus()"></i>
+  </div>
+  <div class="timepicker-select-wrapper" [appHidden]="!IsTimeSelectorShown">
+    <div class="row">
+      <div class="row col-md-12">
+        <div class="col-md-4"><i class="fas fa-chevron-up" (appClick)="IncrementHour()"></i></div>
+        <div class="col-md-4"><i class="fas fa-chevron-up" (appClick)="IncrementMins()"></i></div>
+        <div class="col-md-4"><i class="fas fa-chevron-up" (appClick)="ToggleMeridan()"></i></div>
+      </div>
+      <div class="row  col-md-12">
+        <div class="col-md-4">
+          <input [(ngModel)]="Hours" class="time-picker-hm" (blur)="ValidateHours()" />
+        </div>
+        <div class="col-md-4">
+          <input [(ngModel)]="Mins" class="time-picker-hm" (blur)="ValidateMins()"  />
+        </div>
+        <div class="col-md-4">{{Meridan}}</div>
+      </div>
+      <div class="row  col-md-12">
+        <div class="col-md-4"><i class="fas fa-chevron-down" (appClick)="DecrementHour()"></i></div>
+        <div class="col-md-4"><i class="fas fa-chevron-down" (appClick)="DecrementMins()"></i></div>
+        <div class="col-md-4"><i class="fas fa-chevron-down" (appClick)="ToggleMeridan()"></i></div>
+      </div>
+    </div>
+  </div>
+</div>

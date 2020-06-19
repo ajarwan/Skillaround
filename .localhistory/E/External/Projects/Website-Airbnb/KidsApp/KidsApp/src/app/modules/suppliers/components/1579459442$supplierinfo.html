@@ -1,0 +1,619 @@
+<div class="content-wrapper">
+  <!-- Page Title Header Starts-->
+  <div class="row page-title-header">
+    <div class="col-12">
+      <div class="page-header">
+        <h4 class="page-title">{{resources.PersonalInfo}}</h4>
+      </div>
+    </div>
+
+  </div>
+  <!-- Page Title Header Ends-->
+  <div class="row">
+    <div class="col-md-12 grid-margin">
+      <div class="row">
+        <div class="col-sm-6 col-lg-6">
+          <div class="form-group row">
+            <label for="exampleInputEmail2" class="col-sm-3 col-form-label">{{resources.FirstName}}</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" [(ngModel)]="User.FirstName">
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-6">
+          <div class="form-group row">
+            <label for="exampleInputPassword2" class="col-sm-3 col-form-label">{{resources.LastName}}</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" [(ngModel)]="User.LastName">
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-6">
+
+          <div class="form-group row">
+            <label for="exampleInputEmail2" class="col-sm-3 col-form-label">{{resources.Email}}</label>
+            <div class="col-sm-9">
+              <input type="email" class="form-control" [(ngModel)]="User.Email" disabled="disabled">
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-6">
+          <div class="form-group row">
+            <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Password</label>
+            <div class="col-sm-9">
+              <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-6">
+
+          <div class="form-group row">
+            <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Email</label>
+            <div class="col-sm-9">
+              <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Enter email">
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-6">
+          <div class="form-group row">
+            <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Password</label>
+            <div class="col-sm-9">
+              <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12">
+          <button type="submit" class="btn btn-success mr-2">Submit</button>
+          <button class="btn btn-light">Cancel</button>
+        </div>
+
+      </div>
+      <div class="row m-top-100">
+        <div class="col-sm-12 ">
+
+
+          <div class="dropdown ">
+            <button class="btn btn-primary icon-btn dropdown-toggle" type="button" id="dropdownMenuIconButton6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-plus"></i> &nbsp; Add
+            </button>
+            <div class="dropdown-menu dropdownmenuList" aria-labelledby="dropdownMenuIconButton6">
+              <ul>
+                <li>
+                  <a href="#">
+                    <i class="fa fa-file-image-o" aria-hidden="true"></i>
+                    <span>Profile Picture</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <i class="fa fa-file-image-o" aria-hidden="true"></i>
+                    <span>Personal ID</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <i class="fa fa-file-image-o" aria-hidden="true"></i>
+                    <span>Personal ID</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <i class="fa fa-file-image-o" aria-hidden="true"></i>
+                    <span>Personal ID</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <i class="fa fa-file-image-o" aria-hidden="true"></i>
+                    <span>Personal ID</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <i class="fa fa-file-image-o" aria-hidden="true"></i>
+                    <span>Personal ID</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--accordien-->
+      <div class="accordienWrapper">
+        <div id="accordion">
+          <div class="card">
+            <div class="card-header">
+              <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                Profile Pictures
+              </a>
+            </div>
+            <div id="collapseOne" class="collapse show" data-parent="#accordion">
+              <div class="card-body">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th># </th>
+                      <th> Document Title </th>
+                      <th> Uploaded By </th>
+                      <th> Uploaded Date </th>
+                      <th> Actions </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td class="py-1">
+                        <div class="documentWrap">
+                          <div class="imgWrap">
+                            <img src="assets/images/faces-clipart/pic-1.png" alt="image">
+                          </div>
+                          <div class="imgDesc">
+                            <h5>Footer.PNG</h5>
+                            <p>File Size In Bytes 1.14MB</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td> Herman Beck </td>
+
+                      <td> May 15, 2015 </td>
+                      <td>
+                        <ul class="tableActionBtnsWrap">
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-pencil"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-download"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-trash"></i>
+                            </a>
+                          </li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>1</td>
+                      <td class="py-1">
+                        <div class="documentWrap">
+                          <div class="imgWrap">
+                            <img src="assets/images/faces-clipart/pic-1.png" alt="image">
+                          </div>
+                          <div class="imgDesc">
+                            <h5>Footer.PNG</h5>
+                            <p>File Size In Bytes 1.14MB</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td> Herman Beck </td>
+
+                      <td> May 15, 2015 </td>
+                      <td>
+                        <ul class="tableActionBtnsWrap">
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-pencil"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-download"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-trash"></i>
+                            </a>
+                          </li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>1</td>
+                      <td class="py-1">
+                        <div class="documentWrap">
+                          <div class="imgWrap">
+                            <img src="assets/images/faces-clipart/pic-1.png" alt="image">
+                          </div>
+                          <div class="imgDesc">
+                            <h5>Footer.PNG</h5>
+                            <p>File Size In Bytes 1.14MB</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td> Herman Beck </td>
+
+                      <td> May 15, 2015 </td>
+                      <td>
+                        <ul class="tableActionBtnsWrap">
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-pencil"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-download"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-trash"></i>
+                            </a>
+                          </li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>1</td>
+                      <td class="py-1">
+                        <div class="documentWrap">
+                          <div class="imgWrap">
+                            <img src="assets/images/faces-clipart/pic-1.png" alt="image">
+                          </div>
+                          <div class="imgDesc">
+                            <h5>Footer.PNG</h5>
+                            <p>File Size In Bytes 1.14MB</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td> Herman Beck </td>
+
+                      <td> May 15, 2015 </td>
+                      <td>
+                        <ul class="tableActionBtnsWrap">
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-pencil"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-download"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-trash"></i>
+                            </a>
+                          </li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>1</td>
+                      <td class="py-1">
+                        <div class="documentWrap">
+                          <div class="imgWrap">
+                            <img src="assets/images/faces-clipart/pic-1.png" alt="image">
+                          </div>
+                          <div class="imgDesc">
+                            <h5>Footer.PNG</h5>
+                            <p>File Size In Bytes 1.14MB</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td> Herman Beck </td>
+
+                      <td> May 15, 2015 </td>
+                      <td>
+                        <ul class="tableActionBtnsWrap">
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-pencil"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-download"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-trash"></i>
+                            </a>
+                          </li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>1</td>
+                      <td class="py-1">
+                        <div class="documentWrap">
+                          <div class="imgWrap">
+                            <img src="assets/images/faces-clipart/pic-1.png" alt="image">
+                          </div>
+                          <div class="imgDesc">
+                            <h5>Footer.PNG</h5>
+                            <p>File Size In Bytes 1.14MB</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td> Herman Beck </td>
+
+                      <td> May 15, 2015 </td>
+                      <td>
+                        <ul class="tableActionBtnsWrap">
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-pencil"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-download"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-trash"></i>
+                            </a>
+                          </li>
+                        </ul>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
+                Personal Id
+              </a>
+            </div>
+            <div id="collapseTwo" class="collapse" data-parent="#accordion">
+              <div class="card-body">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th># </th>
+                      <th> Document Title </th>
+                      <th> Uploaded By </th>
+                      <th> Uploaded Date </th>
+                      <th> Actions </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td class="py-1">
+                        <div class="documentWrap">
+                          <div class="imgWrap">
+                            <img src="assets/images/faces-clipart/pic-1.png" alt="image">
+                          </div>
+                          <div class="imgDesc">
+                            <h5>Footer.PNG</h5>
+                            <p>File Size In Bytes 1.14MB</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td> Herman Beck </td>
+
+                      <td> May 15, 2015 </td>
+                      <td>
+                        <ul class="tableActionBtnsWrap">
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-pencil"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-download"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-trash"></i>
+                            </a>
+                          </li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>1</td>
+                      <td class="py-1">
+                        <div class="documentWrap">
+                          <div class="imgWrap">
+                            <img src="assets/images/faces-clipart/pic-1.png" alt="image">
+                          </div>
+                          <div class="imgDesc">
+                            <h5>Footer.PNG</h5>
+                            <p>File Size In Bytes 1.14MB</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td> Herman Beck </td>
+
+                      <td> May 15, 2015 </td>
+                      <td>
+                        <ul class="tableActionBtnsWrap">
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-pencil"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-download"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-trash"></i>
+                            </a>
+                          </li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>1</td>
+                      <td class="py-1">
+                        <div class="documentWrap">
+                          <div class="imgWrap">
+                            <img src="assets/images/faces-clipart/pic-1.png" alt="image">
+                          </div>
+                          <div class="imgDesc">
+                            <h5>Footer.PNG</h5>
+                            <p>File Size In Bytes 1.14MB</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td> Herman Beck </td>
+
+                      <td> May 15, 2015 </td>
+                      <td>
+                        <ul class="tableActionBtnsWrap">
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-pencil"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-download"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-trash"></i>
+                            </a>
+                          </li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>1</td>
+                      <td class="py-1">
+                        <div class="documentWrap">
+                          <div class="imgWrap">
+                            <img src="assets/images/faces-clipart/pic-1.png" alt="image">
+                          </div>
+                          <div class="imgDesc">
+                            <h5>Footer.PNG</h5>
+                            <p>File Size In Bytes 1.14MB</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td> Herman Beck </td>
+
+                      <td> May 15, 2015 </td>
+                      <td>
+                        <ul class="tableActionBtnsWrap">
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-pencil"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-download"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-trash"></i>
+                            </a>
+                          </li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>1</td>
+                      <td class="py-1">
+                        <div class="documentWrap">
+                          <div class="imgWrap">
+                            <img src="assets/images/faces-clipart/pic-1.png" alt="image">
+                          </div>
+                          <div class="imgDesc">
+                            <h5>Footer.PNG</h5>
+                            <p>File Size In Bytes 1.14MB</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td> Herman Beck </td>
+
+                      <td> May 15, 2015 </td>
+                      <td>
+                        <ul class="tableActionBtnsWrap">
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-pencil"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-download"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-trash"></i>
+                            </a>
+                          </li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>1</td>
+                      <td class="py-1">
+                        <div class="documentWrap">
+                          <div class="imgWrap">
+                            <img src="assets/images/faces-clipart/pic-1.png" alt="image">
+                          </div>
+                          <div class="imgDesc">
+                            <h5>Footer.PNG</h5>
+                            <p>File Size In Bytes 1.14MB</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td> Herman Beck </td>
+
+                      <td> May 15, 2015 </td>
+                      <td>
+                        <ul class="tableActionBtnsWrap">
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-pencil"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-download"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-trash"></i>
+                            </a>
+                          </li>
+                        </ul>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!--accordien-->
+
+
+    </div>
+  </div>
+
+
+</div>

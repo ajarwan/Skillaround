@@ -1,0 +1,33 @@
+<div class="content-wrapper">
+  <!-- Page Title Header Starts-->
+  <div class="row page-title-header">
+    <div class="col-12">
+      <div class="page-header">
+        <h4 class="page-title ">
+          {{resources.About}}
+        </h4>
+      </div>
+    </div>
+  </div>
+  <div class="row orm-loader-wrap">
+    <!--Loader-->
+    <div class="form-loader" style="display:block" ></div>
+
+    <div class="col-md-12 grid-margin" style="min-height:500px">
+
+      <div class="row">
+        <shared-richtextbox [(ngModel)]="AdminContent.ContentAr" class="col-12" [ngClass]="{'ctr-err': InvalidAr}"></shared-richtextbox>
+      </div>
+
+      <div class="row">
+        <shared-richtextbox [(ngModel)]="AdminContent.ContentEn" class="col-12" [ngClass]="{'ctr-err': InvalidEn}"></shared-richtextbox>
+      </div>
+      <div class="row m-t-5">
+        <div class="col-sm-12" style="text-align:center;margin-top:5px">
+          <button type="submit" class="btn btn-success mr-2" (appClick)="OnSave()">{{resources.Save}}</button>
+          <button class="btn btn-light" (appClick)="navigate('admin/dashboard')">{{resources.Cancel}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

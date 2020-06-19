@@ -1,0 +1,23 @@
+<div class="content-wrapper">
+  <!-- Page Title Header Starts-->
+  <div class="row page-title-header">
+    <div class="col-12">
+      <div class="page-header">
+        <h4 class="page-title ">
+          {{resources.About}}
+        </h4>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 grid-margin form-loader-wrap" style="min-height:500px">
+      <!--Loader-->
+      <div class="form-loader" [ngStyle]="{'display':IsLoading ? 'block' : 'none' }"></div>
+      <div class="row">
+
+        <shared-richtextbox [(ngModel)]="AboutText" class="col-12"></shared-richtextbox>
+
+      </div>
+    </div>
+  </div>
+</div>

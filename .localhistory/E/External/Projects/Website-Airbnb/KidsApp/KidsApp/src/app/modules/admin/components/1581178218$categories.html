@@ -1,0 +1,96 @@
+<div class="content-wrapper">
+  <!-- Page Title Header Starts-->
+  <div class="row page-title-header">
+    <div class="col-12">
+      <div class="page-header">
+        <h4 class="page-title">{{resources.Categories}}</h4>
+      </div>
+    </div>
+  </div>
+  <div class="contentInnerWrap">
+    <!--<nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Dashboard</a>
+        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Calender</a>
+        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Requests</a>
+      </div>
+    </nav>-->
+    <div class="tabContent" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+        <div class="tabContentInner form-loader-wrap" style="padding:0px">
+          <!--Loader-->
+          <div class="form-loader" [ngStyle]="{'display':IsLoading ? 'block' : 'none' }"></div>
+
+          <!--Actions-->
+          <ul class="list-items">
+            <li>
+              <div class="search-container">
+                <input class="inputBox" type="text" [attr.placeholder]="resources.TitleSearch + '...'" [(ngModel)]="keyWord" (appEnter)="LoadCategories()">
+                <button type="button" (appClick)="LoadCategories()"><i class="fa fa-search"></i></button>
+              </div>
+            </li>
+            <li>
+              <a class="v-btn">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                <span>Add</span>
+              </a>
+            </li>
+          </ul>
+          <div class="content-2">
+            <!--Table-->
+            <table class="table table-striped form-loader-wrap">
+              <thead>
+                <tr>
+                  <th>{{resources.TitleAr}}</th>
+                  <th>{{resources.TitleEn}}</th>
+                  <th>{{resources.Icon}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let Cat of Categories">
+                  <td>
+                    <span *ngIf="!Cat.IsSelected">{{Cat.TitleAr}}</span>
+                    <span *ngIf="Cat.IsSelected">
+                      <input type="text" class="form-control"  [(ngModel)]="SelectedCat.TitleAr"/>
+                    </span>
+                  </td>
+                  <td>
+                    {{Cat.TitleEn}}
+                  </td>
+                  <td>
+                    <i class="{{Cat.IconClass}}" aria-hidden="true"></i>
+                    <div class="switchWrap  pull-right">
+                      <div class="switchBtn">
+                        <div class="toggle btn" [ngClass]="{'btn-default off' : !Cat.IsActive , ' btn-primary': Cat.IsActive }"
+                             style="width: 70.0625px; height: 28.7813px;"
+                             (appClick)="ToggleCatStatus(Cat)" stopPropagation="true">
+                          <input class="toggleBtn" checked="" type="checkbox">
+                          <div class="toggle-group">
+                            <label class="btn btn-primary toggle-on">{{resources.On}}</label>
+                            <label class="btn btn-default active toggle-off">{{resources.Off}}</label>
+                            <span class="toggle-handle btn btn-default"></span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <i (appClick)="SetSelectedCat(Cat)" class="margin-10 fa fa-pencil pull-right"></i>
+                  </td>
+                </tr>
+                <!--No Data Found Row-->
+                <tr *ngIf="!Categories || Categories.length ==0">
+                  <td colspan="3">
+                    {{resources.NoDataFound}}
+                  </td>
+                </tr>
+              </tbody>
+
+              <!--Loader-->
+              <div class="form-loader" [ngStyle]="{'display':IsLoadingTable ? 'block' : 'none' }"></div>
+
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

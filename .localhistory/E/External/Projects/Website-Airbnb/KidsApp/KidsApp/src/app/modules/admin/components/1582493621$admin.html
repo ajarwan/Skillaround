@@ -1,0 +1,175 @@
+<!--Header-->
+<nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+  <!--Logo-->
+  <div class="navbar-brand-wrapper d-flex align-items-top">
+    <a class="navbar-brand brand-logo" [routerLink]="''">
+      <img src="assets/images/logo.png" alt="logo">
+    </a>
+    <a class="navbar-brand brand-logo-mini" [routerLink]="''">
+      <img src="assets/images/logo.png" alt="logo">
+    </a>
+  </div>
+  <!--Banner-->
+  <div class="navbar-menu-wrapper d-flex align-items-center">
+    <!--Actions-->
+    <ul class="navbar-nav actions-ribbon">
+
+      <!--Go To System-->
+      <li [routerLink]="''">
+        <div class="actions-ribbon-btn pointer">
+          <i class="actions-ribbon-icon fas fa-child"></i>
+          <span class="actions-ribbon-label">{{resources.System}}</span>
+        </div>
+      </li>
+      <!--Change Language-->
+      <li (appClick)="ChangeLang()">
+        <div class="actions-ribbon-btn pointer">
+          <i class="actions-ribbon-icon fas fa-globe"></i>
+          <span class="actions-ribbon-label">{{resources.ChangeLang}}</span>
+        </div>
+      </li>
+      <!--LogOut-->
+      <li (appClick)="SignOut()">
+        <div class="actions-ribbon-btn pointer">
+          <i class="actions-ribbon-icon fas fa-power-off"></i>
+          <span class="actions-ribbon-label">{{resources.SignOut}}</span>
+        </div>
+      </li>
+    </ul>
+
+    <!--Notifications-->
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link count-indicator" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+          <i class="mdi mdi-bell-outline"></i>
+          <span class="count">7</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="messageDropdown">
+          <a class="dropdown-item py-3">
+            <p class="mb-0 font-weight-medium float-left">You have 7 unread mails </p>
+            <span class="badge badge-pill badge-primary float-right">View all</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item preview-item">
+            <div class="preview-thumbnail">
+              <img src="assets/images/faces/face10.jpg" alt="image" class="img-sm profile-pic">
+            </div>
+            <div class="preview-item-content flex-grow py-2">
+              <p class="preview-subject ellipsis font-weight-medium text-dark">Marian Garner </p>
+              <p class="font-weight-light small-text"> The meeting is cancelled </p>
+            </div>
+          </a>
+          <a class="dropdown-item preview-item">
+            <div class="preview-thumbnail">
+              <img src="assets/images/faces/face12.jpg" alt="image" class="img-sm profile-pic">
+            </div>
+            <div class="preview-item-content flex-grow py-2">
+              <p class="preview-subject ellipsis font-weight-medium text-dark">David Grey </p>
+              <p class="font-weight-light small-text"> The meeting is cancelled </p>
+            </div>
+          </a>
+          <a class="dropdown-item preview-item">
+            <div class="preview-thumbnail">
+              <img src="assets/images/faces/face1.jpg" alt="image" class="img-sm profile-pic">
+            </div>
+            <div class="preview-item-content flex-grow py-2">
+              <p class="preview-subject ellipsis font-weight-medium text-dark">Travis Jenkins </p>
+              <p class="font-weight-light small-text"> The meeting is cancelled </p>
+            </div>
+          </a>
+        </div>
+      </li>
+
+
+    </ul>
+
+    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+      <span class="mdi mdi-menu"></span>
+    </button>
+  </div>
+</nav>
+
+
+
+<div class="container-fluid page-body-wrapper">
+
+  <!--Side Bar-->
+  <nav class="sidebar sidebar-offcanvas" id="sidebar">
+    <ul class="nav">
+      <li class="nav-item nav-category">{{resources.MainMenu}}</li>
+      <li class="nav-item nav-profile">
+        <a class="nav-link">
+          <div class="profile-image">
+            <img [src]="ActiveUser?.Image" class="img-xs rounded-circle"
+                 [appImageError]="'assets/images/user-image.png'" alt="profile image">
+            <div class="dot-indicator bg-success"></div>
+          </div>
+          <div class="text-wrapper">
+            <p class="profile-name">{{ActiveUser?.FullName}}</p>
+            <p class="designation">{{resources.SystemAdmin}}</p>
+          </div>
+        </a>
+      </li>
+      <!--Admin Dashboard-->
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="'dashboard'">
+          <i class="menu-icon typcn typcn-document-text"></i>
+          <span class="menu-title">{{resources.Dashboard}}</span>
+        </a>
+      </li>
+      <!--Users-->
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="'users'">
+          <i class="menu-icon typcn typcn-shopping-bag"></i>
+          <span class="menu-title">{{resources.Users}}</span>
+        </a>
+      </li>
+      <!--Suppliers-->
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="'suppliers'">
+          <i class="menu-icon typcn typcn-shopping-bag"></i>
+          <span class="menu-title">{{resources.Suppliers}}</span>
+        </a>
+      </li>
+      <!--Activities-->
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="'activities'">
+          <i class="menu-icon typcn typcn-shopping-bag"></i>
+          <span class="menu-title">{{resources.Activities}}</span>
+        </a>
+      </li>
+      <!--Categories-->
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="'categories'">
+          <i class="menu-icon typcn typcn-shopping-bag"></i>
+          <span class="menu-title">{{resources.Categories}}</span>
+        </a>
+      </li>
+      <!--Messages-->
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="'messages'">
+          <i class="menu-icon typcn typcn-shopping-bag"></i>
+          <span class="menu-title">{{resources.Messages}}</span>
+          <div class="msgs-count-container" *ngIf="MessagesCount">
+            <span style="width: 100%;">{{MessagesCount}}</span>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="main-panel">
+
+    <router-outlet></router-outlet>
+
+    <footer class="footer">
+      <div class="container-fluid clearfix">
+        <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">
+          Copyright © 2019 <a href="#">Kids App</a>. All rights reserved.
+        </span>
+
+      </div>
+      <div class="scrollUp" (appClick)="ScrollUp()"></div>
+    </footer>
+  </div>
+</div>

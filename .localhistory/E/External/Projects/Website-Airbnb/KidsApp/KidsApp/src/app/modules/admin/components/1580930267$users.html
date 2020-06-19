@@ -1,0 +1,65 @@
+<div class="content-wrapper">
+  <!-- Page Title Header Starts-->
+  <div class="row page-title-header">
+    <div class="col-12">
+      <div class="page-header">
+        <h4 class="page-title">{{resources.Users}}</h4>
+      </div>
+    </div>
+  </div>
+  <!-- Page Title Header Ends-->
+  <div class="row">
+    <div class="col-md-12 grid-margin  form-loader-wrap">
+      <!--Loader-->
+      <div class="form-loader" [ngStyle]="{'display':IsLoading ? 'block' : 'none' }"></div>
+      <div class="row  form-loader-wrap">
+        <div class="col-sm-6 col-lg-4" *ngFor="let User Of Users">
+          <div class="card m-bottom-20">
+            <div class="card-body">
+              <div class="userBlock">
+                <div class="col-left">
+                  <div class="statusBlock">
+                    <span class="circle available"></span>
+                    <span class="date-time dir-ltr">12:50:47 03/12/17</span>
+                  </div>
+                  <div class="mail-wrap">
+                    <span class="mailId">{{User.Email}}</span>
+                    <span class="userName">{{User.FullName}}</span>
+                  </div>
+                  <div class="switchBtn">
+                    <div class="toggle btn" [ngClass]="{'btn-default off' : !User.IsActive , ' btn-primary': User.IsActive }"
+                         style="width: 70.0625px; height: 28.7813px;"
+                         (appClick)="ToggleUserActivityStatus(User)">
+                      <input class="toggleBtn" checked="" type="checkbox">
+                      <div class="toggle-group">
+                        <label class="btn btn-primary toggle-on">{{resources.On}}</label>
+                        <label class="btn btn-default active toggle-off">{{resources.Off}}</label>
+                        <span class="toggle-handle btn btn-default"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-right">
+                  <img [src]="User.Image" class="img-sm"
+                       [appImageError]="'assets/images/user-image.png'" alt="profile image">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <shared-pager [(pager)]="Pager" (OnPageChange)="OnPageChange($event)"></shared-pager>
+          <div class="col-md-12  m-bottom-20" *ngIf="!Users || Users.length ==0">
+            <span class="no-data-found">
+              {{resources.NoDataFound}}
+            </span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+</div>

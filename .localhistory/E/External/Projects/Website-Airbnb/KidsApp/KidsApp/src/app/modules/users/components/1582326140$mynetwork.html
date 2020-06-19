@@ -1,0 +1,74 @@
+<section class="page-section portal-section" style="min-height:calc(100vh - 80px)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6" *ngFor="let User Of Users">
+        <div class="portalBlockWrap">
+          <div class="colLeft">
+
+            <div class="switchWrap">
+              <div class="shSwitch" id="shSwitch0">
+                <div id="bsh-shSwitch0">
+                  <input (appClick)="OnDeleteConfirm(User.Id)" class="tgl-sw tgl-sw-light tgl-sw-light-checked" id="light-shSwitch0" type="checkbox" />
+                  <label (appClick)="OnDeleteConfirm(User.Id)" class="btn-switch" for="light-shSwitch0" id="sw-light-720975" data-state="false"></label>
+                </div>
+                <div style="clear:both"></div>
+              </div>
+            </div>
+
+
+            <div class="mailWrap" style="margin-top:15px">
+              <a (appClick)="OpenSendEmailMessageModal(User,ModalType.Email,EmailMessageModal)">
+                <i class="icon icon-envelope-o"></i> {{resources?.SendEmail}}
+              </a>
+            </div>
+            <div class="msgWrap">
+              <a class="message" (appClick)="OpenSendEmailMessageModal(User,ModalType.Message,EmailMessageModal)">
+                <i class="icon icon-social-whatsapp-outline"></i> {{resources?.SendMessage}}
+              </a>
+            </div>
+          </div>
+          <div class="colRight">
+            <span class="text text-right">{{User.FullName}}</span>
+            <div class="imgWrap">
+              <img [src]="User.Image" [appImageError]="'assets/images/user-image.png'">
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-12" *ngIf="Users.length == 0" style="padding:10px;margin:30px;background-color:#ddd">
+        {{resources?.NoConnections}}
+      </div>
+    </div>
+
+    <shared-pager [(pager)]="Pager" (OnPageChange)="OnPageChange($event)"></shared-pager>
+
+
+
+  </div>
+
+</section>
+
+
+<ng-template #EmailMessageModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">
+      <span *ngIf="CurrentModalType == ModalType.Email">{{resources?.SendEmail}}</span>
+      <span *ngIf="CurrentModalType == ModalType.Message">{{resources?.SendMessage}}</span>
+    </h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body  message-popup popup-content">
+
+    <textarea class="messageFeild" [(ngModel)]="MsgText" [ngClass]="{'ctr-err':InvalidMessage}" [attr.placeholder]="resources.EnterText"></textarea>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (appClick)="OnSend()">{{resources?.Send}}</button>
+    <button type="button" class="btn btn-outline-dark" (appClick)="OnCancel()">{{resources?.Cancel}}</button>
+  </div>
+
+</ng-template>

@@ -1,0 +1,235 @@
+<div class="content-wrapper">
+  <!-- Page Title Header Starts-->
+  <div class="row page-title-header">
+    <div class="col-12">
+      <div class="page-header">
+        <h4 class="page-title">{{resources.Dashboard}}</h4>
+      </div>
+    </div>
+  </div>
+  <!--Counts-->
+  <div class="row">
+    <div class="col-md-12 grid-margin">
+      <div class="row">
+        <!--Activites-->
+        <div class="col-sm-6 col-lg-4 form-loader-wrap">
+          <div class="form-loader" [ngStyle]="{'display':Loadings.Counts ? 'block' : 'none' }"></div>
+          <div class="card">
+            <div class="card-body">
+              <div class="progressWrap">
+                <div class="leftCol">
+                  <div class="progress mx-auto">
+                    <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                      <div class="h2 font-weight-bold">{{Counts.ActivitiesCount}}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="rightCol">
+                  <!--<h3 class="color-blue">2562</h3>-->
+                  <h5 class="color-blue">{{resources.TotalActivities}}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Users-->
+        <div class="col-sm-6 col-lg-4 form-loader-wrap">
+          <div class="form-loader" [ngStyle]="{'display':Loadings.Counts ? 'block' : 'none' }"></div>
+          <div class="card">
+            <div class="card-body">
+              <div class="progressWrap">
+                <div class="leftCol">
+                  <div class="progress mx-auto">
+                    <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                      <div class="h2 font-weight-bold">{{Counts.UsersCount}}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="rightCol">
+                  <h5 class="color-red">{{resources.TotalUsers}}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Suppliers-->
+        <div class="col-sm-6 col-lg-4 form-loader-wrap">
+          <div class="form-loader" [ngStyle]="{'display':Loadings.Counts ? 'block' : 'none' }"></div>
+          <div class="card">
+            <div class="card-body">
+              <div class="progressWrap">
+                <div class="leftCol">
+                  <div class="progress mx-auto">
+                    <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                      <div class="h2 font-weight-bold">{{Counts.SuppliersCount}}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="rightCol">
+                  <h5 class="color-green">{{resources.TotalSuppliers}}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Lates Activities And Most Rated Suppliers-->
+  <div class="row">
+    <!--Latest Activities-->
+    <div class="col-md-8 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body form-loader-wrap">
+          <h4 class="card-title mb-0">{{resources.LatestActivities}}</h4>
+          <div class="form-loader" [ngStyle]="{'display':Loadings.Activities ? 'block' : 'none' }"></div>
+          <table class="table form-loader-wrap">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>{{resources.ActivityName}}</th>
+                <th>{{resources.Category}}</th>
+                <th>{{resources.StartDate}}</th>
+                <th>{{resources.DueDate}}</th>
+                <th>{{resources.Location}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let Act of Activites; let indx= index">
+                <td>{{indx +1 }}</td>
+                <td>{{Act.Title}}</td>
+                <td>
+                  <i aria-hidden="true" class="{{Act.Category.IconClass}}"></i>
+                  &nbsp;
+                  {{Act.Category.Title}}
+                </td>
+                <td>{{Act.DisplayFromDate}}</td>
+                <td>{{Act.DisplayToDate}}</td>
+                <!--<td>
+                  <label class="badge badge-success">Completed</label>
+                </td>-->
+                <td>{{Act.LocationName}}</td>
+              </tr>
+              <tr *ngIf="!Activites || Activites.length ==0">
+                <td colspan="6">
+                  {{resources.NoDataFound}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!--Most Rated Suppliers-->
+    <div class="col-md-4 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body form-loader-wrap">
+          <div class="form-loader" [ngStyle]="{'display':Loadings.Suppliers ? 'block' : 'none' }"></div>
+          <h4 class="card-title mb-0">{{resources.MostRatedSuppliers}}</h4>
+          <div class="d-flex mt-3 py-2 border-bottom" *ngFor="let MRS of MostRatedSuppliers">
+            <img class="img-sm rounded-circle" [src]="MRS.Image"
+                 alt="profile image" [appImageError]="'assets/images/avatar_2x.png'">
+            <div class="wrapper ml-2">
+              <p class="mb-n1 font-weight-semibold">{{MRS.FullName}}</p>
+              <p class="m-bottom-0">{{MRS.Email}}</p>
+              <small class="text-danger" *ngIf="MRS.UserType == AppEnums.UserTypes.IndividualSupplier || MRS.UserType == AppEnums.UserTypes.Manager ">
+                <i class="far fa-building supplier-icon mr-2" *ngIf="MRS.UserType == AppEnums.UserTypes.CompanySupplier"></i>
+                <i class="fas fa-user-tie supplier-icon mr-2" *ngIf="MRS.UserType == AppEnums.UserTypes.IndividualSupplier"></i>
+                {{resources.IndividualSupplier}}
+              </small>
+              <small class="text-success" *ngIf="MRS.UserType == AppEnums.UserTypes.CompanySupplier">{{resources.CompanySupplierSupplier}}</small>
+            </div>
+            <small class="text-muted ml-auto">
+              <i class="fa fa-star color-red"></i> <b>{{MRS.AvgRate}} (5)</b>
+            </small>
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!--Most Viewd Activities And Most Active Users-->
+  <div class="row">
+    <!--Most Viewed Activities-->
+    <div class="col-md-8 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body form-loader-wrap">
+          <h4 class="card-title mb-0">{{resources.MostViewedActivities}}</h4>
+          <div class="form-loader" [ngStyle]="{'display':Loadings.MostViewedActivities ? 'block' : 'none' }"></div>
+          <table class="table form-loader-wrap">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>{{resources.ActivityName}}</th>
+                <th>{{resources.Category}}</th>
+                <th>{{resources.StartDate}}</th>
+                <th>{{resources.DueDate}}</th>
+                <th>{{resources.ViewsCount}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let Act of MostViewedActivities; let indx= index">
+                <td>{{indx +1 }}</td>
+                <td>{{Act.Activity.Title}}</td>
+                <td>
+                  <i aria-hidden="true" class="{{Act.Activity.Category.IconClass}}"></i>
+                  &nbsp;
+                  {{Act.Activity.Category.Title}}
+                </td>
+                <td>{{Act.Activity.DisplayFromDate}}</td>
+                <td>{{Act.Activity.DisplayToDate}}</td>
+                <!--<td>
+                <label class="badge badge-success">Completed</label>
+              </td>-->
+                <td>{{Act.Count}}</td>
+              </tr>
+              <tr *ngIf="!MostViewedActivities || MostViewedActivities.length ==0">
+                <td colspan="6">
+                  {{resources.NoDataFound}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!--Most Active Users-->
+    <div class="col-md-4 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body form-loader-wrap">
+          <div class="form-loader" [ngStyle]="{'display':Loadings.MostActiveUsers ? 'block' : 'none' }"></div>
+          <h4 class="card-title mb-0">{{resources.MostActiveUsers}}</h4>
+          <div class="d-flex mt-3 py-2 border-bottom" *ngFor="let MAU of MostActiveUsers">
+            <img class="img-sm rounded-circle" [src]="MAU.Image"
+                 alt="profile image" [appImageError]="'assets/images/avatar_2x.png'">
+            <div class="wrapper ml-2">
+              <p class="mb-n1 font-weight-semibold">{{MAU.FullName}}</p>
+              <p class="m-bottom-0">{{MAU.Email}}</p>
+              <!--<small class="text-danger" *ngIf="MRS.UserType == AppEnums.UserTypes.IndividualSupplier || MRS.UserType == AppEnums.UserTypes.Manager ">
+              <i class="far fa-building supplier-icon mr-2" *ngIf="MRS.UserType == AppEnums.UserTypes.CompanySupplier"></i>
+              <i class="fas fa-user-tie supplier-icon mr-2" *ngIf="MRS.UserType == AppEnums.UserTypes.IndividualSupplier"></i>
+              {{resources.IndividualSupplier}}
+            </small>-->
+              <!--<small class="text-success" *ngIf="MRS.UserType == AppEnums.UserTypes.CompanySupplier">{{resources.CompanySupplierSupplier}}</small>-->
+            </div>
+            <!--<small class="text-muted ml-auto">
+            <b>{{ MAU.CreateDate}} </b>
+          </small>-->
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>

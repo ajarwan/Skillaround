@@ -1,0 +1,86 @@
+export module AppEnums {
+
+  export enum EndPoints {
+    Main = 1
+  }
+
+  export enum LoginProvider {
+    System = 1,
+    Google = 2,
+    Facebook = 3
+  }
+
+  export enum BusinessErrorCodes {
+    UserExisit = 1,
+  }
+
+  export enum Gender {
+    Male = 1,
+    Female = 2
+  }
+
+  export enum DialogType {
+    Warning = 1,
+    Error = 2,
+    Success = 3,
+    Info = 4,
+    Notification = 5
+  }
+
+  export enum TransportationFilter {
+    All = 0,
+    Available = 1,
+    NotAvailable = 2
+  }
+
+  export enum Days {
+    Sa = 1,
+    Su = 2,
+    Mo = 3,
+    Tu = 4,
+    We = 5,
+    Th = 6,
+    Fr = 7,
+  }
+
+  export enum DocumentType {
+    GovermentId = 1,
+    TradeLicence = 2,
+    SignedDocument = 3,
+    PersonalPhoto = 4
+  }
+
+  export enum Modules {
+    Users = 1,
+    Supplier = 2,
+    Admin = 3
+  }
+
+  export enum ActivityPostStatus {
+    All = 0,
+    Posted = 1,
+    NotPosted = 2
+  }
+
+  export enum BaseState {
+    Unchanged = 0,
+    Added = 2,
+    Modified = 4,
+    Deleted = 8,
+    RelationAdded = 16,
+    RelationDeleted = 32
+  }
+
+  export enum PageMode {
+    Add = 1,
+    Edit = 2,
+    RO = 3
+  }
+
+  export enum MasterSearch {
+    SupplierActivitesSearch = 1,
+
+  }
+
+
+}

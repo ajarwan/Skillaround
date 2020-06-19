@@ -1,0 +1,75 @@
+<div class="content-wrapper bold-label">
+  <!-- Page Title Header Starts-->
+  <div class="row page-title-header">
+    <div class="col-12">
+      <div class="page-header">
+        <h4 class="page-title">{{resources.Messages}}</h4>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 grid-margin">
+      <!--Basic Details-->
+      <div class="row form-loader-wrap" style="min-height:500px">
+        <!--Loader-->
+        <div class="form-loader" [ngStyle]="{'display':IsLoadingActivities ? 'block' : 'none' }"></div>
+        <!--Data-->
+        <div class="booking-table-wrapper">
+          <table class="table msgs-table">
+            <thead>
+              <tr class="header">
+                <th>{{resources.SenderName}}</th>
+                <th>{{resources.MessageText}}</th>
+                <th>{{resources.Email}}</th>
+                <th>{{resources.PhoneNumber}}</th>
+                <th>{{resources.MessageDate}}</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let Msg of Msgs">
+                <!--colspan="8" class="table-container"-->
+                <td>
+                  <span>{{Msg.Name}}</span>
+                </td>
+                <td>
+                  <span style="white-space:pre-line"> {{Msg.Messgae}}  </span>
+                </td>
+                <td>
+                  {{Msg.Email}}
+                </td>
+                <td>
+                  {{Msg.MobileNumber}}
+                </td>
+                <td style="width:10%">
+                  {{formatDate(Msg.CreateDate,'dd MMM yyyy hh:mm')}}
+                </td>
+                <td>
+                  <button class="btn btn-app" *ngIf="!Msg.IsSeen || Msg.IsLoadingUpdate " (appClick)="SetSeen(Msg)">
+                    {{resources.Noted}}
+                    <i class="far fa-eye" *ngIf="!Msg.IsLoadingUpdate"></i>
+                    <shared-dotSpinner *ngIf="Msg.IsLoadingUpdate"></shared-dotSpinner>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="col-md-12">
+          <shared-pager [(pager)]="Pager" (OnPageChange)="OnPageChange($event)"></shared-pager>
+          <div class="col-md-12  m-bottom-20" *ngIf="!Msg || Msg.length ==0">
+            <span class="no-data-found">
+              {{resources.NoDataFound}}
+            </span>
+          </div>
+        </div>
+
+
+      </div>
+
+
+
+    </div>
+  </div>
+</div>

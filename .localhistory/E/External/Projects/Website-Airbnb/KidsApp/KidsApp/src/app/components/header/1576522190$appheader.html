@@ -1,0 +1,110 @@
+<header id="header">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand primary active" [routerLink]="'/'">
+      <img src="assets/images/logo.png" class="logo-white">
+      <img src="assets/images/logo.png" class="logo-black">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-main" aria-controls="navbar-main" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbar-main">
+      <div class="navbar-inner">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item" (appClick)="ChangeLang()">
+            <a class="nav-link">
+              {{resources.ChangeLang}}
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="ActiveUser">
+            <a class="nav-link">
+              {{resources.MyNetwork}}
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="ActiveUser">
+            <a class="nav-link">
+              {{resources.MyPortal}}
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="ActiveUser">
+            <a class="nav-link">
+              {{resources.BecomeSupplier}}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (appClick)="navigate('activity')">
+              {{resources.KidsActivities}}
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="!ActiveUser">
+            <a class="nav-link" id="access_link" #LoginLink (appClick)="OpenLoginPopup()">
+              {{resources.LogIn}}
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="ActiveUser" (appClick)="SignOut()">
+            <a class="nav-link">
+              {{resources.SignOut}}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+
+<div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
+  <div class="small-dialog-header">
+    <h3>{{resources.SignIn}}</h3>
+  </div>
+  <div class="sign-in-wrapper">
+    <a class="social_bt facebook" (appClick)="LoginWithFB()">{{resources.Loginwithfb}}</a>
+    <a class="social_bt google" (appClick)="SignUpGoogle()">{{resources.Loginwithgoogle}}</a>
+    <div class="divider"><span>{{resources.Or}}</span></div>
+    <div class="form-group">
+      <label>{{resources.Email}}</label>
+      <input type="email" class="form-control"
+             [ngClass]="{'ctr-err':Credintials.Validations.Email}"
+             [(ngModel)]="Credintials.Email">
+      <i class="icon_mail_alt"></i>
+    </div>
+    <div class="form-group">
+      <label>{{resources.Password}}</label>
+      <input type="password" class="form-control"
+             [ngClass]="{'ctr-err':Credintials.Validations.Password}"
+             [(ngModel)]="Credintials.Password">
+      <i class="icon_lock_alt"></i>
+    </div>
+    <div class="clearfix add_bottom_15">
+      <div class="checkboxes float-left">
+        <input id="remember-me" type="checkbox" name="check">
+        <label for="remember-me">{{resources.RememberMe}}</label>
+      </div>
+      <div class="float-right"><a id="forgot" href="javascript:void(0);" (appClick)="OnForgotPassword()">{{resources.ForgotPassword}}</a></div>
+    </div>
+    <div class="text-center">
+      <input type="submit" [value]="resources.LogIn" class="btn_login" (appClick)="SystemLogin()">
+    </div>
+    <div class="text-center err-msg" *ngIf="Credintials.Validations.Invalid">
+      {{resources.InvalidEmailOrPassword}}
+    </div>
+    <div class="text-center">
+      {{resources.DontHaveAccount}}
+      <a>{{resources.Signup}}</a>
+    </div>
+    <div id="forgot_pw">
+      <div class="form-group">
+        <label>{{resources.ForgotEmailMsg}}</label>
+        <input type="email" class="form-control" name="email_forgot" id="email_forgot">
+        <i class="icon_mail_alt"></i>
+      </div>
+      <p>{{resources.ForgotNotMsg}}</p>
+      <div class="text-center">
+        <input type="submit" [value]="resources.ResetPassword" class="btn_1">
+      </div>
+    </div>
+  </div>
+</div>
+
+

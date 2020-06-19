@@ -1,0 +1,134 @@
+<div class="content-wrapper bold-label">
+  <!-- Page Title Header Starts-->
+  <div class="row page-title-header">
+    <div class="col-12">
+      <div class="page-header">
+        <h4 class="page-title">{{resources.SupplierBookings}}</h4>
+      </div>
+    </div>
+  </div>
+
+  <!--Filters-->
+  <div class="row col-12 booking-search-wrapper">
+    <div class="col-3">
+      <input type="text" class="filter-div form-control filter-border searchTerm" [attr.placeholder]="resources.ActivityName">
+    </div>
+    <div class="col-2">
+      <input type="text" class="filter-div form-control filter-border searchTerm" [attr.placeholder]="resources.Name">
+    </div>
+    <div class="col-3">
+      <input type="text" class="filter-div form-control filter-border searchTerm" [attr.placeholder]="resources.Email">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 grid-margin">
+      <!--Basic Details-->
+      <div class="row form-loader-wrap" style="min-height:500px">
+        <!--Loader-->
+        <div class="form-loader" [ngStyle]="{'display':IsLoadingActivities ? 'block' : 'none' }"></div>
+        <!--Data-->
+        <div class="booking-table-wrapper">
+          <table class="table">
+            <thead>
+              <tr class="header">
+                <th>{{resources.BookingN}}</th>
+                <th>{{resources.Count}}</th>
+                <th>{{resources.Name}}</th>
+                <th>{{resources.Email}}</th>
+                <th>{{resources.PhoneNumber}}</th>
+                <th>{{resources.BookingDate}}</th>
+                <th>{{resources.Status}}</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let Act of Activities">
+                <td colspan="8" class="table-container">
+                  <table class="table">
+                    <thead>
+                      <tr class="data-header">
+                        <th class="table-row-title" colspan="8">{{Act.Title}}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <ng-container>
+                        <tr class="data-row" *ngFor="let Booking of Act.Bookings">
+                          <td class="bookingnum-column">{{Booking.BookingNumber}}</td>
+                          <td style="text-align:center">{{Booking.Count}}</td>
+                          <td>{{Booking.User.FullName}}</td>
+                          <td>{{Booking.User.Email}}</td>
+                          <td>{{Booking.User.PhoneNumber}}</td>
+                          <td>{{formatDate(Booking.CreateDate, 'dd-MMM-yyyy hh:mm')}}</td>
+                          <td class="{{Booking.ClassColor}}">{{Booking.StatusText}}</td>
+                          <td>
+                            <button class="btn btn-success mr-2" *ngIf="Booking.Status !=  AppEnums.BookingConfirmationStatus.Confirmed"
+                                    (appClick)="SetBookingStatus(Booking,AppEnums.BookingConfirmationStatus.Confirmed)">
+                              <i class="fas fa-check color-white"></i>
+                              <span>{{resources.Confirm}}</span>
+                            </button>
+                            <button class="btn btn-danger mr-2" *ngIf="Booking.Status !=  AppEnums.BookingConfirmationStatus.Cancelled"
+                                    (appClick)="SetBookingStatus(Booking,AppEnums.BookingConfirmationStatus.Cancelled)">
+                              <i class="fas fa-times  color-white"></i>
+                              <span>{{resources.Cancel}}</span>
+                            </button>
+                          </td>
+                        </tr>
+                      </ng-container>
+                      <ng-container *ngIf="!Act.Bookings || Act.Bookings.length ==0">
+                        <tr>
+                          <td colspan="8" style="text-align:center">
+                            {{resources.NoBookings}}
+                          </td>
+                        </tr>
+                      </ng-container>
+                      <tr class="text-center booking-stat-color">
+                        <td colspan="2">
+                          {{resources.TotalBookings}}: {{Act.TotalBooking}}
+                        </td>
+                        <td colspan="2">
+                          {{resources.Pending2}}: {{Act.PendingCount}}
+                        </td>
+                        <td colspan="2">
+                          {{resources.Confirmed}}: {{Act.ConfirmedCount}}
+                        </td>
+                        <td colspan="2">
+                          {{resources.Cancelled}}: {{Act.CancelledCount}}
+                        </td>
+                      </tr>
+                      <tr class="load-more" *ngIf="Act.Bookings && ( Act.Bookings.length < Act.Pager.TotalRecords)">
+                        <td colspan="8">
+                          <a class="btn_full pointer" style="background:#5bc0de" (appClick)="OnLoadMoreBookings(Act)">
+                            {{resources.LoadMore}}
+                            <shared-dotSpinner *ngIf="Act.IsLoading"></shared-dotSpinner>
+                          </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+
+              <tr class="load-more" *ngIf="Activities.length < ActivitiesPager.TotalRecords">
+                <td colspan="8">
+                  <a class="btn_full pointer" (appClick)="OnLoadMoreActivities()" style="background:#5bc0de">
+                    {{resources.LoadMore}}
+                    <shared-dotSpinner *ngIf="Act.IsLoadingActivities"></shared-dotSpinner>
+
+                  </a>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+
+
+      </div>
+
+
+
+    </div>
+  </div>
+</div>

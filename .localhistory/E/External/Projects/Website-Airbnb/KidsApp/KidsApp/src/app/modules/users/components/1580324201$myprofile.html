@@ -1,0 +1,102 @@
+<section class="page-section my-profile-section" style="min-height:calc(100vh - 80px)">
+  <div class="container">
+    <div class="row profile-row">
+      <div class="col-md-3 left-col">
+        <div class="text-center avatar-block">
+          <img [src]="User.Image" class="avatar img-circle img-thumbnail"
+               [appImageError]="'assets/images/avatar_2x.png'"
+               style="width:250px;height:250px"
+               alt="avatar">
+
+          <!--file upload-->
+          <div class="upload-btn-wrapper">
+            <img class="img" src="assets/images/photo-img.png">
+            <span class="btn fileName">{{resources.UploadImage}}</span>
+            <span class="text">{{resources.Upload}}</span>
+            <input type="file" name="myfile" (change)="OnUploadFile($event)" [attr.accept]="environment.AllowedImagesExtension">
+          </div>
+          <!--file upload-->
+        </div>
+        <ul class="list-group" *ngIf="false">
+          <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
+          <li class="list-group-item text-right"><span class="pull-left"><strong>Shares</strong></span> 125</li>
+          <li class="list-group-item text-right"><span class="pull-left"><strong>Likes</strong></span> 13</li>
+          <li class="list-group-item text-right"><span class="pull-left"><strong>Posts</strong></span> 37</li>
+          <li class="list-group-item text-right"><span class="pull-left"><strong>Followers</strong></span> 78</li>
+        </ul>
+      </div>
+      <div class="col-md-9 right-col">
+        <div class="pageTitleWrap">
+          <h3 class="page-title">My Profile</h3>
+        </div>
+        <div class="my-pofile form-wrap form-loader-wrap">
+          <div class="form-loader" [ngStyle]="{'display':IsLoading ? 'block' : 'none' }"></div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>{{resources?.FirstName}}<span class="filed-req">*</span></label>
+                <input type="text" class="form-control" [(ngModel)]="User.FirstName" [ngClass]="{'ctr-err':UserValidation.FirstName }">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>{{resources?.LastName}}<span class="filed-req">*</span></label>
+                <input type="text" class="form-control" [(ngModel)]="User.LastName" [ngClass]="{'ctr-err':UserValidation.LastName }">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>{{resources?.Email}}<span class="filed-req">*</span></label>
+                <input type="text" class="form-control" [(ngModel)]="User.Email" disabled>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>{{resources?.Gender}}<span class="filed-req">*</span></label>
+                <ul class="form-list">
+                  <li class="checkBox" (appClick)="User.Gender = AppEnums.Gender.Male">
+                    <i class="far" [ngClass]="{'fa-check-square' :User.Gender == AppEnums.Gender.Male, 'fa-square' :User.Gender != AppEnums.Gender.Male }"></i> {{resources?.Male}}
+                  </li>
+                  <li class="checkBox" (appClick)="User.Gender = AppEnums.Gender.Female">
+                    <i class="far" [ngClass]="{'fa-check-square' :User.Gender == AppEnums.Gender.Female, 'fa-square' :User.Gender != AppEnums.Gender.Female }"></i>  {{resources?.Female}}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>{{resources?.Birthday}}<span class="filed-req">*</span></label>
+                <input type="text"
+                       class="form-control popup-datepicker"
+                       placeholder="dd/mm/yyyy"
+                       bsDatepicker
+                       #dpFrom="bsDatepicker"
+                       [bsConfig]="DataStore.get('dbConfig')"
+                       [(ngModel)]="User.DOB" />
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <button type="button" class="btn_login" (appClick)="OnSave()">
+                  {{resources?.Save}}
+                </button>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,978 @@
+<main class="container-scroller">
+  <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+    <div class="navbar-brand-wrapper d-flex align-items-top">
+      <a class="navbar-brand brand-logo" href="admin_index.html">
+        <img src="assets/images/logo.png" alt="logo">
+      </a>
+      <a class="navbar-brand brand-logo-mini" href="admin_index.html">
+        <img src="assets/images/logo.png" alt="logo">
+      </a>
+    </div>
+    <div class="navbar-menu-wrapper d-flex align-items-center">
+      <ul class="navbar-nav">
+        <li class="nav-item font-weight-semibold d-none d-lg-block">Help : +050 2992 709</li>
+
+      </ul>
+      <form class="ml-auto search-form d-none d-md-block" action="#">
+        <div class="form-group">
+          <input type="search" class="form-control" placeholder="Search Here">
+        </div>
+      </form>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link count-indicator" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+            <i class="mdi mdi-bell-outline"></i>
+            <span class="count">7</span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="messageDropdown">
+            <a class="dropdown-item py-3">
+              <p class="mb-0 font-weight-medium float-left">You have 7 unread mails </p>
+              <span class="badge badge-pill badge-primary float-right">View all</span>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item preview-item">
+              <div class="preview-thumbnail">
+                <img src="assets/images/faces/face10.jpg" alt="image" class="img-sm profile-pic">
+              </div>
+              <div class="preview-item-content flex-grow py-2">
+                <p class="preview-subject ellipsis font-weight-medium text-dark">Marian Garner </p>
+                <p class="font-weight-light small-text"> The meeting is cancelled </p>
+              </div>
+            </a>
+            <a class="dropdown-item preview-item">
+              <div class="preview-thumbnail">
+                <img src="assets/images/faces/face12.jpg" alt="image" class="img-sm profile-pic">
+              </div>
+              <div class="preview-item-content flex-grow py-2">
+                <p class="preview-subject ellipsis font-weight-medium text-dark">David Grey </p>
+                <p class="font-weight-light small-text"> The meeting is cancelled </p>
+              </div>
+            </a>
+            <a class="dropdown-item preview-item">
+              <div class="preview-thumbnail">
+                <img src="assets/images/faces/face1.jpg" alt="image" class="img-sm profile-pic">
+              </div>
+              <div class="preview-item-content flex-grow py-2">
+                <p class="preview-subject ellipsis font-weight-medium text-dark">Travis Jenkins </p>
+                <p class="font-weight-light small-text"> The meeting is cancelled </p>
+              </div>
+            </a>
+          </div>
+        </li>
+
+
+      </ul>
+      <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+        <span class="mdi mdi-menu"></span>
+      </button>
+    </div>
+  </nav>
+  <div class="container-fluid page-body-wrapper">
+    <nav class="sidebar sidebar-offcanvas" id="sidebar">
+      <ul class="nav">
+
+        <li class="nav-item nav-category">Main Menu</li>
+        <li class="nav-item nav-profile">
+          <a href="#" class="nav-link">
+            <div class="profile-image">
+              <img class="img-xs rounded-circle" src="assets/images/faces/face8.jpg" alt="profile image">
+              <div class="dot-indicator bg-success"></div>
+            </div>
+            <div class="text-wrapper">
+              <p class="profile-name">Rijosh</p>
+              <p class="designation">Super Admin</p>
+            </div>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="admin_index.html">
+            <i class="menu-icon typcn typcn-document-text"></i>
+            <span class="menu-title">Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="users.html">
+            <i class="menu-icon typcn typcn-shopping-bag"></i>
+            <span class="menu-title">Users</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="suppliers.html">
+            <i class="menu-icon typcn typcn-shopping-bag"></i>
+            <span class="menu-title">Suppliers</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="activities.html">
+            <i class="menu-icon typcn typcn-shopping-bag"></i>
+            <span class="menu-title">Activities</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <i class="menu-icon typcn typcn-shopping-bag"></i>
+            <span class="menu-title">Lookups</span>
+          </a>
+        </li>
+
+
+
+      </ul>
+    </nav>        <div class="main-panel">
+      <div class="content-wrapper">
+        <!-- Page Title Header Starts-->
+        <div class="row page-title-header">
+          <div class="col-12">
+            <div class="page-header">
+              <h4 class="page-title">Supplier Portal</h4>
+
+            </div>
+          </div>
+
+        </div>
+        <!-- Page Title Header Ends-->
+        <div class="row">
+          <div class="col-md-12 grid-margin">
+            <div class="row">
+              <div class="col-sm-6 col-lg-6">
+
+                <div class="form-group row">
+                  <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Email</label>
+                  <div class="col-sm-9">
+                    <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Enter email">
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6 col-lg-6">
+                <div class="form-group row">
+                  <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Password</label>
+                  <div class="col-sm-9">
+                    <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-lg-6">
+
+                <div class="form-group row">
+                  <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Email</label>
+                  <div class="col-sm-9">
+                    <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Enter email">
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6 col-lg-6">
+                <div class="form-group row">
+                  <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Password</label>
+                  <div class="col-sm-9">
+                    <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-lg-6">
+
+                <div class="form-group row">
+                  <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Email</label>
+                  <div class="col-sm-9">
+                    <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Enter email">
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6 col-lg-6">
+                <div class="form-group row">
+                  <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Password</label>
+                  <div class="col-sm-9">
+                    <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-12">
+                <button type="submit" class="btn btn-success mr-2">Submit</button>
+                <button class="btn btn-light">Cancel</button>
+              </div>
+
+            </div>
+            <div class="row m-top-100">
+              <div class="col-sm-12 ">
+
+
+                <div class="dropdown ">
+                  <button class="btn btn-primary icon-btn dropdown-toggle" type="button" id="dropdownMenuIconButton6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-plus"></i> &nbsp; Add
+                  </button>
+                  <div class="dropdown-menu dropdownmenuList" aria-labelledby="dropdownMenuIconButton6">
+                    <ul>
+                      <li>
+                        <a href="#">
+                          <i class="fa fa-file-image-o" aria-hidden="true"></i>
+                          <span>Profile Picture</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i class="fa fa-file-image-o" aria-hidden="true"></i>
+                          <span>Personal ID</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i class="fa fa-file-image-o" aria-hidden="true"></i>
+                          <span>Personal ID</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i class="fa fa-file-image-o" aria-hidden="true"></i>
+                          <span>Personal ID</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i class="fa fa-file-image-o" aria-hidden="true"></i>
+                          <span>Personal ID</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i class="fa fa-file-image-o" aria-hidden="true"></i>
+                          <span>Personal ID</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--accordien-->
+            <div class="accordienWrapper">
+              <div id="accordion">
+                <div class="card">
+                  <div class="card-header">
+                    <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                      Profile Pictures
+                    </a>
+                  </div>
+                  <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                    <div class="card-body">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th># </th>
+                            <th> Document Title </th>
+                            <th> Uploaded By </th>
+                            <th> Uploaded Date </th>
+                            <th> Actions </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>1</td>
+                            <td class="py-1">
+                              <div class="documentWrap">
+                                <div class="imgWrap">
+                                  <img src="assets/images/faces-clipart/pic-1.png" alt="image">
+                                </div>
+                                <div class="imgDesc">
+                                  <h5>Footer.PNG</h5>
+                                  <p>File Size In Bytes 1.14MB</p>
+                                </div>
+                              </div>
+                            </td>
+                            <td> Herman Beck </td>
+
+                            <td> May 15, 2015 </td>
+                            <td>
+                              <ul class="tableActionBtnsWrap">
+                                <li>
+                                  <a href="#">
+                                    <i class="fa fa-pencil"></i>
+                                  </a>
+                                </li>
+                                <li>
+                                  <a href="#">
+                                    <i class="fa fa-download"></i>
+                                  </a>
+                                </li>
+                                <li>
+                                  <a href="#">
+                                    <i class="fa fa-trash"></i>
+                                  </a>
+                                </li>
+                              </ul>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>1</td>
+                            <td class="py-1">
+                              <div class="documentWrap">
+                                <div class="imgWrap">
+                                  <img src="assets/images/faces-clipart/pic-1.png" alt="image">
+                                </div>
+                                <div class="imgDesc">
+                                  <h5>Footer.PNG</h5>
+                                  <p>File Size In Bytes 1.14MB</p>
+                                </div>
+                              </div>
+                            </td>
+                            <td> Herman Beck </td>
+
+                            <td> May 15, 2015 </td>
+                            <td>
+                              <ul class="tableActionBtnsWrap">
+                                <li>
+                                  <a href="#">
+                                    <i class="fa fa-pencil"></i>
+                                  </a>
+                                </li>
+                                <li>
+                                  <a href="#">
+                                    <i class="fa fa-download"></i>
+                                  </a>
+                                </li>
+                                <li>
+                                  <a href="#">
+                                    <i class="fa fa-trash"></i>
+                                  </a>
+                                </li>
+                              </ul>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>1</td>
+                            <td class="py-1">
+                              <div class="documentWrap">
+                                <div class="imgWrap">
+                                  <img src="assets/images/faces-clipart/pic-1.png" alt="image">
+                                </div>
+                                <div class="imgDesc">
+                                  <h5>Footer.PNG</h5>
+                                  <p>File Size In Bytes 1.14MB</p>
+                                </div>
+                              </div>
+                            </td>
+                            <td> Herman Beck </td>
+
+                            <td> May 15, 2015 </td>
+                            <td>
+                              <ul class="tableActionBtnsWrap">
+                                <li>
+                                  <a href="#">
+                                    <i class="fa fa-pencil"></i>
+                                  </a>
+                                </li>
+                                <li>
+                                  <a href="#">
+                                    <i class="fa fa-download"></i>
+                                  </a>
+                                </li>
+                                <li>
+                                  <a href="#">
+                                    <i class="fa fa-trash"></i>
+                                  </a>
+                                </li>
+                              </ul>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>1</td>
+                            <td class="py-1">
+                              <div class="documentWrap">
+                                <div class="imgWrap">
+                                  <img src="assets/images/faces-clipart/pic-1.png" alt="image">
+                                </div>
+                                <div class="imgDesc">
+                                  <h5>Footer.PNG</h5>
+                                  <p>File Size In Bytes 1.14MB</p>
+                                </div>
+                              </div>
+                            </td>
+                            <td> Herman Beck </td>
+
+                            <td> May 15, 2015 </td>
+                            <td>
+                              <ul class="tableActionBtnsWrap">
+                                <li>
+                                  <a href="#">
+                                    <i class="fa fa-pencil"></i>
+                                  </a>
+                                </li>
+                                <li>
+                                  <a href="#">
+                                    <i class="fa fa-download"></i>
+                                  </a>
+                                </li>
+                                <li>
+                                  <a href="#">
+                                    <i class="fa fa-trash"></i>
+                                  </a>
+                                </li>
+                              </ul>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>1</td>
+                            <td class="py-1">
+                              <div class="documentWrap">
+                                <div class="imgWrap">
+                                  <img src="assets/images/faces-clipart/pic-1.png" alt="image">
+                                </div>
+                                <div class="imgDesc">
+                                  <h5>Footer.PNG</h5>
+                                  <p>File Size In Bytes 1.14MB</p>
+                                </div>
+                              </div>
+                            </td>
+                            <td> Herman Beck </td>
+
+                            <td> May 15, 2015 </td>
+                            <td>
+                              <ul class="tableActionBtnsWrap">
+                                <li>
+                                  <a href="#">
+                                    <i class="fa fa-pencil"></i>
+                                  </a>
+                                </li>
+                                <li>
+                                  <a href="#">
+                                    <i class="fa fa-download"></i>
+                                  </a>
+                                </li>
+                                <li>
+                                  <a href="#">
+                                    <i class="fa fa-trash"></i>
+                                  </a>
+                                </li>
+                              </ul>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>1</td>
+                            <td class="py-1">
+                              <div class="documentWrap">
+                                <div class="imgWrap">
+                                  <img src="assets/images/faces-clipart/pic-1.png" alt="image">
+                                </div>
+                                <div class="imgDesc">
+                                  <h5>Footer.PNG</h5>
+                                  <p>File Size In Bytes 1.14MB</p>
+                                </div>
+                              </div>
+                            </td>
+                            <td> Herman Beck </td>
+
+                            <td> May 15, 2015 </td>
+                            <td>
+                              <ul class="tableActionBtnsWrap">
+                                <li>
+                                  <a href="#">
+                                    <i class="fa fa-pencil"></i>
+                                  </a>
+                                </li>
+                                <li>
+                                  <a href="#">
+                                    <i class="fa fa-download"></i>
+                                  </a>
+                                </li>
+                                <li>
+                                  <a href="#">
+                                    <i class="fa fa-trash"></i>
+                                  </a>
+                                </li>
+                              </ul>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header">
+                    <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
+                      Personal Id
+                    </a>
+                  </div>
+                  <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                    <div class="card-body">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th># </th>
+                            <th> Document Title </th>
+                            <th> Uploaded By </th>
+                            <th> Uploaded Date </th>
+                            <th> Actions </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>1</td>
+                            <td class="py-1">
+                              <div class="documentWrap">
+                                <div class="imgWrap">
+                                  <img src="assets/images/faces-clipart/pic-1.png" alt="image">
+                                </div>
+                                <div class="imgDesc">
+                                  <h5>Footer.PNG</h5>
+                                  <p>File Size In Bytes 1.14MB</p>
+                                </div>
+                              </div>
+                            </td>
+                            <td> Herman Beck </td>
+
+                            <td> May 15, 2015 </td>
+                            <td>
+                              <ul class="tableActionBtnsWrap">
+                                <li>
+                                  <a href="#">
+                                    <i class="fa fa-pencil"></i>
+                                  </a>
+                                </li>
+                                <li>
+                                  <a href="#">
+                                    <i class="fa fa-download"></i>
+                                  </a>
+                                </li>
+                                <li>
+                                  <a href="#">
+                                    <i class="fa fa-trash"></i>
+                                  </a>
+                                </li>
+                              </ul>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>1</td>
+                            <td class="py-1">
+                              <div class="documentWrap">
+                                <div class="imgWrap">
+                                  <img src="assets/images/faces-clipart/pic-1.png" alt="image">
+                                </div>
+                                <div class="imgDesc">
+                                  <h5>Footer.PNG</h5>
+                                  <p>File Size In Bytes 1.14MB</p>
+                                </div>
+                              </div>
+                            </td>
+                            <td> Herman Beck </td>
+
+                            <td> May 15, 2015 </td>
+                            <td>
+                              <ul class="tableActionBtnsWrap">
+                                <li>
+                                  <a href="#">
+                                    <i class="fa fa-pencil"></i>
+                                  </a>
+                                </li>
+                                <li>
+                                  <a href="#">
+                                    <i class="fa fa-download"></i>
+                                  </a>
+                                </li>
+                                <li>
+                                  <a href="#">
+                                    <i class="fa fa-trash"></i>
+                                  </a>
+                                </li>
+                              </ul>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>1</td>
+                            <td class="py-1">
+                              <div class="documentWrap">
+                                <div class="imgWrap">
+                                  <img src="assets/images/faces-clipart/pic-1.png" alt="image">
+                                </div>
+                                <div class="imgDesc">
+                                  <h5>Footer.PNG</h5>
+                                  <p>File Size In Bytes 1.14MB</p>
+                                </div>
+                              </div>
+                            </td>
+                            <td> Herman Beck </td>
+
+                            <td> May 15, 2015 </td>
+                            <td>
+                              <ul class="tableActionBtnsWrap">
+                                <li>
+                                  <a href="#">
+                                    <i class="fa fa-pencil"></i>
+                                  </a>
+                                </li>
+                                <li>
+                                  <a href="#">
+                                    <i class="fa fa-download"></i>
+                                  </a>
+                                </li>
+                                <li>
+                                  <a href="#">
+                                    <i class="fa fa-trash"></i>
+                                  </a>
+                                </li>
+                              </ul>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>1</td>
+                            <td class="py-1">
+                              <div class="documentWrap">
+                                <div class="imgWrap">
+                                  <img src="assets/images/faces-clipart/pic-1.png" alt="image">
+                                </div>
+                                <div class="imgDesc">
+                                  <h5>Footer.PNG</h5>
+                                  <p>File Size In Bytes 1.14MB</p>
+                                </div>
+                              </div>
+                            </td>
+                            <td> Herman Beck </td>
+
+                            <td> May 15, 2015 </td>
+                            <td>
+                              <ul class="tableActionBtnsWrap">
+                                <li>
+                                  <a href="#">
+                                    <i class="fa fa-pencil"></i>
+                                  </a>
+                                </li>
+                                <li>
+                                  <a href="#">
+                                    <i class="fa fa-download"></i>
+                                  </a>
+                                </li>
+                                <li>
+                                  <a href="#">
+                                    <i class="fa fa-trash"></i>
+                                  </a>
+                                </li>
+                              </ul>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>1</td>
+                            <td class="py-1">
+                              <div class="documentWrap">
+                                <div class="imgWrap">
+                                  <img src="assets/images/faces-clipart/pic-1.png" alt="image">
+                                </div>
+                                <div class="imgDesc">
+                                  <h5>Footer.PNG</h5>
+                                  <p>File Size In Bytes 1.14MB</p>
+                                </div>
+                              </div>
+                            </td>
+                            <td> Herman Beck </td>
+
+                            <td> May 15, 2015 </td>
+                            <td>
+                              <ul class="tableActionBtnsWrap">
+                                <li>
+                                  <a href="#">
+                                    <i class="fa fa-pencil"></i>
+                                  </a>
+                                </li>
+                                <li>
+                                  <a href="#">
+                                    <i class="fa fa-download"></i>
+                                  </a>
+                                </li>
+                                <li>
+                                  <a href="#">
+                                    <i class="fa fa-trash"></i>
+                                  </a>
+                                </li>
+                              </ul>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>1</td>
+                            <td class="py-1">
+                              <div class="documentWrap">
+                                <div class="imgWrap">
+                                  <img src="assets/images/faces-clipart/pic-1.png" alt="image">
+                                </div>
+                                <div class="imgDesc">
+                                  <h5>Footer.PNG</h5>
+                                  <p>File Size In Bytes 1.14MB</p>
+                                </div>
+                              </div>
+                            </td>
+                            <td> Herman Beck </td>
+
+                            <td> May 15, 2015 </td>
+                            <td>
+                              <ul class="tableActionBtnsWrap">
+                                <li>
+                                  <a href="#">
+                                    <i class="fa fa-pencil"></i>
+                                  </a>
+                                </li>
+                                <li>
+                                  <a href="#">
+                                    <i class="fa fa-download"></i>
+                                  </a>
+                                </li>
+                                <li>
+                                  <a href="#">
+                                    <i class="fa fa-trash"></i>
+                                  </a>
+                                </li>
+                              </ul>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <!--accordien-->
+
+
+          </div>
+        </div>
+
+
+      </div>
+      <!-- content-wrapper ends -->
+      <!-- Sign In Popup -->
+      <div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide sign-in-dialog">
+        <!--Sign IN Tab-->
+        <div class="signInTab tab_active siTabContent" id="signin-tab-1">
+          <div class="small-dialog-header">
+            <h3>Sign In</h3>
+          </div>
+          <form>
+            <div class="sign-in-wrapper">
+              <a href="#0" class="social_bt facebook">Login with Facebook</a>
+              <a href="#0" class="social_bt google">Login with Google</a>
+              <div class="divider"><span>Or</span></div>
+              <div class="form-group">
+                <label>Email</label>
+                <input type="email" class="form-control" name="email" id="email">
+                <i class="icon_mail_alt"></i>
+              </div>
+              <div class="form-group">
+                <label>Password</label>
+                <input type="password" class="form-control" name="password" id="password" value="">
+                <i class="icon_lock_alt"></i>
+              </div>
+              <div class="clearfix add_bottom_15">
+                <div class="checkboxes float-left">
+                  <input id="remember-me" type="checkbox" name="check">
+                  <label for="remember-me">Remember Me</label>
+                </div>
+                <div class="float-right"><a class="forgetPassBtn tabBtn" href="#signin-tab-3">Forgot Password?</a></div>
+              </div>
+              <div class="text-center"><input type="submit" value="Log In" class="btn_login"></div>
+              <div class="text-center">
+                Don’t have an account? <a class="signUpBtn tabBtn" href="#signin-tab-2">Sign up</a>
+              </div>
+
+            </div>
+          </form>
+          <!--form -->
+        </div>
+        <!--Sign IN Tab-->
+        <!--Sign Up Tab-->
+        <div class="signUpTab siTabContent" id="signin-tab-2">
+          <div class="small-dialog-header">
+            <h3>Sign Up</h3>
+          </div>
+          <form>
+            <div class="sign-in-wrapper">
+
+              <div class="form-group">
+                <label>Name</label>
+                <input type="email" class="form-control" name="email" id="email">
+                <i class="icon_mail_alt"></i>
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                <input type="email" class="form-control" name="email" id="email">
+                <i class="icon_mail_alt"></i>
+              </div>
+              <div class="form-group">
+                <ul class="form-list">
+                  <li class="checkBox">
+                    <i class="far fa-check-square"></i> Male
+                  </li>
+                  <li class="checkBox">
+                    <i class="far fa-square"></i> Female
+                  </li>
+                </ul>
+              </div>
+              <div class="form-group">
+                <ul class="form-list">
+                  <li class="checkBox">
+                    <i class="far fa-circle"></i> Radio 1
+                  </li>
+                  <li class="checkBox">
+                    <i class="far fa-dot-circle"></i> Radio 1
+                  </li>
+                </ul>
+              </div>
+              <div class="form-group">
+                <label>Password</label>
+                <input type="password" class="form-control" name="password" id="password" value="">
+                <i class="icon_lock_alt"></i>
+              </div>
+              <div class="form-group">
+                <label>Confirm Password</label>
+                <input type="password" class="form-control" name="password" id="password" value="">
+                <i class="icon_lock_alt"></i>
+              </div>
+
+              <div class="form-group dob-wrap">
+                <h5>Birthday</h5>
+                <p>To sign up, you need to be at least 18. Other people who use Airbnb won’t see your birthday.</p>
+                <div class="row dob-row">
+                  <div class="col-md-6 col-xs-6">
+                    <select class="form-control">
+                      <option>Month</option>
+                      <option>January</option>
+                      <option>February</option>
+                      <option>March</option>
+                      <option>April</option>
+                      <option>May</option>
+                    </select>
+                  </div>
+                  <div class="col-md-3 col-xs-6">
+                    <select class="form-control">
+                      <option>Day</option>
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                    </select>
+                  </div>
+                  <div class="col-md-3 col-xs-6">
+                    <select class="form-control">
+                      <option>Year</option>
+                      <option>2019</option>
+                      <option>2018</option>
+                      <option>2017</option>
+                      <option>2016</option>
+                      <option>2015</option>
+                    </select>
+                  </div>
+                </div>
+                <p>We’ll send you marketing promotions, special offers, inspiration, and policy updates via email.</p>
+              </div>
+
+              <div class="text-center"><input type="submit" value="Sign Up" class="btn_login"></div>
+              <div class="backBtnWrap">
+                <a class="backToLoginBtn tabBtn" href="#signin-tab-1">Back to Login</a>
+              </div>
+
+            </div>
+          </form>
+          <!--form -->
+        </div>
+        <!--Sign Up Tab-->
+        <!--Forget Password Tab-->
+        <div class="forgetPassTab siTabContent" id="signin-tab-3">
+          <div class="small-dialog-header">
+            <h3>Forget Password</h3>
+          </div>
+          <div id="forgot_pw">
+            <div class="form-group">
+              <label>Please confirm login email below</label>
+              <input type="email" class="form-control" name="email_forgot" id="email_forgot">
+              <i class="icon_mail_alt"></i>
+            </div>
+            <p>You will receive an email containing a link allowing you to reset your password to a new preferred one.</p>
+            <div class="text-center m-top-15"><input type="submit" value="Reset Password" class="btn_1"></div>
+            <div class="backBtnWrap">
+              <a class="tabBtn" href="#signin-tab-1">Back to Login</a>
+            </div>
+          </div>
+        </div>
+        <!--Forget Password Tab-->
+      </div>
+      <!-- /Sign In Popup -->
+      <footer>
+        <!--<div class="footer-top">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-lg-3 f-col">
+                        <address>
+                            <h3>Kids App</h3>
+                            <p><i class="icon icon-map-marker"></i> Amman Jordan</p>
+                            <p><i class="icon icon-phone"></i> +971 11111</p>
+                            <p><i class="icon icon-phone"></i> +971 11111</p>
+                            <p><i class="icon icon-envelope-o"></i><a>info@kidsapp.com</a></p>
+                        </address>
+                    </div>
+                    <div class="col-lg-6 f-col">
+                        <div class="contact-form">
+                            <h4 class="widget-title">Contact Us</h4>
+                            <form class="form-v2">
+                              <div class="feildWrap">
+                                      <input type="text" class="form-control" name="name" placeholder="Your Name">
+                              </div>
+                              <div class="feildWrap">
+                                 <input type="text" class="form-control" name="email" placeholder="Your Email">
+                              </div>
+                              <div class="feildWrap">
+                                 <input type="text" class="form-control" name="Subject" placeholder="Subject">
+                              </div>
+                              <div class="feildWrap">
+                                 <textarea class="form-control" placeholder="Message"></textarea>
+                              </div>
+                              <div class="button-wrap">
+                                  <button class="button">Send Message</button>
+                              </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 f-col">
+                        <h4 class="widget-title">Follow Us On</h4>
+                        <ul class="socialLinks">
+                            <li>
+                                <a href="#">
+                                  <i class="icon icon-social-facebook"></i> Facebook
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                  <i class="icon icon-social-twitter"></i> Twitter
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+        <div class="footer-bottom">
+          <div class="container">
+            <!--<a class="showHideFooterBtn">
+                <i class="icon icon-angle-up"></i>
+                <span class="shBtntext">Show Footer</span>
+            </a>-->
+            <div class="copyRight">
+              <span class="copyRight">
+                Copyright © 2019 kids app All rights reserved.
+              </span>
+              <span class="fLink">
+                <a href="contact-us.html">Contact Us</a>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="scrollUp"></div>
+      </footer>
+      <!-- partial -->
+    </div>
+  </div>
+
+</main>

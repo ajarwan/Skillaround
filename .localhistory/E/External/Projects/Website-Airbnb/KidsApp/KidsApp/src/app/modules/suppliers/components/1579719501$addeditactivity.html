@@ -1,0 +1,203 @@
+<div class="content-wrapper">
+
+  <!-- Page Title Header Ends-->
+  <div class="row">
+    <div class="col-md-12 grid-margin">
+      <div class="row">
+        <!--Titles-->
+        <div class="col-sm-6 col-lg-6">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">{{resources.TitleAr}}</label>
+            <div class="col-sm-9">
+              <input class="form-control" [(ngModel)]="Activity.TitleAr" [ngClass]="{'ctr-err': Validations.TitleAr}">
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-6">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">{{resources.TitleEn}}</label>
+            <div class="col-sm-9">
+              <input class="form-control" [(ngModel)]="Activity.TitleEn" [ngClass]="{'ctr-err': Validations.TitleEn}">
+            </div>
+          </div>
+        </div>
+        <!--Descriptions-->
+        <div class="col-sm-6 col-lg-6">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">{{resources.DescriptionAr}}</label>
+            <div class="col-sm-9">
+              <textarea class="form-control" [(ngModel)]="Activity.DescriptionAr" [ngClass]="{'ctr-err': Validations.DescriptionAr}"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-6">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">{{resources.DescriptionEn}}</label>
+            <div class="col-sm-9">
+              <textarea class="form-control" [(ngModel)]="Activity.DescriptionEn" [ngClass]="{'ctr-err': Validations.DescriptionEn}"></textarea>
+            </div>
+          </div>
+        </div>
+        <!--Category-->
+        <div class="col-sm-6 col-lg-6">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">{{resources.Category}}</label>
+            <div class="col-sm-9">
+              <ng-select [items]="Categories"
+                         [bindLabel]="environment.Lang =='ar' ? 'TitleAr' : 'TitleEn'"
+                         [placeholder]="resources?.PleaseSelect"
+                         [(ngModel)]="Activity.Category"
+                         class="remove-input">
+                <ng-template ng-option-tmp let-item="item" let-index="index">
+                  <div style="font-size:16px">
+                    <button class="btn margin-side btn-in-ac">
+                      <i aria-hidden="true" class="{{item.IconClass}} margin-side"></i>
+                    </button>
+                    <b>
+                      {{localizeData(item.TitleAr,item.TitleEn)}}
+                    </b>
+                  </div>
+                </ng-template>
+              </ng-select>
+            </div>
+          </div>
+        </div>
+        <!--Transportation-->
+        <div class="col-sm-6 col-lg-6">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">{{resources.TransportationAvailable}}</label>
+            <div class="col-sm-9">
+              <ul class="form-list">
+                <li class="checkBox" (appClick)="Activity.Transportation = true">
+                  <i class="far" [ngClass]="{'fa-check-square' :Activity.Transportation, 'fa-square' :!Activity.Transportation }"></i> {{resources?.GeneralYes}}
+                </li>
+                <li class="checkBox" (appClick)="Activity.Transportation = false">
+                  <i class="far" [ngClass]="{'fa-check-square' :!Activity.Transportation, 'fa-square' :Activity.Transportation }"></i> {{resources?.GeneralNo}}
+                </li>
+
+              </ul>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+        <div class="col-sm-6 col-lg-6">
+
+          <div class="form-group row">
+
+            <label for="exampleFormControlSelect1" class="col-sm-3 col-form-label">Large select</label>
+            <div class="col-sm-9">
+
+
+              <select class="form-control form-control-lg" id="exampleFormControlSelect1">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-6">
+
+          <div class="form-group row">
+
+            <label for="exampleFormControlSelect1" class="col-sm-3 col-form-label">Large select</label>
+            <div class="col-sm-9">
+
+
+              <select class="form-control form-control-lg" id="exampleFormControlSelect1">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-6">
+
+          <div class="form-group row">
+            <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Email</label>
+            <div class="col-sm-9">
+              <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Enter email">
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-6">
+          <div class="form-group row">
+            <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Password</label>
+            <div class="col-sm-9">
+              <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12">
+          <button type="submit" class="btn btn-success mr-2">Submit</button>
+          <button class="btn btn-light">Cancel</button>
+        </div>
+
+      </div>
+
+
+      <div class="m-top-20 m-bottom-20">
+        <label>Activate / Deactivate</label>
+        <div class="switchBtn">
+          <div class="toggle btn btn-primary" data-toggle="toggle" style="width: 70.0625px; height: 28.7813px;"><input class="toggleBtn" id="toggle-one" checked="" type="checkbox"><div class="toggle-group"><label class="btn btn-primary toggle-on">On</label><label class="btn btn-default active toggle-off">Off</label><span class="toggle-handle btn btn-default"></span></div></div>
+        </div>
+      </div>
+
+      <div class="row img-gallery">
+        <div class="col-lg-3">
+          <div class="img_bg_wrap">
+            <div class="imgBg" style="background-image: url('assets/images/img-1.jpg');"></div>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="img_bg_wrap">
+            <div class="imgBg" style="background-image: url('assets/images/img-1.jpg');"></div>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="img_bg_wrap">
+            <div class="imgBg" style="background-image: url('assets/images/img-1.jpg');"></div>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="img_bg_wrap">
+            <div class="imgBg" style="background-image: url('assets/images/img-1.jpg');"></div>
+          </div>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="input-group uploadBlock">
+            <div class="textIcon text-center">
+              <div class="icon">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="text">
+                Add a New progrmme
+              </div>
+            </div>
+            <input class="fileUpload" type="file" name="myFile">
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+</div>

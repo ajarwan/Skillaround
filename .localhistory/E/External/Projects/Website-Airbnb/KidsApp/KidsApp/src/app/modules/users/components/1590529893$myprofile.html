@@ -1,0 +1,300 @@
+<section class="page-section my-profile-section" style="min-height:calc(100vh - 80px)">
+  <div class="container tabContent">
+
+
+    <nav *ngIf="ActiveUser?.UserType != AppEnums.UserTypes.Manager">
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab"
+           href="#nav-profile" role="tab" aria-controls="nav-profile"
+           aria-selected="false">
+          {{resources.MyProfile}}
+        </a>
+        <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab"
+           href="#nav-kids" role="tab" aria-controls="nav-home" aria-selected="true">
+          {{resources.Kids}}
+        </a>
+        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab"
+           href="#nav-rec" role="tab" aria-controls="nav-contact"
+           aria-selected="false">
+          {{resources.Recommendations}}
+        </a>
+      </div>
+    </nav>
+
+    <!--Profile-->
+    <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+      <div class="tabContentInner">
+        <div class="row">
+          <div class="col-md-3 left-col">
+            <div class="text-center avatar-block">
+              <img [src]="User.Image" class="avatar img-circle img-thumbnail"
+                   [appImageError]="'assets/images/avatar_2x.png'"
+                   style="width:250px;height:250px"
+                   alt="avatar">
+              <!--file upload-->
+              <div class="upload-btn-wrapper">
+                <img class="img" src="assets/images/photo-img.png">
+                <span class="btn fileName">{{resources.UploadImage}}</span>
+                <span class="text">{{resources.Upload}}</span>
+                <input type="file" name="myfile" (change)="OnUploadFile($event)" [attr.accept]="environment.AllowedImagesExtension">
+              </div>
+              <!--file upload-->
+            </div>
+            <ul class="list-group" *ngIf="false">
+              <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
+              <li class="list-group-item text-right"><span class="pull-left"><strong>Shares</strong></span> 125</li>
+              <li class="list-group-item text-right"><span class="pull-left"><strong>Likes</strong></span> 13</li>
+              <li class="list-group-item text-right"><span class="pull-left"><strong>Posts</strong></span> 37</li>
+              <li class="list-group-item text-right"><span class="pull-left"><strong>Followers</strong></span> 78</li>
+            </ul>
+          </div>
+          <div class="col-md-9 right-col">
+            <div class="my-pofile form-wrap form-loader-wrap">
+              <div class="form-loader" [ngStyle]="{'display':IsLoading ? 'block' : 'none' }"></div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>{{resources?.FirstName}}<span class="filed-req">*</span></label>
+                    <input type="text" class="form-control" [(ngModel)]="User.FirstName" [ngClass]="{'ctr-err':UserValidation.FirstName }">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>{{resources?.LastName}}<span class="filed-req">*</span></label>
+                    <input type="text" class="form-control" [(ngModel)]="User.LastName" [ngClass]="{'ctr-err':UserValidation.LastName }">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>{{resources?.Email}}<span class="filed-req">*</span></label>
+                    <input type="text" class="form-control" [(ngModel)]="User.Email" disabled>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>{{resources?.MobileNumber}}</label>
+                    <ngx-intl-tel-input [cssClass]="'custom'"
+                                        [enableAutoCountrySelect]="true"
+                                        [preferredCountries]="PreferredCountries"
+                                        [enablePlaceholder]="true"
+                                        [searchCountryFlag]="true"
+                                        [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+                                        [selectFirstCountry]="true"
+                                        [maxLength]="15"
+                                        [tooltipField]="TooltipLabel.Name"
+                                        [phoneValidation]="true"
+                                        [separateDialCode]="true"
+                                        [(ngModel)]="User.PhoneNumber">
+                    </ngx-intl-tel-input>
+                  </div>
+                </div>
+              </div>
+              <div class="row fix-phone-margin">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>{{resources?.Birthday}}</label>
+                    <input type="text"
+                           [ngClass]="{'ctr-err':UserValidation.DOB }"
+                           class="form-control popup-datepicker dateIcon"
+                           placeholder="dd/mm/yyyy"
+                           bsDatepicker
+                           #dpFrom="bsDatepicker"
+                           [bsConfig]="DataStore.get('dbConfig')"
+                           [maxDate]="Now"
+                           [(ngModel)]="User.DOB" />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>{{resources?.Gender}}</label>
+                    <ul class="form-list">
+                      <li class="checkBox" (appClick)="User.Gender = AppEnums.Gender.Male">
+                        <i class="far" [ngClass]="{'fa-check-square' :User.Gender == AppEnums.Gender.Male, 'fa-square' :User.Gender != AppEnums.Gender.Male }"></i> {{resources?.Male}}
+                      </li>
+                      <li class="checkBox" (appClick)="User.Gender = AppEnums.Gender.Female">
+                        <i class="far" [ngClass]="{'fa-check-square' :User.Gender == AppEnums.Gender.Female, 'fa-square' :User.Gender != AppEnums.Gender.Female }"></i>  {{resources?.Female}}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="row fix-phone-margin">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <button type="button" class="btn_login" (appClick)="OnSave()">
+                      {{resources?.Save}}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Related Kids-->
+    <div class="tab-pane fade" id="nav-kids" role="tabpanel" aria-labelledby="nav-kids-tab">
+      <div class="tabContentInner">
+        <div class="row">
+          <div class="col-md-12 form-loader-wrap">
+            <div class="form-loader" [ngStyle]="{'display':IsLoadingKids ? 'block' : 'none' }"></div>
+            <div>
+              <div class="content-2">
+                <table class="table table-striped kids-table">
+                  <thead>
+                    <tr>
+                      <th>{{resources.KidName}}</th>
+                      <th>{{resources.Gender}}</th>
+                      <th>{{resources.Birthday}}</th>
+                      <th>{{resources.Age}}</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngIf="!IsLoadingKids && Kids.length ==0">
+                      <td colspan="5">
+                        <span>{{resources.NoDataFound}}</span>
+                      </td>
+                    </tr>
+                    <tr *ngFor="let Kid of Kids" [ngClass]="{'add-row': Kid.IsSelected}">
+                      <ng-container *ngIf="!Kid.IsSelected">
+                        <td>
+                          {{Kid.KidName}}
+                        </td>
+                        <td>
+                          {{EncodeGender(Kid)}}
+                        </td>
+                        <td>
+                          {{formatDate(Kid.DOB, 'dd/MM/yyyy')}}
+                        </td>
+                        <td>
+                          {{Kid.Age}} {{resources.Years}}
+
+                        </td>
+                        <td>
+                          <i class="fa fa-pencil pull-right margin-side-md" (appClick)="OnEditKid(Kid)" *ngIf="EditKidsEnabled"></i>
+                          <i class="fa fa-trash pull-right margin-side-md" (appClick)="OnKidDeleteConfirmation(Kid)" *ngIf="EditKidsEnabled"></i>
+                        </td>
+                      </ng-container>
+                      <ng-container *ngIf="Kid.IsSelected">
+                        <td>
+                          <input type="text" [attr.placeholder]="resources.KidName" class="form-control" [(ngModel)]="SelectedKid.KidName" [ngClass]="{'ctr-err':KidsValidations.KidName }">
+                        </td>
+                        <td>
+                          <ul class="form-list">
+                            <li class="checkBox" (appClick)="SelectedKid.Gender = AppEnums.Gender.Male">
+                              <i class="far" [ngClass]="{'fa-check-square' :SelectedKid.Gender == AppEnums.Gender.Male, 'fa-square' :SelectedKid.Gender != AppEnums.Gender.Male }"></i> {{resources?.Male}}
+                            </li>
+                            <li class="checkBox" (appClick)="SelectedKid.Gender = AppEnums.Gender.Female">
+                              <i class="far" [ngClass]="{'fa-check-square' :SelectedKid.Gender == AppEnums.Gender.Female, 'fa-square' :SelectedKid.Gender != AppEnums.Gender.Female }"></i>  {{resources?.Female}}
+                            </li>
+                          </ul>
+                        </td>
+                        <td>
+                          <input type="text"
+                                 [ngClass]="{'ctr-err':KidsValidations.DOB }"
+                                 class="form-control popup-datepicker dateIcon"
+                                 placeholder="dd/mm/yyyy"
+                                 bsDatepicker
+                                 #dpDOB="bsDatepicker"
+                                 [maxDate]="Now"
+                                 [bsConfig]="DataStore.get('dbConfig')"
+                                 [(ngModel)]="SelectedKid.DOB" />
+                        </td>
+                        <td style="display:none"></td>
+                        <td class="add-kid-controls">
+                          <button class="btn btn-light" [ngClass]="{'pull-right': Language == CoreEnums.Lang.En , 'pull-left': Language == CoreEnums.Lang.Ar}" (appClick)="OnEditKidCancel()">{{resources.Cancel}}</button>
+                          <button class="btn btn-success mr-2" [ngClass]="{'pull-right': Language == CoreEnums.Lang.En , 'pull-left': Language == CoreEnums.Lang.Ar}" (appClick)="OnEditKidSave()">{{resources.Save}}</button>
+                        </td>
+                      </ng-container>
+                    </tr>
+                    <!--Add New Controls-->
+                    <tr *ngIf="AddNewKidActive" class="add-row">
+                      <td>
+                        <input type="text" [attr.placeholder]="resources.KidName" class="form-control" [(ngModel)]="SelectedKid.KidName" [ngClass]="{'ctr-err':KidsValidations.KidName }">
+                      </td>
+                      <td>
+                        <ul class="form-list">
+                          <li class="checkBox" (appClick)="SelectedKid.Gender = AppEnums.Gender.Male">
+                            <i class="far" [ngClass]="{'fa-check-square' :SelectedKid.Gender == AppEnums.Gender.Male, 'fa-square' :SelectedKid.Gender != AppEnums.Gender.Male }"></i> {{resources?.Male}}
+                          </li>
+                          <li class="checkBox" (appClick)="SelectedKid.Gender = AppEnums.Gender.Female">
+                            <i class="far" [ngClass]="{'fa-check-square' :SelectedKid.Gender == AppEnums.Gender.Female, 'fa-square' :SelectedKid.Gender != AppEnums.Gender.Female }"></i>  {{resources?.Female}}
+                          </li>
+                        </ul>
+                      </td>
+                      <td>
+                        <input type="text"
+                               [ngClass]="{'ctr-err':KidsValidations.DOB }"
+                               class="form-control popup-datepicker dateIcon"
+                               placeholder="dd/mm/yyyy"
+                               bsDatepicker
+                               #dpDOB="bsDatepicker"
+                               [maxDate]="Now"
+                               [bsConfig]="DataStore.get('dbConfig')"
+                               [(ngModel)]="SelectedKid.DOB" />
+                      </td>
+                      <td style="display:none"></td>
+                      <td class="add-kid-controls">
+                        <button class="pull-right btn btn-light" (appClick)="OnAddNewKidCancel()">{{resources.Cancel}}</button>
+                        <button class="pull-right btn btn-success mr-2" (appClick)="OnAddNewKidSave()">{{resources.Save}}</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="submitBtnWrap form-v4 m-t-5" *ngIf="!AddNewKidActive && EditKidsEnabled">
+                  <button class="outline-btn pointer" (appClick)="OnAddNewKid()">{{resources.Add}}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="tab-pane fade" id="nav-rec" role="tabpanel" aria-labelledby="nav-rec-tab">
+      <div class="tabContentInner">
+        <div class="row">
+          <div class="col-md-12  ">
+            <a class="activity_Block link-div no-hover" *ngFor="let Act of Activities" [routerLink]="'/activity/details/25' + Act.Id">
+              <div class="img_container">
+                <div class="img_link">
+                  <div class="imgBg">
+                    <img class="img" [src]="Act.Thumbnail?.File" />
+                  </div>
+                </div>
+              </div>
+              <div class="desc_wrap">
+                <div class="info-left">
+                  <h4>{{Act.Title}}</h4>
+                  <p class="place">
+                    <i aria-hidden="true" class="fas fa-map-marker-alt"></i>
+                    {{Act.LocationNameCalculated}}
+                  </p>
+                  <div class="details">
+                    {{Act.Description}}
+                  </div>
+                </div>
+                <div class="info-right">
+                  <span class="rating" *ngIf="Act.TotalReviews">
+                    <i class="icon icon-star"></i> {{Act.AvgRate}}
+                  </span>
+                  <span class="price">{{Act.Price}}$</span>
+                </div>
+              </div>
+            </a>
+            <div *ngIf="!Activities || Activities.length ==0">
+              <span class="no-data-found">
+                {{resources.NoDataFound}}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

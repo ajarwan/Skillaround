@@ -1,0 +1,71 @@
+body {
+  direction: rtl !important;
+}
+
+html {
+  direction: rtl !important;
+}
+
+.filter-align-left {
+  text-align: right;
+}
+
+
+@media only screen and (max-width: 1500px) {
+  .kids-table, .kids-table thead, .kids-table tbody, .kids-table th, .kids-table td, .kids-table tr {
+    display: block;
+  }
+
+    .kids-table thead tr {
+      position: absolute;
+      top: -9999px;
+      right: -9999px;
+    }
+
+    .kids-table tr {
+      border: 1px solid #ccc;
+    }
+
+    .kids-table td {
+      border: none;
+      border-bottom: 1px solid #eee;
+      position: relative;
+      padding-right: 200px;
+      margin-right: 100px;
+    }
+
+      .kids-table td:before {
+        position: absolute;
+        top: 12px;
+        right: 6px;
+        width: 200px;
+        padding-left: 40px;
+        white-space: nowrap;
+        margin-right: -100px;
+      }
+
+      .kids-table td:nth-of-type(1):before {
+        content: "إسم الابن";
+      }
+
+  td:nth-of-type(2):before {
+    content: "الجنس";
+  }
+
+  .kids-table td:nth-of-type(3):before {
+    content: "تاريخ الميلاد";
+  }
+
+  .kids-table td:nth-of-type(4):before {
+    content: "العمر";
+  }
+
+  .add-row td {
+    border: none !important;
+  }
+
+  .add-kid-controls {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}

@@ -1,0 +1,264 @@
+<div class="content-wrapper">
+
+
+
+
+  <div class="row">
+    <div class="col-md-12 grid-margin">
+      <!--Basic Info-->
+      <div class="row">
+
+        <div class="col-sm-12 page-title-header">
+          <div class="col-12">
+            <div class="page-header">
+              <h4 class="page-title">{{resources.BasicDetails}}</h4>
+            </div>
+          </div>
+        </div>
+
+        <!--Titles-->
+        <div class="col-sm-6 col-lg-6">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">{{resources.TitleAr}}</label>
+            <div class="col-sm-9">
+              <input class="form-control" [(ngModel)]="Activity.TitleAr" [ngClass]="{'ctr-err': Validations.TitleAr}">
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-6">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">{{resources.TitleEn}}</label>
+            <div class="col-sm-9">
+              <input class="form-control" [(ngModel)]="Activity.TitleEn" [ngClass]="{'ctr-err': Validations.TitleEn}">
+            </div>
+          </div>
+        </div>
+        <!--Descriptions-->
+        <div class="col-sm-6 col-lg-6">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">{{resources.DescriptionAr}}</label>
+            <div class="col-sm-9">
+              <textarea class="form-control" [(ngModel)]="Activity.DescriptionAr" [ngClass]="{'ctr-err': Validations.DescriptionAr}"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-6">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">{{resources.DescriptionEn}}</label>
+            <div class="col-sm-9">
+              <textarea class="form-control" [(ngModel)]="Activity.DescriptionEn" [ngClass]="{'ctr-err': Validations.DescriptionEn}"></textarea>
+            </div>
+          </div>
+        </div>
+        <!--Category-->
+        <div class="col-sm-6 col-lg-6">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">{{resources.Category}}</label>
+            <div class="col-sm-9">
+              <ng-select [items]="Categories"
+                         [bindLabel]="environment.Lang =='ar' ? 'TitleAr' : 'TitleEn'"
+                         [placeholder]="resources?.PleaseSelect"
+                         [(ngModel)]="Activity.Category"
+                         class="remove-input">
+                <ng-template ng-option-tmp let-item="item" let-index="index">
+                  <div style="font-size:16px">
+                    <button class="btn margin-side btn-in-ac">
+                      <i aria-hidden="true" class="{{item.IconClass}} margin-side"></i>
+                    </button>
+                    <b>
+                      {{localizeData(item.TitleAr,item.TitleEn)}}
+                    </b>
+                  </div>
+                </ng-template>
+              </ng-select>
+            </div>
+          </div>
+        </div>
+        <!--Transportation-->
+        <div class="col-sm-6 col-lg-6">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">{{resources.TransportationAvailable}}</label>
+            <div class="col-sm-9">
+              <ul class="form-list">
+                <li class="checkBox" (appClick)="Activity.Transportation = true">
+                  <i class="far" [ngClass]="{'fa-check-square' :Activity.Transportation, 'fa-square' :!Activity.Transportation }"></i> {{resources?.GeneralYes}}
+                </li>
+                <li class="checkBox" (appClick)="Activity.Transportation = false">
+                  <i class="far" [ngClass]="{'fa-check-square' :!Activity.Transportation, 'fa-square' :Activity.Transportation }"></i> {{resources?.GeneralNo}}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!--Age From-->
+        <div class="col-sm-6 col-lg-6">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">{{resources.AgeFrom}}</label>
+            <div class="col-sm-9">
+              <ng-select [items]="Ages"
+                         [placeholder]="resources?.PleaseSelect"
+                         [(ngModel)]="Activity.AgeFrom"
+                         class="remove-input">
+              </ng-select>
+            </div>
+          </div>
+        </div>
+        <!--Age To-->
+        <div class="col-sm-6 col-lg-6">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">{{resources.AgeTo}}</label>
+            <div class="col-sm-9">
+              <ng-select [items]="Ages"
+                         [placeholder]="resources?.PleaseSelect"
+                         [(ngModel)]="Activity.AgeTo"
+                         class="remove-input">
+              </ng-select>
+            </div>
+          </div>
+        </div>
+        <!--Date From-->
+        <div class="col-sm-6 col-lg-6">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">{{resources.FromDate}}</label>
+            <div class="col-sm-9">
+              <input type="text"
+                     class="form-control"
+                     placeholder="dd/mm/yyyy"
+                     bsDatepicker
+                     #dpFrom="bsDatepicker"
+                     [bsConfig]="DataStore.get('dbConfig')"
+                     [(ngModel)]="Activity.From" />
+            </div>
+          </div>
+        </div>
+        <!--Date To-->
+        <div class="col-sm-6 col-lg-6">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">{{resources.ToDate}}</label>
+            <div class="col-sm-9">
+              <input type="text"
+                     class="form-control"
+                     placeholder="dd/mm/yyyy"
+                     bsDatepicker
+                     #dpFrom="bsDatepicker"
+                     [bsConfig]="DataStore.get('dbConfig')"
+                     [(ngModel)]="Activity.To" />
+            </div>
+          </div>
+        </div>
+        <!--Capacity-->
+        <div class="col-sm-6 col-lg-6">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">{{resources.Capacity}}</label>
+            <div class="col-sm-9">
+              <input type="number" [appCharLimit]="CoreEnums.CharLimit.PositiveNumbers" class="form-control" [(ngModel)]="Activity.Capacity">
+            </div>
+          </div>
+        </div>
+        <!--Price-->
+        <div class="col-sm-6 col-lg-6">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">{{resources.Price}}</label>
+            <div class="col-sm-9">
+              <input [appCharLimit]="CoreEnums.CharLimit.PositiveFloat" class="form-control" [(ngModel)]="Activity.Price">
+            </div>
+          </div>
+        </div>
+        <!--IsPublished-->
+        <div class="col-sm-6 col-lg-6">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">{{resources.IsPublished}}</label>
+            <div class="col-sm-9">
+              <div class="toggle btn" [ngClass]="{'btn-default off' : !Activity.IsPosted , ' btn-primary': Activity.IsPosted }"
+                   style="width: 70.0625px; height: 28.7813px;"
+                   (appClick)="Activity.IsPosted =!Activity.IsPosted ">
+                <input class="toggleBtn" checked="" type="checkbox">
+                <div class="toggle-group">
+                  <label class="btn btn-primary toggle-on">{{resources.GeneralYes}}</label>
+                  <label class="btn btn-default active toggle-off">{{resources.GeneralNo}}</label>
+                  <span class="toggle-handle btn btn-default"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!--Location Info-->
+      <div class="row">
+        <div class="col-sm-12 page-title-header">
+          <div class="col-12">
+            <div class="page-header">
+              <h4 class="page-title">{{resources.LocationInfo}}</h4>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12">
+          <div id="map" #MapElement></div>
+        </div>
+      </div>
+
+
+      <!--Photo Gallery-->
+      <div class="row img-gallery">
+        <div class="col-sm-12 page-title-header">
+          <div class="col-12">
+            <div class="page-header">
+              <h4 class="page-title">{{resources.PhotoGallery}}</h4>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="img_bg_wrap">
+            <div class="imgBg" style="background-image: url('assets/images/img-1.jpg');"></div>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="img_bg_wrap">
+            <div class="imgBg" style="background-image: url('assets/images/img-1.jpg');"></div>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="img_bg_wrap">
+            <div class="imgBg" style="background-image: url('assets/images/img-1.jpg');"></div>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="img_bg_wrap">
+            <div class="imgBg" style="background-image: url('assets/images/img-1.jpg');"></div>
+          </div>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="input-group uploadBlock">
+            <div class="textIcon text-center">
+              <div class="icon">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="text">
+                Add a New progrmme
+              </div>
+            </div>
+            <input class="fileUpload" type="file" name="myFile">
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-sm-12" style="text-align:center;margin-top:5px">
+          <button type="submit" class="btn btn-success mr-2">Submit</button>
+          <button class="btn btn-light">Cancel</button>
+        </div>
+      </div>
+      
+
+    </div>
+  </div>
+
+
+</div>

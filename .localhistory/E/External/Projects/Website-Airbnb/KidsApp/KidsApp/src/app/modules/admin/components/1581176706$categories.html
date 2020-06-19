@@ -1,0 +1,79 @@
+<div class="content-wrapper">
+  <!-- Page Title Header Starts-->
+  <div class="row page-title-header">
+    <div class="col-12">
+      <div class="page-header">
+        <h4 class="page-title">{{resources.Categories}}</h4>
+      </div>
+    </div>
+  </div>
+  <div class="contentInnerWrap">
+    <!--<nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Dashboard</a>
+        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Calender</a>
+        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Requests</a>
+      </div>
+    </nav>-->
+    <div class="tabContent" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+        <div class="tabContentInner" style="padding:0px">
+          <!--Actions-->
+          <ul class="list-items">
+            <li>
+              <div class="search-container">
+                <input class="inputBox" type="text" placeholder="Search..">
+                <button type="button"><i class="fa fa-search"></i></button>
+              </div>
+            </li>
+            <li>
+              <a class="v-btn">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                <span>Add</span>
+              </a>
+            </li>
+            <li>
+              <a class="v-btn">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+                <span>Delete</span>
+              </a>
+            </li>
+          </ul>
+          <div class="content-2">
+            <!--Table-->
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>{{resources.TitleAr}}</th>
+                  <th>{{resources.TitleEn}}</th>
+                  <th>{{resources.Icon}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let Cat of Categories">
+                  <td>
+                    {{Cat.TitleAr}}
+                  </td>
+                  <td>
+                    {{Cat.TitleEn}}
+                  </td>
+                  <td>
+                    <i class=" {{Cat.IconClass}}" aria-hidden="true"></i>
+                    <i class="fa fa-pencil pull-right"></i>
+                  </td>
+                </tr>
+
+
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+
+</div>

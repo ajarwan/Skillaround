@@ -1,0 +1,402 @@
+<header id="header">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand primary active" [routerLink]="'/'">
+      <img src="assets/images/logo.png" class="logo-white">
+      <img src="assets/images/logo.png" class="logo-black">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-main" aria-controls="navbar-main" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbar-main">
+      <div class="navbar-inner">
+
+        <ul class="nav navbar-nav profile-dropdown navbar-right ml-auto" *ngIf="ActiveUser">
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+              <div class="user-profile-block">
+                <span class="u-img">
+                  <img [src]="ActiveUser.Image" class="user-img"
+                       [appImageError]="'assets/images/user-image.png'">
+                </span>
+                <span class="u-name">{{ActiveUser.FullName}}</span>
+              </div>
+            </a>
+            <ul class="dropdown-menu">
+              <li (appClick)="SignOut()"><a>{{resources?.SignOut}}</a></li>
+              <li><a>View Profile</a></li>
+            </ul>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav">
+          <li class="nav-item" (appClick)="ChangeLang()">
+            <a class="nav-link">
+              <i class="fas fa-globe header-icon"></i>
+              {{resources?.ChangeLang}}
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="ActiveUser">
+            <a class="nav-link" [routerLink]="'user/mynetwork'">
+              {{resources?.MyNetwork}}
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="ActiveUser">
+            <a class="nav-link">
+              {{resources?.MyPortal}}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (appClick)="OpenBecomeSupplier()">
+              {{resources?.BecomeSupplier}}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="'activity'">
+              {{resources?.KidsActivities}}
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="!ActiveUser">
+            <a class="nav-link" id="access_link" #LoginLink (appClick)="OpenLoginModal()">
+              {{resources?.LogIn}}
+            </a>
+          </li>
+          <!--<li class="nav-item" *ngIf="ActiveUser" (appClick)="SignOut()">
+            <a class="nav-link">
+              {{resources?.SignOut}}
+            </a>
+          </li>-->
+        </ul>
+
+
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+<!--Sign Up-->
+<div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide sign-in-dialog">
+
+  <div class="signInTab siTabContent " id="signin-tab-1" [ngClass]="{'tab_active':ActiveTab == LoginTabs.Login}">
+    <div class="small-dialog-header">
+      <h3>{{resources?.SignIn}}</h3>
+    </div>
+    <div class="sign-in-wrapper">
+      <a class="social_bt facebook" (appClick)="LoginWithFB()">{{resources?.Loginwithfb}}</a>
+      <a class="social_bt google" (appClick)="SignUpGoogle()">{{resources?.Loginwithgoogle}}</a>
+      <div class="divider"><span>{{resources?.Or}}</span></div>
+      <div class="form-group">
+        <label>{{resources?.Email}}</label>
+        <input type="email" class="form-control"
+               [ngClass]="{'ctr-err':Credintials.Validations.Email}"
+               [(ngModel)]="Credintials.Email">
+        <i class="icon_mail_alt"></i>
+      </div>
+      <div class="form-group">
+        <label>{{resources?.Password}}</label>
+        <input type="password" class="form-control"
+               [ngClass]="{'ctr-err':Credintials.Validations.Password}"
+               [(ngModel)]="Credintials.Password">
+        <i class="icon_lock_alt"></i>
+      </div>
+      <div class="clearfix add_bottom_15">
+        <div class="checkboxes float-left">
+          <input id="remember-me" type="checkbox" name="check">
+          <label for="remember-me">{{resources?.RememberMe}}</label>
+        </div>
+        <div class="float-right"><a id="forgot" href="javascript:void(0);" (appClick)="SetActiveTab(LoginTabs.ForgetPassword)">{{resources?.ForgotPassword}}</a></div>
+      </div>
+      <div class="text-center">
+        <input type="submit" [value]="resources.LogIn" class="btn_login_2" (appClick)="SystemLogin()">
+      </div>
+      <div class="text-center err-msg" *ngIf="Credintials.Validations.Invalid">
+        {{resources?.InvalidEmailOrPassword}}
+      </div>
+      <div class="text-center">
+        {{resources?.DontHaveAccount}}
+        <a href="javascript:void(0);" (appClick)="SetActiveTab(LoginTabs.SignUp)">{{resources?.Signup}}</a>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="signUpTab siTabContent" id="signin-tab-2" [ngClass]="{'tab_active':ActiveTab == LoginTabs.SignUp}">
+    <div class="small-dialog-header">
+      <h3>{{resources?.Signup}}</h3>
+    </div>
+    <div>
+      <div class="sign-in-wrapper">
+        <div class="form-group">
+          <label>{{resources?.FirstName}}<span class="filed-req">*</span></label>
+          <input type="text" class="form-control" [(ngModel)]="User.FirstName" [ngClass]="{'ctr-err':UserValidation.FirstName }">
+        </div>
+        <div class="form-group">
+          <label>{{resources?.LastName}}<span class="filed-req">*</span></label>
+          <input type="text" class="form-control" [(ngModel)]="User.LastName" [ngClass]="{'ctr-err':UserValidation.LastName }">
+        </div>
+        <div class="form-group">
+          <label>{{resources?.Email}}<span class="filed-req">*</span></label>
+          <input type="email" class="form-control" [(ngModel)]="User.Email" [ngClass]="{'ctr-err':UserValidation.Email }" (ngModelChange)="OnEmailTyping()">
+          <i class="icon_mail_alt"></i>
+          <label class="err-msg" *ngIf="UserValidation.AccountExisit">{{resources?.EmailAlreadyExisit}}</label>
+        </div>
+
+        <div class="form-group">
+          <label>{{resources?.Gender}}<span class="filed-req">*</span></label>
+          <ul class="form-list">
+            <li class="checkBox" (appClick)="User.Gender = AppEnums.Gender.Male">
+              <i class="far" [ngClass]="{'fa-check-square' :User.Gender == AppEnums.Gender.Male, 'fa-square' :User.Gender != AppEnums.Gender.Male }"></i> {{resources?.Male}}
+            </li>
+            <li class="checkBox" (appClick)="User.Gender = AppEnums.Gender.Female">
+              <i class="far" [ngClass]="{'fa-check-square' :User.Gender == AppEnums.Gender.Female, 'fa-square' :User.Gender != AppEnums.Gender.Female }"></i>  {{resources?.Female}}
+            </li>
+          </ul>
+        </div>
+
+
+        <div class="form-group">
+          <label>{{resources?.Password}}<span class="filed-req">*</span></label>
+          <input type="password" class="form-control" [(ngModel)]="User.PasswordHash" [ngClass]="{'ctr-err':UserValidation.PasswordHash }">
+          <i class="icon_lock_alt"></i>
+        </div>
+        <div class="form-group">
+          <label>{{resources?.ConfirmPassword}}<span class="filed-req">*</span></label>
+          <input type="password" class="form-control" [(ngModel)]="User.PasswordHash2" [ngClass]="{'ctr-err':UserValidation.PasswordHash2 }">
+          <i class="icon_lock_alt"></i>
+          <label class="err-msg" *ngIf="UserValidation.PasswordLength">{{resources?.PasswodMustBeSixCharAtLeast}}</label>
+        </div>
+        <div *ngIf="UserValidation.PasswordMisMatch">
+          <label class="err-msg">{{resources?.PasswordMismatch}}</label>
+        </div>
+        <div class="form-group dob-wrap">
+          <h5>{{resources?.Birthday}}<span class="filed-req">*</span></h5>
+          <div class="row dob-row">
+            <div class="col-md-6 col-xs-6">
+              <select class="form-control" [(ngModel)]="SelectedMonth" [ngClass]="{'ctr-err':UserValidation.Birthday }">
+                <option [value]="Month.Id" *ngFor="let Month of Months">{{Month.Title}}</option>
+              </select>
+            </div>
+            <div class="col-md-3 col-xs-6">
+              <select class="form-control" [(ngModel)]="SelectedDay" [ngClass]="{'ctr-err':UserValidation.Birthday }">
+                <option [value]="Day" *ngFor="let Day of Days">{{Day}}</option>
+              </select>
+            </div>
+            <div class="col-md-3 col-xs-6">
+              <select class="form-control" [(ngModel)]="SelectedYear" [ngClass]="{'ctr-err':UserValidation.Birthday }">
+                <option [value]="Year" *ngFor="let Year of Years;let indx= index" [attr.selected]="indx == 0">{{Year}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix add_bottom_15">
+          <div class="checkboxes float-left">
+            <a class="backToLoginBtn" (appClick)="SetActiveTab(LoginTabs.Login)">{{resources?.BackToLogin}}</a>
+          </div>
+
+        </div>
+        <div class="text-center">
+          <button type="button" class="btn_login" (appClick)="OnSignUpSystem()">
+            {{resources?.Signup}}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="forgetPassTab siTabContent" id="signin-tab-3" [ngClass]="{'tab_active':ActiveTab == LoginTabs.ForgetPassword}">
+    <div class="small-dialog-header">
+      <h3>Forget Password</h3>
+    </div>
+
+    <div id="forgot_pw">
+      <div class="form-group">
+        <label>{{resources?.ForgotEmailMsg}}</label>
+        <input type="email" class="form-control" [(ngModel)]="UserForgetEmail" [ngClass]="{'ctr-err':InvalidForgetEmail}">
+        <i class="icon_mail_alt"></i>
+      </div>
+      <div class="err-msg" *ngIf="NoUserAssociated" style="padding-bottom:10px">
+        <p>{{resources?.EmailNotFound}}</p>
+      </div>
+      <p>{{resources?.ForgotNotMsg}}</p>
+      <div class="text-center">
+        <button class="btn_reset" (appClick)="ResetPassword()">
+
+          {{resources?.ResetPassword}}
+
+          <shared-dotSpinner *ngIf="IsForgetPasswordLoading"></shared-dotSpinner>
+
+        </button>
+      </div>
+      <div class="backBtnWrap">
+        <a class="tabBtn" (appClick)="SetActiveTab(LoginTabs.Login)">{{resources?.BackToLogin}}</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!--Become Supplier-->
+<div id="become-supplier-dialog" class="zoom-anim-dialog mfp-hide sign-in-dialog become-a-supplier">
+
+  <div class="signUpTab siTabContent" [ngClass]="{'tab_active' :SupplierActiveTab == BecomeSupplierTabs.Login}">
+    <div class="small-dialog-header">
+      <h3>{{resources?.BecomeSupplier}}</h3>
+    </div>
+    <div>
+      <div class="sign-in-wrapper">
+        <h6>In order to become a supplier you need to provide the below details.</h6>
+        <div class="form-group">
+          <label>{{resources?.FirstName}}<span class="filed-req">*</span></label>
+          <input type="text" class="form-control" [(ngModel)]="User.FirstName" [ngClass]="{'ctr-err':UserValidation.FirstName }" []>
+        </div>
+        <div class="form-group">
+          <label>{{resources?.LastName}}<span class="filed-req">*</span></label>
+          <input type="text" class="form-control" [(ngModel)]="User.LastName" [ngClass]="{'ctr-err':UserValidation.LastName }">
+        </div>
+        <div class="form-group">
+          <label>{{resources?.Email}}<span class="filed-req">*</span></label>
+          <input type="email" class="form-control" [(ngModel)]="User.Email" [ngClass]="{'ctr-err':UserValidation.Email }" (ngModelChange)="OnEmailTyping()">
+          <i class="icon_mail_alt"></i>
+          <label class="err-msg" *ngIf="UserValidation.AccountExisit">{{resources?.EmailAlreadyExisit}}</label>
+        </div>
+        <div class="form-group">
+          <label>{{resources?.Gender}}<span class="filed-req">*</span></label>
+          <ul class="form-list">
+            <li class="checkBox" (appClick)="User.Gender = AppEnums.Gender.Male">
+              <i class="far" [ngClass]="{'fa-check-square' :User.Gender == AppEnums.Gender.Male, 'fa-square' :User.Gender != AppEnums.Gender.Male }"></i> {{resources?.Male}}
+            </li>
+            <li class="checkBox" (appClick)="User.Gender = AppEnums.Gender.Female">
+              <i class="far" [ngClass]="{'fa-check-square' :User.Gender == AppEnums.Gender.Female, 'fa-square' :User.Gender != AppEnums.Gender.Female }"></i>  {{resources?.Female}}
+            </li>
+          </ul>
+        </div>
+        <div class="form-group">
+          <label>{{resources?.Password}}<span class="filed-req">*</span></label>
+          <input type="password" class="form-control" [(ngModel)]="User.PasswordHash" [ngClass]="{'ctr-err':UserValidation.PasswordHash }">
+          <i class="icon_lock_alt"></i>
+        </div>
+        <div class="form-group">
+          <label>{{resources?.ConfirmPassword}}<span class="filed-req">*</span></label>
+          <input type="password" class="form-control" [(ngModel)]="User.PasswordHash2" [ngClass]="{'ctr-err':UserValidation.PasswordHash2 }">
+          <i class="icon_lock_alt"></i>
+          <label class="err-msg" *ngIf="UserValidation.PasswordLength">{{resources?.PasswodMustBeSixCharAtLeast}}</label>
+        </div>
+        <div *ngIf="UserValidation.PasswordMisMatch">
+          <label class="err-msg">{{resources?.PasswordMismatch}}</label>
+        </div>
+        <div class="form-group dob-wrap">
+          <h5>{{resources?.Birthday}}<span class="filed-req">*</span></h5>
+          <div class="row dob-row">
+            <div class="col-md-6 col-xs-6">
+              <select class="form-control" [(ngModel)]="SelectedMonth" [ngClass]="{'ctr-err':UserValidation.Birthday }">
+                <option [value]="Month.Id" *ngFor="let Month of Months">{{Month.Title}}</option>
+              </select>
+            </div>
+            <div class="col-md-3 col-xs-6">
+              <select class="form-control" [(ngModel)]="SelectedDay" [ngClass]="{'ctr-err':UserValidation.Birthday }">
+                <option [value]="Day" *ngFor="let Day of Days">{{Day}}</option>
+              </select>
+            </div>
+            <div class="col-md-3 col-xs-6">
+              <select class="form-control" [(ngModel)]="SelectedYear" [ngClass]="{'ctr-err':UserValidation.Birthday }">
+                <option [value]="Year" *ngFor="let Year of Years;let indx= index" [attr.selected]="indx == 0">{{Year}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="button" class="btn_login" (appClick)="SetSupplierActiveTab(BecomeSupplierTabs.Details)">
+            {{resources?.Next}}
+          </button>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+  <div class="signUpTab siTabContent" [ngClass]="{'tab_active' :SupplierActiveTab == BecomeSupplierTabs.Details}">
+    <div class="small-dialog-header">
+      <h3>{{resources?.BecomeSupplier}}</h3>
+    </div>
+    <div>
+      <div class="sign-in-wrapper">
+        <h6>In order to become a supplier you need to provide the below details.</h6>
+        <!--Mobile Number-->
+        <div class="form-group">
+          <label>{{resources?.MobileNumber}}<span class="filed-req">*</span></label>
+          <input type="text" class="form-control" [(ngModel)]="User.PhoneNumber" [ngClass]="{'ctr-err':UserValidation.PhoneNumber }">
+        </div>
+        <!--Working Days-->
+        <div class="form-group dob-wrap">
+          <label>{{resources?.WorkingDays}}<span class="filed-req">*</span></label>
+          <div class="row dob-row">
+            <div class="col-md-5 col-xs-5">
+              <select class="form-control" [(ngModel)]="SelectedStartDay" [ngClass]="{'ctr-err':UserValidation.SupplierStatrtWorkingDay }">
+                <option [value]="Day.Id" *ngFor="let Day of WorkindDays">{{Day.Title}}</option>
+              </select>
+            </div>
+            <div class="col-md-2 col-xs-2" style="text-align:center;line-height:2.1em">
+              <label> {{resources.To}} </label>
+            </div>
+            <div class="col-md-5 col-xs-5">
+              <select class="form-control" [(ngModel)]="SelectedEndDay" [ngClass]="{'ctr-err':UserValidation.SupplierEndWorkingDay }">
+                <option [value]="Day.Id" *ngFor="let Day of WorkindDays">{{Day.Title}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <!--Working Hours-->
+        <div class="form-group dob-wrap">
+          <label>{{resources?.WorkingHours}}<span class="filed-req">*</span></label>
+          <div class="row dob-row">
+            <div class="col-md-5 col-xs-5" style="display:inline-flex">
+              <select class="form-control" [(ngModel)]="SelectedStartHour" [ngClass]="{'ctr-err':UserValidation.WorkingHours }" style="margin:5px">
+                <option [value]="Hour" *ngFor="let Hour of Hours">{{Hour}}</option>
+              </select>
+              <select class="form-control" [(ngModel)]="SelectedStartMin" [ngClass]="{'ctr-err':UserValidation.WorkingHours }" style="margin:5px">
+                <option [value]="Min" *ngFor="let Min of Minutes">{{Min}}</option>
+              </select>
+            </div>
+            <div class="col-md-2 col-xs-2" style="text-align:center;line-height:2.1em">
+              <label> {{resources.To}} </label>
+            </div>
+            <div class="col-md-5 col-xs-5" style="display:inline-flex">
+              <select class="form-control" [(ngModel)]="SelectedEndHour" [ngClass]="{'ctr-err':UserValidation.WorkingHours }" style="margin:5px">
+                <option [value]="Hour" *ngFor="let Hour of Hours">{{Hour}}</option>
+              </select>
+              <select class="form-control" [(ngModel)]="SelectedEndMin" [ngClass]="{'ctr-err':UserValidation.WorkingHours }" style="margin:5px">
+                <option [value]="Min" *ngFor="let Min of Minutes">{{Min}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <!--Perosnal Image Attachment-->
+        <div class="form-group">
+          <label>{{resources?.PerosnalPhoto}}<span class="filed-req">*</span></label>
+          <input type="file" class="form-control" [(ngModel)]="User.Image " [ngClass]="{'ctr-err':UserValidation.Email }">
+        </div>
+        <!--PersonalId-->
+        <div class="form-group">
+          <label>{{resources?.PersonalId}}<span class="filed-req">*</span></label>
+          <input type="file" class="form-control" [(ngModel)]="User.Image " [ngClass]="{'ctr-err':UserValidation.Email }">
+        </div>
+        <!--PersonalId-->
+        <div class="form-group">
+          <label>{{resources?.TradeLicence}}<span class="filed-req">*</span></label>
+          <input type="file" class="form-control" [(ngModel)]="User.Image " [ngClass]="{'ctr-err':UserValidation.Email }">
+        </div>
+
+        <div class="text-center">
+          <button type="button" class="btn_login" (appClick)="OnBecomeSupplierRegister()">
+            {{resources?.Register}}
+          </button>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>

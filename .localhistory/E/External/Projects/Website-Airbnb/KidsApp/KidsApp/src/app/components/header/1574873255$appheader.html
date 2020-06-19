@@ -1,0 +1,92 @@
+<header id="header">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand primary active" href="index.html">
+      <img src="assets/images/logo.png" class="logo-white">
+      <img src="assets/images/logo.png" class="logo-black">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-main" aria-controls="navbar-main" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbar-main">
+      <div class="navbar-inner">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item" (appClick)="ChangeLang()">
+            <a class="nav-link">
+              {{resources.ChangeLang}}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">
+              {{resources.MyNetwork}}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">
+              {{resources.MyPortal}}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="access_link">
+              {{resources.BecomeSupplier}}
+            </a>
+          </li>
+          <li class="nav-item" (appClick)="OpenLogin()">
+            <a class="nav-link" id="access_link">
+              {{resources.LogIn}}
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+
+
+<div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
+  <div class="small-dialog-header">
+    <h3>Sign In</h3>
+  </div>
+  <form>
+    <div class="sign-in-wrapper">
+      <a href="#0" class="social_bt facebook">Login with Facebook</a>
+      <a href="#0" class="social_bt google">Login with Google</a>
+      <div class="divider"><span>Or</span></div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" class="form-control" name="email" id="email">
+        <i class="icon_mail_alt"></i>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" class="form-control" name="password" id="password" value="">
+        <i class="icon_lock_alt"></i>
+      </div>
+      <div class="clearfix add_bottom_15">
+        <div class="checkboxes float-left">
+          <input id="remember-me" type="checkbox" name="check">
+          <label for="remember-me">Remember Me</label>
+        </div>
+        <div class="float-right"><a id="forgot" href="javascript:void(0);">Forgot Password?</a></div>
+      </div>
+      <div class="text-center"><input type="submit" value="Log In" class="btn_login"></div>
+      <div class="text-center">
+        Don’t have an account? <a href="javascript:void(0);">Sign up</a>
+      </div>
+      <div id="forgot_pw">
+        <div class="form-group">
+          <label>Please confirm login email below</label>
+          <input type="email" class="form-control" name="email_forgot" id="email_forgot">
+          <i class="icon_mail_alt"></i>
+        </div>
+        <p>You will receive an email containing a link allowing you to reset your password to a new preferred one.</p>
+        <div class="text-center"><input type="submit" value="Reset Password" class="btn_1"></div>
+      </div>
+    </div>
+  </form>
+  <!--form -->
+</div>

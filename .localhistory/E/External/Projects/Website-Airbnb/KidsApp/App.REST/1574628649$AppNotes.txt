@@ -1,0 +1,8 @@
+﻿1- To Create Google Project
+https://console.developers.google.com/projectselector2/apis/credentials?pli=1&supportedpurview=project
+
+
+https://console.cloud.google.com/apis/credentials?folder=&organizationId=&project=kidsapp-259816
+
+
+https://developers.facebook.com/apps/499867460877918/dashboard/

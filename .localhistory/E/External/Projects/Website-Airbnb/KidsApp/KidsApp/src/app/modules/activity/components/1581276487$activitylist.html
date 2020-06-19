@@ -1,0 +1,251 @@
+<section class="page-section listing-section form-loader-wrap" [ngClass]="{'hideMap':!MapVisible}">
+  <!--Loader-->
+  <div class="form-loader" [ngStyle]="{'display':IsLoading ? 'block' : 'none' }"></div>
+
+  <!--Search Controls-->
+  <div class="sortingWrapper">
+    <ul class="sortFeildList">
+      <!--Keyword-->
+      <li>
+        <input [attr.placeholder]="resources?.Keyword" type="text" class="filter-div form-control filter-border"
+               [(ngModel)]="Criteria.Keyword" (appEnter)="OnFilterApply(FilterType.Keyword)">
+      </li>
+      <!--Date Range-->
+      <li>
+        <input [attr.placeholder]="resources?.Date" type="text" class="filter-div form-control filter-border"
+               bsDaterangepicker
+               #dpr="bsDaterangepicker"
+               id="dpRange"
+               container="ul"
+               [(ngModel)]="Criteria.DateRangeTemp"
+               [bsConfig]="DataStore.get('dbConfigRange')"
+               (ngModelChange)="OnFilterApply(FilterType.Date,$event)">
+      </li>
+      <!--Category-->
+      <li>
+        <ng-template #CategorisTemplate>
+          <ul class="popover-list">
+            <li *ngFor="let Cat of Categories" class="popover-list-item"
+                [ngClass]="{'item-selected':Cat.Id == Criteria.Category?.Id}"
+                (appClick)="SetSelectedCategory(Cat)">
+              <span>
+                <i class="margin-5 {{Cat.IconClass}}" aria-hidden="true"></i>
+                {{localizeData(Cat.TitleAr,Cat.TitleEn)}}
+              </span>
+            </li>
+            <li class="popover-list-item no-hover popover-list-action">
+              <button class="btn btn-outline-dark" (appClick)="OnFilterClear(FilterType.Category)" [appDisabled]="!FinalCriteria.Category" style="margin-left:2px;margin-right:2px">{{resources?.Clear}}</button>
+              <button class="btn btn-outline-dark float-right"
+                      (appClick)="OnFilterApply(FilterType.Category)">
+                {{resources?.Apply}}
+              </button>
+            </li>
+          </ul>
+        </ng-template>
+        <div class="dropdown priceRangeDropDown"
+             [popover]="CategorisTemplate" [outsideClick]="true" container="body" placement="bottom" #popCat="bs-popover">
+          <div class="filter-div form-control filter-align-left filter-200 filter-border">
+            <span *ngIf="!Criteria.Category">{{resources?.Category}}</span>
+            <span *ngIf="Criteria.Category">
+              <i class="{{Criteria.Category.IconClass}}" aria-hidden="true"></i>
+              {{localizeData(Criteria.Category.TitleAr,Criteria.Category.TitleEn)}}
+            </span>
+          </div>
+          <span class="priceRangeDropDownIcon" id="priceRangeDropDownIcon">
+            <i class="icon icon-angle-down"></i>
+          </span>
+        </div>
+      </li>
+      <!--Price-->
+      <li>
+        <ng-template #PriceTemplate>
+          <div class="popover-list">
+            <div class="popover-list-item no-hover">
+              <label for="price">{{resources?.Price}}:</label>
+            </div>
+            <div style="width:90%;margin:auto">
+              <div id="mySlider" class="popover-list-item no-hover"></div>
+            </div>
+          </div>
+          <div class="popover-list-item no-hover popover-list-action" style="margin-top:15px">
+            <button class="btn btn-outline-dark float-right" (appClick)="OnFilterApply(FilterType.Price)">{{resources?.Apply}}</button>
+          </div>
+        </ng-template>
+        <div class="dropdown priceRangeDropDown" (onShown)="OnPriceShown()"
+             [popover]="PriceTemplate" [outsideClick]="true" container="body" placement="bottom" #popPice="bs-popover">
+          <input type="button" class="form-control  filter-align-left filter-160 filter-border" [attr.placeholder]="resources?.Price" id="price" />
+          <span class="priceRangeDropDownIcon" id="priceRangeDropDownIcon">
+            <i class="icon icon-angle-down"></i>
+          </span>
+        </div>
+      </li>
+      <!--Age-->
+      <li>
+        <ng-template #AgeTemplate>
+          <ul class="popover-list">
+            <li *ngFor="let Age of Ages" class="popover-list-item"
+                [ngClass]="{'item-selected':Age.Id == Criteria.Age?.Id}"
+                (appClick)="SetSelectedAge(Age)">
+              <i class="margin-5 fas fa-child"></i>
+              <span>{{Age.Title}}</span>
+            </li>
+            <li class="popover-list-item no-hover popover-list-action">
+              <button class="btn btn-outline-dark" (appClick)="OnFilterClear(FilterType.Age)" [appDisabled]="!FinalCriteria.Age" style="margin-left:2px;margin-right:2px">{{resources?.Clear}}</button>
+              <button class="btn btn-outline-dark float-right" (appClick)="OnFilterApply(FilterType.Age)">{{resources?.Apply}}</button>
+            </li>
+          </ul>
+        </ng-template>
+        <div class="dropdown priceRangeDropDown"
+             [popover]="AgeTemplate" [outsideClick]="true" container="body" placement="bottom" #popAge="bs-popover">
+          <div class="filter-div form-control  filter-align-left filter-160 filter-border">
+            <span *ngIf="!Criteria.Age">{{resources?.Age}}</span>
+            <span *ngIf="Criteria.Age">
+              <i class="fas fa-child"></i>
+              {{Criteria.Age.Title}}
+            </span>
+          </div>
+          <span class="priceRangeDropDownIcon" id="priceRangeDropDownIcon">
+            <i class="icon icon-angle-down"></i>
+          </span>
+        </div>
+      </li>
+      <!--Transportation-->
+      <li>
+        <ng-template #TransTemplate>
+          <ul class="popover-list">
+            <li class="popover-list-item" (appClick)="SetSelectedTrans( AppEnums.TransportationFilter.All)">
+              <i class="far" [ngClass]="{'fa-check-square' : Criteria.TransportationStatus == AppEnums.TransportationFilter.All ,
+                 'fa-square':Criteria.TransportationStatus != AppEnums.TransportationFilter.All}"></i> {{resources?.All}}
+            </li>
+            <li class="popover-list-item" (appClick)="SetSelectedTrans( AppEnums.TransportationFilter.Available)">
+              <i class="far" [ngClass]="{'fa-check-square' : Criteria.TransportationStatus == AppEnums.TransportationFilter.Available,
+                 'fa-square':Criteria.TransportationStatus != AppEnums.TransportationFilter.Available}"></i> {{resources?.Yes}}
+            </li>
+            <li class="popover-list-item" (appClick)="SetSelectedTrans( AppEnums.TransportationFilter.NotAvailable)">
+              <i class="far" [ngClass]="{'fa-check-square' : Criteria.TransportationStatus == AppEnums.TransportationFilter.NotAvailable,
+                 'fa-square': Criteria.TransportationStatus != AppEnums.TransportationFilter.NotAvailable}"></i> {{resources?.No}}
+            </li>
+            <li class="popover-list-item no-hover popover-list-action">
+              <button class="btn btn-outline-dark float-right" (appClick)="OnFilterApply(FilterType.Transportation)" style="margin-bottom:5px">{{resources?.Apply}}</button>
+            </li>
+          </ul>
+        </ng-template>
+        <div class="dropdown priceRangeDropDown"
+             [popover]="TransTemplate" [outsideClick]="true" container="body" placement="bottom" #popTrans="bs-popover">
+          <input type="button" class="form-control  filter-align-left   filter-border" [attr.placeholder]="GetTransLabel" [value]="GetTransLabel">
+          <span class="priceRangeDropDownIcon" id="priceRangeDropDownIcon">
+            <i class="icon icon-angle-down"></i>
+          </span>
+        </div>
+      </li>
+     
+      <!--Clear-->
+      <li>
+        <div class="ptxs">
+          <i class="fas fa-sync fa-spin-hover" (appClick)="ClearFilter()"></i>
+        </div>
+      </li>
+      <!--Show/Hide Map-->
+      <li>
+
+        <div class="showMapSwitchWrap">
+          <span class="showMapLebl">{{resources?.ShowMap}}</span>
+          <div id="shSwitch">
+            <div id="bsh-shSwitch">
+              <input (appClick)="ToggleMap()" class="tgl-sw tgl-sw-light" [ngClass]="{'tgl-sw-light-checked' : MapVisible , 'tgl-sw-active' : MapVisible}" id="light-shSwitch" type="checkbox">
+              <label class="btn-switch" for="light-shSwitch" id="sw-light-320473" data-state="false"></label>
+            </div>
+            <div style="clear:both"></div>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+    <ul class="sortFeildList">
+      <li>
+        <!--Sort By-->
+      <li>
+        <ng-template #SortTemplate>
+          <ul class="popover-list">
+            <li class="popover-list-item" (appClick)="SetSortedBy(SortBy.PriceASC)"
+                [ngClass]="{'item-selected':Criteria.Sort == SortBy.PriceASC}">
+              <i class="fas fa-sort-amount-up"></i>
+              {{resources?.SortPriceASC}}
+            </li>
+            <li class="popover-list-item" (appClick)="SetSortedBy(SortBy.PriceDESC)"
+                [ngClass]="{'item-selected':Criteria.Sort == SortBy.PriceDESC}">
+              <i class="fas fa-sort-amount-down-alt"></i>
+              {{resources?.SortPriceDESC}}
+            </li>
+            <li class="popover-list-item" (appClick)="SetSortedBy(SortBy.DateASC)"
+                [ngClass]="{'item-selected':Criteria.Sort == SortBy.DateASC}">
+              <i class="fas fa-sort-amount-up"></i>
+              {{resources?.SortDateASC}}
+            </li>
+            <li class="popover-list-item" (appClick)="SetSortedBy(SortBy.DateDESC)"
+                [ngClass]="{'item-selected':Criteria.Sort == SortBy.DateDESC}">
+              <i class="fas fa-sort-amount-down-alt"></i>
+              {{resources?.SortDateDESC}}
+            </li>
+          </ul>
+        </ng-template>
+        <div class="dropdown priceRangeDropDown"
+             [popover]="SortTemplate" [outsideClick]="true" container="body" placement="bottom" #popTrans="bs-popover">
+
+          <input type="button" class="form-control  filter-align-left   filter-border" [attr.placeholder]="GetSortLabel" [value]="GetSortLabel">
+          <span class="priceRangeDropDownIcon" id="priceRangeDropDownIcon">
+            <i class="icon icon-angle-down"></i>
+          </span>
+        </div>
+      </li>
+      </li>
+    </ul>
+  </div>
+
+  <div class="listing-map-container">
+    <!--Results-->
+    <div class="col_left">
+      <a class="activity_Block link-div no-hover" *ngFor="let Act of Activities" [routerLink]="'details/' + Act.Id">
+        <div class="img_container">
+          <div class="img_link">
+            <div class="imgBg">
+              <img class="img" [src]="Act.Thumbnail?.File" />
+            </div>
+          </div>
+        </div>
+        <div class="desc_wrap">
+          <div class="info-left">
+            <h4>{{Act.Title}}</h4>
+            <p class="place">
+              <i aria-hidden="true" class="fas fa-map-marker-alt"></i>
+              {{Act.LocationName}}
+            </p>
+            <div class="details">
+              {{Act.Description}}
+            </div>
+          </div>
+          <div class="info-right">
+            <span class="rating" *ngIf="Act.TotalReviews">
+              <i class="icon icon-star"></i> {{Act.AvgRate}}
+            </span>
+            <span class="price">{{Act.Price}}$</span>
+          </div>
+        </div>
+      </a>
+
+      <shared-pager [(pager)]="Pager" (OnPageChange)="OnPageChange($event)"></shared-pager>
+
+      <div *ngIf="!Activities || Activities.length ==0">
+        <span class="no-data-found">
+          {{resources.NoActMatchCriteria}}
+        </span>
+      </div>
+    </div>
+
+    <!--Map-->
+    <div class="col_right">
+      <div id="map" #MapElement></div>
+    </div>
+  </div>
+</section>
+

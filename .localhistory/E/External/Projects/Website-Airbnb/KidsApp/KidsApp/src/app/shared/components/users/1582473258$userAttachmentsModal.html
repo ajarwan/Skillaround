@@ -1,0 +1,83 @@
+<!--Search USer-->
+<ng-template #UserAttachmentsModal let-modal>
+  <div class="form-loader-wrap" style="margin:15px">
+    <!--Loader-->
+    <div class="form-loader" [ngStyle]="{'display':IsLoading ? 'block' : 'none' }"></div>
+
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">
+        <span>{{resources.SearchUsers}}</span>
+      </h4>
+      <button type="button" class="close" aria-label="Close" (-)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" style="min-height:calc(50vh)">
+
+
+      <div class="card-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th> {{resources.DocumentTitle}} </th>
+              <th> {{resources.DocumentType}} </th>
+              <th> {{resources.FileSize}} </th>
+              <th> {{resources.UploadedDate}} </th>
+              <th> {{resources.Action}} </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let Doc Of Documents">
+              <!--File Name-->
+              <td class="py-1">
+                <div class="documentWrap">
+                  <div class="imgWrap">
+                    <a class="link img-preview-link" data-fancybox="gal-3" [attr.href]="Doc.File"></a>
+                    <img [src]="Doc.File" alt="image"
+                         [appImageError]="'assets/images/user-image.png'">
+                  </div>
+                  <div style="vertical-align:middle;line-height:1">
+                    <span>{{Doc.FileName}}</span>
+                  </div>
+                </div>
+              </td>
+              <!--File Type-->
+              <td>
+                {{Doc.DocumentType}}
+              </td>
+              <td>
+                {{Doc.FileSize}} MB
+              </td>
+              <td *ngIf="Doc.UpdateDate">{{formatDate(Doc.UpdateDate, 'DDD, dd MMM yyyy hh:mm') }}</td>
+              <td *ngIf="!Doc.UpdateDate">{{formatDate(Doc.CreateDate, 'DDD, dd MMM yyyy hh:mm') }}</td>
+              <td>
+                <ul class="tableActionBtnsWrap">
+                  <li>
+                    <a [attr.download]="Doc.FileName" [attr.href]="Doc.File">
+                      <i class="fa fa-download"></i>
+                    </a>
+                  </li>
+                  <!--<li>
+                    <a>
+                      <i class="fa fa-upload upload-btn-wrapper2 pointer" style="position:relative">
+                        <input type="file" name="myfile" (change)="OnUploadFile($event,AppEnums.DocumentType.TradeLicence)" [attr.accept]="environment.AllowedImagesExtension">
+                      </i>
+                    </a>
+                  </li>-->
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (appClick)="modal.dismiss('Cross click')">{{resources?.Close}}</button>
+    </div>
+  </div>
+
+
+
+</ng-template>

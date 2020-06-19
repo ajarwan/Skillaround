@@ -1,0 +1,41 @@
+
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+  <ul class="nav">
+    <li class="nav-item nav-category">{{resources.MainMenu}}</li>
+    <li class="nav-item nav-profile">
+      <a class="nav-link">
+        <div class="profile-image">
+          <img [src]="ActiveUser.Image" class="img-xs rounded-circle"
+               [appImageError]="'assets/images/user-image.png'" alt="profile image">
+          <div class="dot-indicator bg-success"></div>
+        </div>
+        <div class="text-wrapper">
+          <p class="profile-name">{{ActiveUser?.FullName}}</p>
+          <p class="designation">{{resources.Supplier}}</p>
+        </div>
+      </a>
+    </li>
+    <!--Supplier Info-->
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="'info'">
+        <i class="menu-icon typcn typcn-document-text"></i>
+        <span class="menu-title">{{resources.PersonalInfo}}</span>
+      </a>
+    </li>
+    <!--Supplier Activities-->
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="'activities'">
+        <i class="menu-icon typcn typcn-shopping-bag"></i>
+        <span class="menu-title">{{resources.ActivitiesList}}</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="suppliers.html">
+        <i class="menu-icon typcn typcn-shopping-bag"></i>
+        <span class="menu-title">{{resources.ActivitiesCalendar}}</span>
+      </a>
+    </li>
+
+
+  </ul>
+</nav>

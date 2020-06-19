@@ -1,0 +1,164 @@
+<div>
+  Test page
+</div>
+
+<div>
+  <h3>Test Navigation</h3>
+  <button (cpcClick)="navigate('fm/view')">Go To View</button>
+
+</div>
+<hr />
+
+<div>
+  <h3>Test Click</h3>
+  <button (cpcClick)="testClick()">Click</button>
+  <div *ngIf="testClickflag">Show</div>
+</div>
+<hr />
+
+
+<div>
+  <h3>Test Click - Disabled</h3>
+  <button (cpcClick)="testClick()" cpcDisabled="true">Click</button>
+  <div *ngIf="testClickflag">Show</div>
+</div>
+<hr />
+
+
+<div>
+  <h3>Test Click - Stop Prpagation</h3>
+  <div style="background-color:red; width:100px;height:100px;" (cpcClick)="clickParent()">
+    <div style="background-color:yellow;width:50px;height:50px;text-align:center;position:relative;left:25%;top:25%" (cpcClick)="clickChild()" stopPropagation>child</div>
+  </div>
+</div>
+<hr />
+
+
+<div>
+  <h3>CPC Hidden</h3>
+  <div>
+    <h3 [cpcHidden]="false">this item should not be hidden (next item should be)</h3>
+    <h3 [cpcHidden]="true">this item should  be hidden</h3>
+  </div>
+</div>
+<hr />
+
+
+<iframe id="txtArea1" style="display:none"></iframe>
+
+
+
+<div id="dv">
+  <h3>Export Excel</h3>
+  <div>
+    <button (click)="ExportToExcel()">Export To Excel</button>
+  </div>
+</div>
+<hr />
+
+
+<div>
+  <h3>Char Limit</h3>
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Input</th>
+          <th>Model Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>OnlyEnglish</td>
+          <td><input type="text" [(ngModel)]="OnlyEnglish" [cpcCharLimit]="CoreEnums.CharLimit.OnlyEnglish" /></td>
+          <td>{{OnlyEnglish}}</td>
+        </tr>
+        <tr>
+          <td>OnlyArabic</td>
+          <td><input type="text" [(ngModel)]="OnlyArabic" [cpcCharLimit]="CoreEnums.CharLimit.OnlyArabic" /></td>
+          <td>{{OnlyArabic}}</td>
+        </tr>
+        <tr>
+          <td>OnlyNumbers</td>
+          <td><input type="text" [(ngModel)]="OnlyNumbers" [cpcCharLimit]="CoreEnums.CharLimit.OnlyNumbers" /></td>
+          <td>{{OnlyNumbers}}</td>
+        </tr>
+        <tr>
+          <td>PositiveNumbers</td>
+          <td><input type="text" [(ngModel)]="PositiveNumbers" [cpcCharLimit]="CoreEnums.CharLimit.PositiveNumbers" /></td>
+          <td>{{PositiveNumbers}}</td>
+        </tr>
+        <tr>
+          <td>PositiveNumbersZ</td>
+          <td><input type="text" [(ngModel)]="PositiveNumbersZ" [cpcCharLimit]="CoreEnums.CharLimit.PositiveNumbersZ" /></td>
+          <td>{{PositiveNumbersZ}}</td>
+        </tr>
+        <tr>
+          <td>PositiveFloat</td>
+          <td><input type="text" [(ngModel)]="PositiveFloat" [cpcCharLimit]="CoreEnums.CharLimit.PositiveFloat" /></td>
+          <td>{{PositiveFloat}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<hr />
+
+<div>
+  <h3>CPC Enter (click enter after typing)</h3>
+  <div>
+    <div></div>
+    <input type="text" [(ngModel)]="cpcEnterValue" (cpcEnter)="showCpcpEnterValue()" />
+    <div *ngIf="cpcEnterShowText">{{cpcEnterShowText}}</div>
+  </div>
+</div>
+<hr />
+
+
+
+<div>
+  <h3>Pipes Test</h3>
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Input</th>
+          <th>Model Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Empty Replacer</td>
+          <td><input type="text" [(ngModel)]="cpcEmptyReplacertxt" /></td>
+          <td>{{cpcEmptyReplacertxt | cpcEmptyReplacer:'-'}}</td>
+        </tr>
+        <tr>
+          <td>cpcMoneyFormat</td>
+          <td><input type="text" [(ngModel)]="cpcMoneyFormattxt" /></td>
+          <td>{{cpcMoneyFormattxt | cpcMoneyFormat}}</td>
+        </tr>
+        <tr>
+          <td>cpcTruncateWords</td>
+          <td><input type="text" [(ngModel)]="cpcTruncateWordstxt" /></td>
+          <td>{{cpcTruncateWordstxt | cpcTruncateWords: 5}}</td>
+        </tr>
+        <tr>
+          <td>cpcTruncateText</td>
+          <td><input type="text" [(ngModel)]="cpcTruncateTexttxt" /></td>
+          <td>{{cpcTruncateTexttxt | cpcTruncateText: 5}}</td>
+        </tr>
+        <tr>
+          <td>cpcNumberSeparator</td>
+          <td><input type="text" [(ngModel)]="cpcNumberSeparatortxt" /></td>
+          <td>{{cpcNumberSeparatortxt | cpcNumberSeparator        }}</td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>
+<hr />
+
+

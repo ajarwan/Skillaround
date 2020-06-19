@@ -1,0 +1,35 @@
+<div class="frcs time-comp" [ngClass]="{'toggle': SelectedTimeFormat == TimeFormat.PM}">
+  <div class="time-comp-field time-comp__min">
+    <input #hoursInput [attr.disabled]="disabled ? '':null"
+           class="form-control"
+           [appCharLimit]="CorEnums.CharLimit.OnlyNumbers"
+           (blur)="ValidateAndSelectTime()"
+           [(ngModel)]="Mins"
+           (appClick)="hoursInput.select()"
+           value="00" placeholder="{{resources.MinuteShort}}">
+    <div class="time-comp-arrows" tabindex="-1">
+      <span (appClick)="IncrementOrDecrement(ChangeType.Increment, TimeUnit.Mins)" class="evicon-chevron-up time-comp-arrow"></span>
+      <span (appClick)="IncrementOrDecrement(ChangeType.Decrement, TimeUnit.Mins)" class="evicon-chevron-down time-comp-arrow"></span>
+    </div>
+  </div>
+  <div class="separator">:</div>
+  <div class="time-comp-field time-comp__hours">
+    <input #minsInput [attr.disabled]="disabled ? '':null"
+           class="form-control"
+           maxlength="2"
+           [appCharLimit]="CorEnums.CharLimit.OnlyNumbers"
+           (blur)="ValidateAndSelectTime()"
+           (appClick)="minsInput.select()"
+           [(ngModel)]="Hours"
+           value="00" placeholder="{{resources.HourShort}}">
+    <div class="time-comp-arrows" tabindex="-1">
+      <span (wslClick)="IncrementOrDecrement(ChangeType.Increment, TimeUnit.Hours)" class="evicon-chevron-up time-comp-arrow"></span>
+      <span (wslClick)="IncrementOrDecrement(ChangeType.Decrement, TimeUnit.Hours)" class="evicon-chevron-down time-comp-arrow"></span>
+    </div>
+  </div>
+  <div *ngIf="hourMode == AppEnums.HourMode.Twelve && isDuration == false" class="pm-am" tabindex="0" (appClick)="ToggleAmPm()">
+    <span class="time-am">{{resources.AM}}</span>
+    <span class="time-pm">{{resources.PM}}</span>
+  </div>
+  <span class="glyphicon glyphicon-erase time-comp__clear" tabindex="0" (appClick)="clearTime()"></span>
+</div>

@@ -1,0 +1,79 @@
+﻿using App.Core;
+using App.Core.Base;
+using App.Entity.DTO;
+using App.Entity.Models;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Text;
+using System.Threading.Tasks;
+
+
+namespace App.Data.Extended
+{
+    public class StatisticsRepository : RepositoryBase<Statistic>
+    {
+        #region "----Constructor----"
+        public StatisticsRepository(IUnitOfWork uw) : base(uw)
+        {
+
+        }
+        #endregion "----Constructor----"
+
+        #region "----Extended----"
+
+        public async Task<SupplierActivityViewStatistics> FindSupplierActivityViewStatistics(int activityId)
+        {
+            var res = new SupplierActivityViewStatistics()
+            {
+                ActivityId = activityId
+            };
+
+
+            Expression<Func<Statistic, bool>> FilterListUser = x => !x.IsDeleted && x.ActivityId == activityId && x.UserId.HasValue && x.Type == Entity.SharedEnums.StatisicType.ActivityViewList;
+            Expression<Func<Statistic, bool>> FilterListAnonymous = x => !x.IsDeleted && x.ActivityId == activityId && !x.UserId.HasValue && x.Type == Entity.SharedEnums.StatisicType.ActivityViewList;
+            Expression<Func<Statistic, bool>> FilterDetailsUser = x => !x.IsDeleted && x.ActivityId == activityId && x.UserId.HasValue && x.Type == Entity.SharedEnums.StatisicType.ActivityView;
+            Expression<Func<Statistic, bool>> FilterDetailsAnonymous = x => !x.IsDeleted && x.ActivityId == activityId && !x.UserId.HasValue && x.Type == Entity.SharedEnums.StatisicType.ActivityView;
+
+            res.SystemUsersViewCount_List = await this.Count_Async(FilterListUser);
+            res.AnonymousUsersViewCount_List = await this.Count_Async(FilterListAnonymous);
+            res.SystemUsersViewCount_Details = await this.Count_Async(FilterDetailsUser);
+            res.AnonymousUsersViewCount_Details = await this.Count_Async(FilterDetailsAnonymous);
+
+
+            return res;
+
+        }
+
+
+        //public async Task<UserDTO> FindMostActiveUsers()
+        //{
+
+
+        //    Expression<Func<Statistic, bool>> Filter = x => !x.IsDeleted;
+
+        //    Filter = Filter.And(x => x.Type == Entity.SharedEnums.StatisicType.UserAccess);
+
+        //    Filter = Filter.And(x => x.User.UserType == Entity.SharedEnums.UserTypes.Normal);
+
+        //    var Query = dbSet.AsNoTracking().Where(Filter);
+
+        //    var res = Query.GroupBy(x => x.UserId).OrderBy(x => x.Count()).Select(x => new UserDTO()
+        //    {
+        //        Email = x.FirstOrDefault().
+        //    });
+
+        //    res.SystemUsersViewCount_List = await this.Count_Async(FilterListUser);
+        //    res.AnonymousUsersViewCount_List = await this.Count_Async(FilterListAnonymous);
+        //    res.SystemUsersViewCount_Details = await this.Count_Async(FilterDetailsUser);
+        //    res.AnonymousUsersViewCount_Details = await this.Count_Async(FilterDetailsAnonymous);
+
+
+        //    return res;
+
+        //}
+        #endregion "----Extended----"
+    }
+}

@@ -1,0 +1,44 @@
+<section class="page-section portal-section" style="min-height:calc(100vh - 80px)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6" *ngFor="let User Of Users">
+        <div class="portalBlockWrap">
+          <div class="colLeft">
+            <div class="switchWrap">
+              <div class="shSwitch" id="shSwitch0">
+                <div id="bsh-shSwitch0">
+                  <input (appClick)="OnDeleteConfirm(User.Id)" class="tgl-sw tgl-sw-light tgl-sw-light-checked" id="light-shSwitch" type="checkbox" />
+                  <label class="btn-switch" for="light-shSwitch0" id="sw-light-866189" data-state="false"></label>
+                </div>
+                <div style="clear:both"></div>
+              </div>
+            </div>
+            <div class="mailWrap">
+              <a href="#">
+                <i class="icon icon-envelope-o"></i> {{resources.SendEmail}}
+              </a>
+            </div>
+            <div class="msgWrap">
+              <a class="message" data-fancybox="" data-src="#messagePopup">
+                <i class="icon icon-social-whatsapp-outline"></i> {{resources.SendMessage}}
+              </a>
+            </div>
+          </div>
+          <div class="colRight">
+            <span class="text text-right">{{User.FullName}}</span>
+            <div class="imgWrap">
+              <img [src]="User.Image">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12" *ngIf="Users.length == 0" style="padding:10px;margin:30px;background-color:#ddd">
+        {{resources.NoConnections}}
+      </div>
+    </div>
+
+    <shared-pager [(pager)]="Pager" (OnPageChange)="OnPageChange($event)"></shared-pager>
+  </div>
+
+</section>

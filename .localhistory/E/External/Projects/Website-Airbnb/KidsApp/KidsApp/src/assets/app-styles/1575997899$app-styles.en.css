@@ -1,0 +1,12 @@
+body {
+  direction: ltr !important;
+}
+
+html {
+  direction: ltr !important;
+}
+
+.filter-price {
+  min-width: 200px;
+  text-align: left;
+}

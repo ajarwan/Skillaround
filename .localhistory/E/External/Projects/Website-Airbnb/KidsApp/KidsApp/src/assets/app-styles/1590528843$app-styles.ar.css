@@ -1,0 +1,11 @@
+body {
+  direction: rtl !important;
+}
+
+html {
+  direction: rtl !important;
+}
+
+.filter-align-left {
+  text-align: right;
+}

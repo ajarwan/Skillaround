@@ -1,0 +1,78 @@
+<div class="content-wrapper bold-label">
+  <!-- Page Title Header Starts-->
+  <div class="row page-title-header">
+    <div class="col-12">
+      <div class="page-header">
+        <h4 class="page-title">{{resources.SupplierBookings}}</h4>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 grid-margin">
+      <!--Basic Details-->
+      <div class="row form-loader-wrap">
+        <!--<div class="form-loader" [ngStyle]="{'display':IsLoading ? 'block' : 'none' }"></div>-->
+        <!--Data-->
+
+        <div class="booking-table-wrapper">
+          <table class="table">
+            <thead>
+              <tr class="header">
+                <th>Booking #</th>
+                <th>Count</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Booking Date</th>
+                <th>Status</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let Act of Activities">
+                <td colspan="8" class="table-container">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th class="table-row-title" colspan="8">{{Act.Title}}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <ng-container>
+                        <tr *ngFor="let Booking of Act.Bookings">
+                          <td class="bookingnum-column">{{Booking.BookingNumber}}</td>
+                          <td>{{Booking.Count}}</td>
+                          <td>{{Booking.User.FullName}}</td>
+                          <td>{{Booking.User.Email}}</td>
+                          <td>{{Booking.User.PhoneNumber}}</td>
+                          <td>{{Booking.CreateDate}}</td>
+                          <td>{{Booking.Status}}</td>
+                          <td>...</td>
+                        </tr>
+                      </ng-container>
+                      <ng-container *ngIf="!Act.Bookings || Act.Bookings.length ==0">
+                        <tr>
+                          <td colspan="8">
+                            No Bookings
+                          </td>
+                        </tr>
+                      </ng-container>
+
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+
+
+      </div>
+
+
+
+    </div>
+  </div>
+</div>

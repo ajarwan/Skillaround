@@ -1,0 +1,80 @@
+<div class="content-wrapper">
+  <!-- Page Title Header Starts-->
+  <div class="row page-title-header">
+    <div class="col-12">
+      <div class="page-header">
+        <h4 class="page-title have-searchbox">
+          {{resources.Users}}
+          <div class="search">
+            <input type="text" class="searchTerm" [attr.placeholder]="resources.SearchInUsers"
+                   [(ngModel)]="Tempkeyword" (appEnter)="OnSerach()">
+            <button type="submit" class="searchButton" (appClick)="OnSerach()">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </h4>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 grid-margin form-loader-wrap">
+      <!--Loader-->
+      <div class="form-loader" [ngStyle]="{'display':IsLoading ? 'block' : 'none' }"></div>
+      <div class="row">
+        <div class="col-sm-6 col-lg-4 margin-b-20 form-loader-wrap" *ngFor="let User Of Users">
+          <div class="form-loader" [ngStyle]="{'display':User.IsLoading ? 'block' : 'none' }"></div>
+          <div class="card-2">
+            <div class="left-side">
+              <div style="position:relative">
+                <img class="img-100 rounded-circle " [src]="User.Image" [appImageError]="'assets/images/avatar_2x.png'" alt="profile image" />
+                <i class="fas fa-circle status-circle"></i>
+              </div>
+              <div class="user-name">
+                <h3>{{User.FullName}}</h3>
+                <div class="attachments-line" (appClick)="OpenAttachmentsModal(Supplier)">
+                  <span>Join On {{fomatDate(User.CreateDate,'dd/MM/yyyy')}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="right-side">
+              <p>
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                <a>
+                  &nbsp;
+                  {{User.Email}}
+                </a>
+              </p>
+              <p>
+                <i class="fa fa-phone" aria-hidden="true"></i>
+                &nbsp;
+                {{User.PhoneNumber | appEmptyReplacer:'-'}}
+              </p>
+              <div id="shSwitch" class="switchWrap switchBtn btn-switch-color float-right">
+                <div id="bsh-shSwitch" (appClick)="ToggleUserActiveStatus(User)" stopPropagation="true">
+                  <input class="tgl-sw tgl-sw-light"
+                         [ngClass]="{'tgl-sw-light-checked' : User.IsActive , 'tgl-sw-active' : !User.IsActive}" id="light-shSwitch" type="checkbox">
+                  <label class="btn-switch" for="light-shSwitch" id="sw-light-320473" data-state="false"></label>
+                </div>
+                <div style="clear:both"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <shared-pager [(pager)]="Pager" (OnPageChange)="OnPageChange($event)"></shared-pager>
+          <div class="col-md-12  m-bottom-20" *ngIf="!Users || Users.length ==0">
+            <span class="no-data-found card-2">
+              {{resources.NoDataFound}}
+            </span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+</div>
+
+
+<shared-userattachmentsmodal #AttachmentsModal></shared-userattachmentsmodal>

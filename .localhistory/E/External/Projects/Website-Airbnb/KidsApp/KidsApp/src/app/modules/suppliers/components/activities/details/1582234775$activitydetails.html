@@ -1,0 +1,249 @@
+<div class="content-wrapper">
+  <!-- Page Title Header Starts-->
+  <div class="row">
+    <div class="col-12">
+      <div class="page-header">
+        <div class="h4 page-title have-searchbox">
+          {{resources.BasicDetails}}
+          <div>
+            <div class="row activity-actiob-ribbon">
+              <div class="col-sm-12">
+                <div class="col-sm-12">
+                  <button class="btn mr-2 btn-primary btn-ribbon-action" (appClick)="GoToActivityEditPage()">
+                    <i class="far fa-edit"></i>
+                    {{resources.Edit}}
+                  </button>
+                  <button class="btn mr-2 btn-primary btn-ribbon-action" (appClick)="OnTogglePostStatus()">
+                    <i class="fas fa-upload color-white" *ngIf="!Activity?.IsPosted"></i>
+                    <i class="fas fa-download color-white" *ngIf="Activity?.IsPosted"></i>
+                    <span *ngIf="!Activity?.IsPosted">{{resources.Publish}}</span>
+                    <span *ngIf="Activity?.IsPosted"> {{resources.UnPublish}}</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row bold-label">
+    <div class="col-md-12 grid-margin  form-loader-wrap">
+      <!--Loader-->
+      <div class="form-loader" [ngStyle]="{'display':IsLoading ? 'block' : 'none' }"></div>
+      <!--Basic Info-->
+      <div class="row margin-15">
+        <!--Titles-->
+        <div class="col-sm-6 col-lg-6">
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">{{resources.TitleAr}}</label>
+            <div class="col-sm-8 data-content">
+              <span>{{Activity?.TitleAr}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-6">
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">{{resources.TitleEn}}</label>
+            <div class="col-sm-8 data-content">
+              <span>{{Activity?.TitleEn}}</span>
+            </div>
+          </div>
+        </div>
+        <!--Descriptions-->
+        <div class="col-sm-6 col-lg-6">
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">{{resources.DescriptionAr}}</label>
+            <div class="col-sm-8 data-content data-content-ar">
+              <span>{{Activity?.DescriptionAr}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-6">
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">{{resources.DescriptionEn}}</label>
+            <div class="col-sm-8 data-content">
+              <span>{{Activity?.DescriptionEn}}</span>
+            </div>
+          </div>
+        </div>
+        <!--Category-->
+        <div class="col-sm-6 col-lg-6">
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">{{resources.Category}}</label>
+            <div class="col-sm-8 data-content">
+              <span>{{localizeData(Activity?.Category?.TitleAr,Activity?.Category?.TitleEn)}}</span>
+            </div>
+          </div>
+        </div>
+        <!--Transportation-->
+        <div class="col-sm-6 col-lg-6">
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">{{resources.TransportationAvailable}}</label>
+            <div class="col-sm-8 data-content">
+              <span>{{Activity?.Transportation ? resources.Yes:resources.No}}</span>
+            </div>
+          </div>
+        </div>
+        <!--Age From-->
+        <div class="col-sm-6 col-lg-6">
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">{{resources.AgeFrom}}</label>
+            <div class="col-sm-8 data-content">
+              <span *ngIf="Activity?.AgeFrom">{{Activity?.AgeFrom}}</span>
+              <span *ngIf="!Activity?.AgeFrom">-</span>
+            </div>
+          </div>
+        </div>
+        <!--Age To-->
+        <div class="col-sm-6 col-lg-6">
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">{{resources.AgeTo}}</label>
+            <div class="col-sm-8 data-content">
+              <span *ngIf="Activity?.AgeTo">{{Activity?.AgeTo}}</span>
+              <span *ngIf="!Activity?.AgeTo">-</span>
+            </div>
+          </div>
+        </div>
+        <!--Date From-->
+        <div class="col-sm-6 col-lg-6">
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">{{resources.FromDate}}</label>
+            <div class="col-sm-8 data-content">
+              <span *ngIf="Activity?.From">{{formatDate(Activity?.From, 'mmm dd, yyyy')}}</span>
+              <span *ngIf="!Activity?.From">-</span>
+            </div>
+          </div>
+        </div>
+        <!--Date To-->
+        <div class="col-sm-6 col-lg-6">
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">{{resources.ToDate}}</label>
+            <div class="col-sm-8 data-content">
+              <span *ngIf="Activity.To">{{formatDate(Activity?.To, 'mmm dd, yyyy')}}</span>
+              <span *ngIf="!Activity.To">-</span>
+            </div>
+          </div>
+        </div>
+        <!--Capacity-->
+        <div class="col-sm-6 col-lg-6">
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">{{resources.Capacity}}</label>
+            <div class="col-sm-8 data-content">
+              <span *ngIf="Activity?.Capacity">{{Activity.Capacity}}</span>
+              <span *ngIf="!Activity?.Capacity">-</span>
+            </div>
+          </div>
+        </div>
+        <!--Price-->
+        <div class="col-sm-6 col-lg-6">
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">{{resources.Price}}</label>
+            <div class="col-sm-8 data-content">
+              <span *ngIf="Activity?.Price">{{Activity.Price}}</span>
+              <span *ngIf="!Activity?.Price">-</span>
+            </div>
+          </div>
+        </div>
+        <!--IsPublished-->
+        <div class="col-sm-6 col-lg-6">
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">{{resources.IsPublished}}</label>
+            <div class="col-sm-8 data-content">
+              <span *ngIf="Activity?.IsPosted">{{resources.GeneralYes}}</span>
+              <span *ngIf="!Activity?.IsPosted">{{resources.GeneralNo}}</span>
+            </div>
+          </div>
+        </div>
+
+        <!--Location-->
+        <div class="col-sm-6 col-lg-6">
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">{{resources.LocationInfo}}</label>
+            <div class="col-sm-8 data-content">
+              <span *ngIf="Activity?.LocationName">{{Activity?.LocationName}}</span>
+              <span *ngIf="!Activity?.LocationName">-</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!--Photo Gallery-->
+      <div class="row img-gallery form-loader-wrap">
+        <!--Loader-->
+        <div class="form-loader" [ngStyle]="{'display':IsLoadingImages ? 'block' : 'none' }"></div>
+        <div class="col-sm-12 page-title-header">
+          <div class="col-12">
+            <div class="page-header">
+              <h4 class="page-title">{{resources.PhotoGallery}}</h4>
+            </div>
+          </div>
+        </div>
+        <div class="row col-sm-12 margin-15">
+          <!--Uploaded Photos-->
+          <div class="col-lg-3 " *ngFor="let Doc of Activity?.Documents">
+            <div class="img_bg_wrap">
+              <a class="link img-preview-link" data-fancybox="gal-1" [attr.href]="Doc.File"></a>
+              <img class="imgBg" [src]="Doc.File" />
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!--User Reviews-->
+      <div class="row img-gallery form-loader-wrap">
+        <div class="col-sm-12 page-title-header">
+          <div class="col-12">
+            <div class="page-header">
+              <h4 class="page-title">{{resources.UsersReviews}}</h4>
+            </div>
+          </div>
+        </div>
+        <div class="row col-sm-12 margin-15">
+          <!--Reviews-->
+          <div class="col-md-6 margin-b-20" *ngFor="let Review of Reviews">
+            <div class="supplier-reviews-wrapper">
+              <div class="review-image">
+                <img alt="Image" class="rounded-circle img-100" [src]="Review.User.Image"
+                     [appImageError]="'assets/images/user-image.png'">
+              </div>
+              <div class="review-contents">
+                <div class="flex">
+                  <h4><span>{{Review.User.FullName}}</span></h4>
+                  <small class="margin-left-auto">- {{formatDate(Review.CreateDate, 'dd MMM yyyy')}} -</small>
+                </div>
+                <div class="rating">
+                  <ngb-rating [(rate)]="Review.Rate" [readonly]="true" max="5">
+                    <ng-template let-fill="fill" let-index="index">
+                      <i class="icon icon-star" [ngClass]="{'empty-star':fill == 0 }"></i>
+                    </ng-template>
+                  </ngb-rating>
+                </div>
+                <p class="review-text" #reviewText>
+                  {{Review.Text}}
+                </p>
+                <a class="read-more" #readMore *ngIf="IsReadMoreButtonShown(reviewText)" (appClick)="ReadMoreReviews(reviewText,readMore)">
+                  {{resources.ReadMore}}
+                </a>
+              </div>
+
+            </div>
+
+
+          </div>
+          <!--No Data-->
+          <div class="col-md-12 supplier-reviews-wrapper" *ngIf="!Reviews || Reviews.length ==0">
+            <span class="no-data-found">
+              {{resources.NoReviewsYet}}
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+</div>

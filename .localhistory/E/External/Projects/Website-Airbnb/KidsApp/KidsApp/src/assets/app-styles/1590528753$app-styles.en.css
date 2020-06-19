@@ -1,0 +1,12 @@
+body {
+  direction: ltr !important;
+}
+
+html {
+  direction: ltr !important;
+}
+
+
+.filter-align-left {
+  text-align: left;
+}
