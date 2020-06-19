@@ -1,2 +1,0 @@
-﻿1- To Create Google Application
-https://console.developers.google.com/projectselector2/apis/credentials?pli=1&supportedpurview=project
