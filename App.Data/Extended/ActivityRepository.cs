@@ -49,7 +49,7 @@ namespace App.Data.Extended
                 Description = UnitOfWork.Language == LanguageEnum.Arabic ? x.DescriptionAr : x.DescriptionEn,
                 Image = x.Documents.Where(y => y.IsMain).Select(y => y.File).FirstOrDefault(),
                 Pin = x.Category.ImageName,
-                SupplierPhoneNumber = x.Supplier.PhoneNumber,
+                SupplierPhoneNumber = x.SupplierId.HasValue ? x.Supplier.PhoneNumber : x.SupplierPhoneNumber,
                 Price = x.Price
             }).OrderBy(x => x.Id).Take(25).ToListAsync();
 

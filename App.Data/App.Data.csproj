@@ -71,6 +71,7 @@
     <Compile Include="Extended\ReviewRepository.cs" />
     <Compile Include="Extended\StatisticsRepository.cs" />
     <Compile Include="Extended\UserFriendRepository.cs" />
+    <Compile Include="Extended\UserRepository.cs" />
     <Compile Include="Migrations\201911161457545_initial.cs" />
     <Compile Include="Migrations\201911161457546_initial.cs" />
     <Compile Include="Migrations\201911161457546_initial.designer.cs">
@@ -244,6 +245,22 @@
     <Compile Include="Migrations\202006181145175_ContentAdmin.designer.cs">
       <DependentUpon>202006181145175_ContentAdmin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006221524078_AddIsReplied.cs" />
+    <Compile Include="Migrations\202006221524078_AddIsReplied.designer.cs">
+      <DependentUpon>202006221524078_AddIsReplied.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006221544320_Add-ContactUs-Reply.cs" />
+    <Compile Include="Migrations\202006221544320_Add-ContactUs-Reply.designer.cs">
+      <DependentUpon>202006221544320_Add-ContactUs-Reply.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006231910534_AddOutgoingEmails.cs" />
+    <Compile Include="Migrations\202006231910534_AddOutgoingEmails.designer.cs">
+      <DependentUpon>202006231910534_AddOutgoingEmails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009121415252_AdminActivitiesChanges.cs" />
+    <Compile Include="Migrations\202009121415252_AdminActivitiesChanges.designer.cs">
+      <DependentUpon>202009121415252_AdminActivitiesChanges.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -390,6 +407,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006181145175_ContentAdmin.resx">
       <DependentUpon>202006181145175_ContentAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006221524078_AddIsReplied.resx">
+      <DependentUpon>202006221524078_AddIsReplied.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006221544320_Add-ContactUs-Reply.resx">
+      <DependentUpon>202006221544320_Add-ContactUs-Reply.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006231910534_AddOutgoingEmails.resx">
+      <DependentUpon>202006231910534_AddOutgoingEmails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009121415252_AdminActivitiesChanges.resx">
+      <DependentUpon>202009121415252_AdminActivitiesChanges.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

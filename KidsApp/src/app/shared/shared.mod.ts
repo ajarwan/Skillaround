@@ -20,7 +20,9 @@ import { AboutUs } from './components/about';
 import { TermsAndConditions } from './components/tac';
 import { Privacy } from './components/privacy';
 import { RichTextbox } from './components/richtextbox';
- 
+import { ActivityDetails } from './components/activity/activitydetails';
+import { AddEditActivity } from './components/activity/addeditactivity';
+
 
 const SHARED_DECLARATIONS = [
   UnderlineDirective,
@@ -35,7 +37,9 @@ const SHARED_DECLARATIONS = [
   AboutUs,
   TermsAndConditions,
   Privacy,
-  RichTextbox
+  RichTextbox,
+  ActivityDetails,
+  AddEditActivity
 ];
 
 

@@ -1,6 +1,7 @@
 ﻿using App.Core;
 using App.Core.Base;
 using App.Data.Extended;
+using App.Entity;
 using App.Entity.DTO;
 using App.Entity.Models;
 using System;
@@ -19,14 +20,15 @@ namespace App.Business.Extended
     public class UserManager : BusinessBase<User>
     {
         #region "----Constructor----"
-        public UserManager(IUnitOfWork uw) : base(new RepositoryBase<User>(uw))
+        public UserManager(IUnitOfWork uw) : base(new UserRepository(uw))
         {
         }
-        public RepositoryBase<User> RepositoryBase
+        public UserRepository RepositoryBase
         {
             get
             {
-                return ((RepositoryBase<User>)Repository);
+                return ((UserRepository)Repository);
+
             }
         }
         #endregion
@@ -88,8 +90,8 @@ namespace App.Business.Extended
             text = text.Replace("{{YouUserNameIs}}", App.Entity.Resources.KidsApp.YouUserNameIs);
             text = text.Replace("{{UserEmail}}", user.Email);
             text = text.Replace("{{SystemURL}}", ConfigurationManager.AppSettings["SystemBaseURL"].ToString());
-            
-            
+
+
             text = text.Replace("{{MailTo}}", ConfigurationManager.AppSettings["SupportEmail"].ToString());
             text = text.Replace("{{EmailAboutBody}}", App.Entity.Resources.KidsApp.AboutEmailBody);
 
@@ -142,7 +144,6 @@ namespace App.Business.Extended
 
         }
 
-
         public User RegisterSupplier(User user, string password)
         {
             if (user.Id > 0)
@@ -171,6 +172,16 @@ namespace App.Business.Extended
             }
 
 
+        }
+
+        public List<string> GetUserEmails(SharedEnums.MailReceiverType type)
+        {
+            return RepositoryBase.GetUserEmails(type);
+        }
+
+        public bool CheckUserActive(int userId)
+        {
+            return RepositoryBase.CheckUserActive(userId);
         }
         #endregion
     }

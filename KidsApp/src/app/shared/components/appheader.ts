@@ -284,7 +284,14 @@ export class AppHeader extends BaseComponent implements OnInit, AfterViewInit {
       DataStore.addUpdate('token', res.token, CoreEnums.StorageLocation.LocalStorge);
       CoreSubjects.onLoginSubject.next(res);
     }, (err: any) => {
-      this.Credintials.Validations.Invalid = true;
+
+
+      if (err.status == 406) {
+        this.Credintials.Validations.InActive = true;
+      }
+      else {
+        this.Credintials.Validations.Invalid = true;
+      }
     })
   }
 
@@ -772,13 +779,13 @@ export class AppHeader extends BaseComponent implements OnInit, AfterViewInit {
       this.User.Documents = [];
 
 
-    this.LoadingType = type; 
+    this.LoadingType = type;
     this.sharedSVC.UploadFile({
       File: event.target.files[0],
       Type: AppEnums.AttachmentLocationType.Users,
       Ext: CoreHelper.GetFileExtension(event.target.files[0].name)
     }).subscribe((res: any) => {
-      this.LoadingType = null; 
+      this.LoadingType = null;
       switch (type) {
         case Files.PersonalPhoto:
 

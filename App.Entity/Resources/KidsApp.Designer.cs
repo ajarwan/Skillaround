@@ -97,6 +97,15 @@ namespace App.Entity.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reply to your inquery.
+        /// </summary>
+        public static string ContactUsReply {
+            get {
+                return ResourceManager.GetString("ContactUsReply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to System Email.
         /// </summary>
         public static string EmailMessageSubject {
@@ -219,6 +228,15 @@ namespace App.Entity.Resources {
         public static string WelcomEmailSubject {
             get {
                 return ResourceManager.GetString("WelcomEmailSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your Message.
+        /// </summary>
+        public static string YourMessage {
+            get {
+                return ResourceManager.GetString("YourMessage", resourceCulture);
             }
         }
         

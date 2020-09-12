@@ -8,6 +8,7 @@ using System.Web.Http.Cors;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity;
 using App.Entity.Models;
+using App.REST.Common;
 
 namespace App.REST
 {
@@ -23,6 +24,8 @@ namespace App.REST
         {
             HttpContext.Current.Response.Headers.Add("access-control-expose-headers", "X-Token");
             Unit = HttpContext.Current.GetOwinContext().GetUserManager<UnitOfWork>();
+            //Unit.UserId = LoadUser();
+             
             var x = RequestContext.Principal.Identity.Name;
         }
 
@@ -35,5 +38,7 @@ namespace App.REST
             set { }
 
         }
+
+    
     }
 }

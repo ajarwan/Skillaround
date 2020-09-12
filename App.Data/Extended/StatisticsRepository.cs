@@ -69,7 +69,7 @@ namespace App.Data.Extended
                 Image = x.User.Image,
                 FirstName = x.User.FirstName,
                 LastName = x.User.LastName
-            }).Take(3).ToListAsync();
+            }).Take(5).ToListAsync();
 
             return res;
 

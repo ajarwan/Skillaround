@@ -104,6 +104,7 @@
     <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.Cors, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.7\lib\net45\System.Web.Cors.dll</HintPath>
     </Reference>
@@ -196,12 +197,14 @@
     <Compile Include="Controllers\BookingController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\ContactUsController.cs" />
+    <Compile Include="Controllers\ContactUsMessageReplyController.cs" />
     <Compile Include="Controllers\ContentAdminController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\GeneralController.cs" />
     <Compile Include="Controllers\KidController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
+    <Compile Include="Controllers\OutgoingEmailController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />
     <Compile Include="Controllers\StatisticsController.cs" />
     <Compile Include="Controllers\UserController.cs" />

@@ -38,6 +38,10 @@ namespace App.Data
 
         public DbSet<ContentAdmin> ContentAdmins { get; set; }
 
+        public DbSet<ContactUsMessageReply> ContactUsMessageReplies { get; set; }
+        public DbSet<OutgoingEmail> OutgoingEmails { get; set; }
+        
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

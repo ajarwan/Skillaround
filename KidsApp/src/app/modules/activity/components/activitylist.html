@@ -164,7 +164,7 @@
         </div>
       </li>
       <!--Show/Hide Map-->
-      <li>
+      <li class="float-right">
         <div class="showMapSwitchWrap">
           <span class="showMapLebl">{{resources?.ShowMap}}</span>
           <div id="shSwitch">
@@ -177,7 +177,6 @@
         </div>
       </li>
       <li>
-
         <div class="filterExpandBar  " (appClick)="ToggleFilters()" [ngClass]="{'active': IsFiltersShown}">
           <span>{{resources.HideFilter}}</span>
           <i class="icon icon-angle-down"></i>
@@ -248,11 +247,20 @@
         </div>
         <div class="desc_wrap">
           <div class="info-left">
-            <h4>{{Act.Title}}</h4>
+            <span class="rating rating-container float-right  d-block d-sm-none" *ngIf="Act.TotalReviews">
+              <ngb-rating [rate]="Act.AvgRate" [readonly]="true" max="5" [starTemplate]="t"></ngb-rating>
+              <ng-template #t let-fill="fill">
+                <span class="fa fa-star empty-star" *ngIf="fill == 0"></span>
+                <span class="fa fa-star full-star" *ngIf="fill === 100"></span>
+                <span class="fa fa-star-half-empty" *ngIf="fill >0 && fill< 100"></span>
+              </ng-template>
+            </span>
+            <h4 class="row full-width">{{Act.Title}}</h4>
             <p class="place">
-              <i class="fas fa-building mr-2" *ngIf="Act.Supplier.UserType == AppEnums.UserTypes.CompanySupplier"></i>
-              <i class="fas fa-user-tie mr-2" *ngIf="Act.Supplier.UserType == AppEnums.UserTypes.IndividualSupplier"></i>
-              {{Act.Supplier.FullName}}
+              <i class="fas fa-building mr-2" *ngIf="Act.Supplier?.UserType == AppEnums.UserTypes.CompanySupplier"></i>
+              <i class="fas fa-user-tie mr-2" *ngIf="Act.Supplier?.UserType == AppEnums.UserTypes.IndividualSupplier"></i>
+              <i class="fas fa-building mr-2" *ngIf="!Act.Supplier"></i>
+              {{Act.SupplierNameV}}
             </p>
             <p class="place">
               <i aria-hidden="true" class="fas fa-map-marker-alt"></i>
@@ -263,10 +271,15 @@
             </div>
           </div>
           <div class="info-right">
-            <span class="rating" *ngIf="Act.TotalReviews">
-              <i class="icon icon-star"></i> {{Act.AvgRate}}
+            <span class="rating d-none d-sm-block" *ngIf="Act.TotalReviews">
+              <ngb-rating [rate]="Act.AvgRate" [readonly]="true" max="5" [starTemplate]="t"></ngb-rating>
+              <ng-template #t let-fill="fill">
+                <span class="fa fa-star empty-star" *ngIf="fill == 0"></span>
+                <span class="fa fa-star full-star" *ngIf="fill === 100"></span>
+                <span class="fa fa-star-half-empty" *ngIf="fill >0 && fill< 100"></span>
+              </ng-template>
             </span>
-            <span class="price">{{Act.Price}}$</span>
+            <span class="price float-right" *ngIf="Act.Price">{{formatMony(Act.Price)}}</span>
           </div>
         </div>
       </a>

@@ -79,9 +79,15 @@
     <Content Include="src\app\components\test.html" />
     <Content Include="src\app\modules\admin\components\aboutAdmin.html" />
     <Content Include="src\app\modules\admin\components\activities.html" />
+    <Content Include="src\app\modules\admin\components\activities\adminactivities.html" />
+    <Content Include="src\app\modules\admin\components\activities\list\adminactivitylist.html" />
     <Content Include="src\app\modules\admin\components\admin.html" />
     <Content Include="src\app\modules\admin\components\categories.html" />
     <Content Include="src\app\modules\admin\components\dashboard.html" />
+    <Content Include="src\app\modules\admin\components\mailers.html" />
+    <TypeScriptCompile Include="src\app\modules\admin\components\activities\adminactivities.ts" />
+    <TypeScriptCompile Include="src\app\modules\admin\components\activities\list\adminactivitylist.ts" />
+    <TypeScriptCompile Include="src\app\modules\admin\components\mailers.ts" />
     <Content Include="src\app\modules\admin\components\messages.html" />
     <Content Include="src\app\modules\admin\components\pac.html" />
     <Content Include="src\app\modules\admin\components\suppliers.html" />
@@ -98,8 +104,8 @@
     <Content Include="src\app\shared\components\appnotificationdialog.html" />
     <Content Include="src\app\modules\activity\components\activitylist.html" />
     <Content Include="src\app\modules\activity\components\activitydetails.html" />
-    <Content Include="src\app\modules\suppliers\components\activities\details\activitydetails.html" />
-    <Content Include="src\app\modules\suppliers\components\activities\details\addeditactivity.html" />
+    <Content Include="src\app\shared\components\activity\activitydetails.html" />
+    <Content Include="src\app\shared\components\activity\addeditactivity.html" />
     <Content Include="src\app\modules\suppliers\components\activities\list\supplieractivitieslist.html" />
     <Content Include="src\app\modules\suppliers\components\activities\supplieractivities.html" />
     <Content Include="src\app\modules\suppliers\components\info\supplierinfo.html" />
@@ -123,6 +129,7 @@
     <Content Include="src\assets\app-styles\app-styles.css" />
     <Content Include="src\assets\app-styles\app-styles.en.css" />
     <Content Include="src\assets\config\config.js" />
+    <Content Include="src\assets\currency\currency.js" />
     <Content Include="src\assets\fonts\droid_kulfi\DroidArabicKufi-Bold.svg" />
     <Content Include="src\assets\fonts\droid_kulfi\DroidArabicKufi.svg" />
     <Content Include="src\assets\fonts\droid_kulfi\Droid_Kufi_Bold.svg" />
@@ -158,6 +165,7 @@
     <Content Include="src\assets\scripts\min\home_plugins.js" />
     <Content Include="src\assets\scripts\min\page.js" />
     <Content Include="src\assets\scripts\min\page_plugins.js" />
+    <Content Include="src\assets\scripts\money.min.js" />
     <Content Include="src\assets\scripts\mtr\mtr-datepicker-timezones.min.js" />
     <Content Include="src\assets\scripts\mtr\mtr-datepicker.min.js" />
     <Content Include="src\assets\scripts\page.js" />
@@ -423,6 +431,7 @@
     <TypeScriptCompile Include="src\app\modules\admin\components\users.ts" />
     <TypeScriptCompile Include="src\app\modules\suppliers\components\bookings\supplierbooking.ts" />
     <TypeScriptCompile Include="src\app\modules\suppliers\components\calendar\suppliercalendar.ts" />
+    <TypeScriptCompile Include="src\app\shared\classes\HTMLMarker.ts" />
     <TypeScriptCompile Include="src\app\shared\components\about.ts" />
     <TypeScriptCompile Include="src\app\shared\components\contactus.ts" />
     <TypeScriptCompile Include="src\app\shared\components\appfooter.ts" />
@@ -451,8 +460,8 @@
     <TypeScriptCompile Include="src\app\modules\admin\admin.mod.ts" />
     <TypeScriptCompile Include="src\app\modules\admin\admin.routes.ts" />
     <TypeScriptCompile Include="src\app\modules\admin\admin.service.ts" />
-    <TypeScriptCompile Include="src\app\modules\suppliers\components\activities\details\activitydetails.ts" />
-    <TypeScriptCompile Include="src\app\modules\suppliers\components\activities\details\addeditactivity.ts" />
+    <TypeScriptCompile Include="src\app\shared\components\activity\activitydetails.ts" />
+    <TypeScriptCompile Include="src\app\shared\components\activity\addeditactivity.ts" />
     <TypeScriptCompile Include="src\app\modules\suppliers\components\activities\list\supplieractivitieslist.ts" />
     <TypeScriptCompile Include="src\app\modules\suppliers\components\activities\supplieractivities.ts" />
     <TypeScriptCompile Include="src\app\modules\suppliers\components\info\supplierinfo.ts" />

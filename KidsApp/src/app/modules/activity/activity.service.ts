@@ -89,13 +89,20 @@ export class ActivityService {
       }
 
 
-      if (criteria.MaxPrice) {
-        params.set('maxPrice', criteria.MaxPrice);
+      //if (criteria.MaxPrice) {
+      //  params.set('maxPrice', criteria.MaxPrice);
+      //}
+
+      //if (criteria.MinPrice) {
+      //  params.set('minPrice', criteria.MinPrice);
+      //}
+
+      if (criteria.MaxPriceFix) {
+        params.set('maxPrice', criteria.MaxPriceFix);
       }
 
-
-      if (criteria.MinPrice) {
-        params.set('minPrice', criteria.MinPrice);
+      if (criteria.MinPriceFix) {
+        params.set('minPrice', criteria.MinPriceFix);
       }
 
       if (criteria.Status) {
@@ -131,6 +138,15 @@ export class ActivityService {
       if (criteria.BookingNumber) {
         params.set('bookingNumber', criteria.BookingNumber);
       }
+
+      if (criteria.ExcludeAdminActivities) {
+        params.set('excludeAdminActivities', criteria.ExcludeAdminActivities);
+      }
+
+      if (criteria.OnlyAdminActivities) {
+        params.set('onlyAdminActivities', criteria.OnlyAdminActivities);
+      }
+
       
 
       //if (criteria.Lat) {
@@ -204,12 +220,21 @@ export class ActivityService {
         params.set('categoryId', criteria.Category.Id);
       }
 
-      if (criteria.MaxPrice) {
-        params.set('maxPrice', criteria.MaxPrice);
+      //if (criteria.MaxPrice) {
+      //  params.set('maxPrice', criteria.MaxPrice);
+      //}
+
+      //if (criteria.MinPrice) {
+      //  params.set('minPrice', criteria.MinPrice);
+      //}
+
+
+      if (criteria.MaxPriceFix) {
+        params.set('maxPrice', criteria.MaxPriceFix);
       }
 
-      if (criteria.MinPrice) {
-        params.set('minPrice', criteria.MinPrice);
+      if (criteria.MinPriceFix) {
+        params.set('minPrice', criteria.MinPriceFix);
       }
 
       if (criteria.GLat) {

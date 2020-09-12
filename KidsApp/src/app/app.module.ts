@@ -22,6 +22,12 @@ import { SharedModule } from './shared/shared.mod';
 import { ContactUs } from './shared/components/contactus';
 import { Test } from './components/test';
 import { environment } from 'src/environments/environment';
+import { getParamByISO } from 'iso-country-currency';
+
+
+declare var fx: any;
+declare var _Currency: any;
+
 
 @NgModule({
   declarations: [
@@ -45,6 +51,7 @@ import { environment } from 'src/environments/environment';
     SocialMedialService,
     { provide: APP_INITIALIZER, useFactory: LoadSettings, deps: [CoreService], multi: true },
     { provide: APP_INITIALIZER, useFactory: LoadUser, deps: [HttpClient], multi: true },
+    { provide: APP_INITIALIZER, useFactory: LoadCurrencies, deps: [HttpClient], multi: true },
     { provide: LOCALE_ID, useFactory: () => CoreHelper.getCurrentLocale() },
 
 
@@ -65,7 +72,8 @@ export function LoadSettings(CoreSVC: CoreService) {
     return;
   }
   let styles = ['assets/app-styles/app-styles.{{lang}}.css?v=1', 'assets/styles/main.css', 'assets/styles/main.{{lang}}.css?v=1'];
-  let scripts = ['assets/resources/resources.{{lang}}.js', 'https://apis.google.com/js/client:platform.js?onload=renderButton'];
+  let scripts = ['assets/resources/resources.{{lang}}.js', 'assets/currency/currency.js',
+    'https://apis.google.com/js/client:platform.js?onload=renderButton'];
   return () => CoreSVC.LoadAppSetting(styles, scripts, 'assets/images/logo.png')
 }
 
@@ -90,6 +98,65 @@ export function LoadUser(http: HttpClient) {
   else
     return () => null;
 
+
+}
+
+
+export function LoadCurrencies(http: HttpClient) {
+  var options = {
+    headers: new HttpHeaders()
+  }
+  return () => {
+    http.get('https://openexchangerates.org/api/latest.json?app_id=1ad3d9b9af184ef9a3806c0944f28a57', options).toPromise().then((res: any) => {
+      if (typeof fx !== "undefined" && fx.rates) {
+        fx.rates = res.rates;
+        fx.base = res.base;
+      } else {
+        // If not, apply to fxSetup global:
+        var fxSetup = {
+          rates: res.rates,
+          base: res.base
+        }
+      }
+      fx.base = 'USD';
+
+      var options2 = {
+        headers: new HttpHeaders().set('accept', 'application/json')
+          .set('Content-Type', 'application/json')
+      }
+
+      //dbip.getVisitorInfo().then(info => {
+      //  console.log(info);
+      //});
+      //http.get(window['_Config'].MainEndPoint + 'Api/General/Location', options2).toPromise().then((innerRes: any) => {
+      //  //debugger
+      //  DataStore.addUpdate('CurrentCountryCode', innerRes.countryCode);
+      //  let currencyName = getParamByISO(innerRes.countryCode, 'currency');
+      //  DataStore.addUpdate('Currency', _Currency[currencyName]);
+      //  DataStore.addUpdate('CurrencyName', currencyName);
+      //  fx.settings = { from: "USD", to: currencyName };
+      //}, (err: any) => {
+      //  fx.settings = { from: "USD", to: "AED" };
+      //});
+      http.get('https://get.geojs.io/v1/ip/geo.js', { responseType: 'text' }).subscribe((innerRes: any) => {
+
+        var code = innerRes.match(/"country_code":"([^"]+)"/)[1]
+        DataStore.addUpdate('CurrentCountryCode', code);
+        let currencyName = getParamByISO(code, 'currency');
+        DataStore.addUpdate('Currency', _Currency[currencyName]);
+        DataStore.addUpdate('CurrencyName', currencyName);
+        fx.settings = { from: "USD", to: currencyName };
+
+        //let currencyData = getAllInfoByISO('BE');
+        //console.log(currencyData);
+      }, (err: any) => {
+        console.log('== API Error ==')
+        console.log(err)
+        fx.settings = { from: "USD", to: "AED" };
+      });
+
+    });
+  }
 
 }
 

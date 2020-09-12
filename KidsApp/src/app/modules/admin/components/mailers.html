@@ -1,0 +1,42 @@
+<div class="content-wrapper">
+  <!-- Page Title Header Starts-->
+  <div class="row page-title-header">
+    <div class="col-12">
+      <div class="page-header">
+        <h4 class="page-title ">
+          {{resources.Mailers}}
+        </h4>
+      </div>
+    </div>
+  </div>
+  <div class="row form-loader-wrap">
+    <!--Loader-->
+    <div class="form-loader" [ngStyle]="{'display':IsLoading ? 'block' : 'none' }"></div>
+
+    <div class="col-md-12 grid-margin " style="min-height:500px">
+
+      <div class="row m-1">
+        <h3>{{resources?.EmailSubject}}</h3>
+        <input type="text" class="form-control col-12 "  [(ngModel)]="Content.Subject" [ngClass]="{'ctr-err': InvalidSubject}" />
+      </div>
+      <div class="row">
+        <h3 class="m-3">{{resources?.EmailArabic}}</h3>
+        <shared-richtextbox [(ngModel)]="Content.TextAr" [IsArabic]="true" class="col-12" [ngClass]="{'ctr-err': Invalid}"></shared-richtextbox>
+      </div>
+
+      <div class="row margin-t-10">
+        <h3 class="m-3">{{resources?.EmailEnglish}}</h3>
+        <shared-richtextbox [(ngModel)]="Content.TextEn" class="col-12" [ngClass]="{'ctr-err': Invalid}"></shared-richtextbox>
+      </div>
+
+      <div class="row m-t-5">
+        <div class="col-sm-12" style="text-align:center;margin-top:5px">
+          <button type="submit" class="btn btn-success mr-2" (appClick)="OnSend(MailReceiverType.All)">{{resources.SendEmailToAll}}</button>
+          <button type="submit" class="btn btn-success mr-2" (appClick)="OnSend(MailReceiverType.Users)">{{resources.SendEmailToUsers}}</button>
+          <button type="submit" class="btn btn-success mr-2" (appClick)="OnSend(MailReceiverType.Suppliers)">{{resources.SendEmailToSuppliers}}</button>
+          <button type="submit" class="btn btn-success mr-2" (appClick)="OnSend(MailReceiverType.Admins)">{{resources.SendEmailToAdmins}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

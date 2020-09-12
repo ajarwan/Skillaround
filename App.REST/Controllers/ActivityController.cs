@@ -59,7 +59,7 @@ namespace App.REST.Controllers
             int? minPrice = null, SharedEnums.ActivationStatus status = SharedEnums.ActivationStatus.Active, string adminKeyword = null,
             string bookingUserName = null, string bookingUserEmail = null,
             SharedEnums.BookingConfirmationStatus bookingStatus = SharedEnums.BookingConfirmationStatus.All,
-            string bookingNumber = null)
+            string bookingNumber = null, bool excludeAdminActivities = false, bool onlyAdminActivities = false)
         {
             try
             {
@@ -172,10 +172,14 @@ namespace App.REST.Controllers
 
                 }
 
-
-
-
-
+                if (excludeAdminActivities)
+                {
+                    Filter = Filter.And(x => x.SupplierId.HasValue);
+                }
+                if (onlyAdminActivities)
+                {
+                    Filter = Filter.And(x => !x.SupplierId.HasValue);
+                }
                 //TODO 
                 //if(Unit.UserId.IsSupplier)
                 //if(this.ActiveUser.IsSupplier)
@@ -190,7 +194,7 @@ namespace App.REST.Controllers
                 }
 
 
-                if (this.ActiveUser != null && this.ActiveUser.UserType == SharedEnums.UserTypes.Manager)
+                if (this.ActiveUser != null && this.ActiveUser.UserType == SharedEnums.UserTypes.Manager && !onlyAdminActivities)
                 {
                     if (status != SharedEnums.ActivationStatus.All)
                     {
@@ -206,7 +210,7 @@ namespace App.REST.Controllers
                     Filter = Filter.And(x => x.SupplierId == this.ActiveUser.Id);
 
                 }
-                else
+                else if(!onlyAdminActivities)
                     Filter = Filter.And(x => x.IsActive);
 
 
@@ -267,7 +271,7 @@ namespace App.REST.Controllers
                 Pager pager = new Pager() { PageSize = 25, PageIndex = 1 }; ;
 
 
-                Expression<Func<Activity, bool>> Filter = x => !x.IsDeleted;
+                Expression<Func<Activity, bool>> Filter = x => !x.IsDeleted && x.IsActive;
 
 
                 Filter = Filter.And(x => x.Lat >= sLat && x.Lat <= gLat);
@@ -329,6 +333,7 @@ namespace App.REST.Controllers
                 //if(Unit.UserId.IsSupplier)
                 Filter = Filter.And(x => x.IsPosted == isPosted);
 
+
                 if (myActivities)
                     Filter = Filter.And(x => x.SupplierId == Unit.UserId);
 
@@ -357,7 +362,7 @@ namespace App.REST.Controllers
         {
             try
             {
-                if (this.ActiveUser.Id != activity.SupplierId)
+                if (this.ActiveUser.UserType != SharedEnums.UserTypes.Manager && this.ActiveUser.Id != activity.SupplierId)
                     return BadRequest();
 
                 activity.State = BaseState.Added;

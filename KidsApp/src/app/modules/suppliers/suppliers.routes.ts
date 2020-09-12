@@ -3,12 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { Suppliers } from './components/suppliers';
 import { SupplierActivities } from './components/activities/supplieractivities';
 import { SupplierActivitiesList } from './components/activities/list/supplieractivitieslist';
-import { AddEditActivity } from './components/activities/details/addeditactivity';
-import { ActivityDetails } from './components/activities/details/activitydetails';
 import { SupplierInfo } from './components/info/supplierinfo';
 import { SupplierCalendar } from './components/calendar/suppliercalendar';
 import { SupplierBooking } from './components/bookings/supplierbooking';
-
+import { ActivityDetails } from '../../shared/components/activity/activitydetails';
+import { AddEditActivity } from '../../shared/components/activity/addeditactivity';
 
 const routes: Routes = [
   {

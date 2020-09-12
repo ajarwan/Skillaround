@@ -21,6 +21,8 @@ export class AdminService {
   private readonly DASHBOARD_BASE_URL = 'Api/Dashboard/';
   private readonly CONTACT_US_BASE_URL = 'Api/ContactUs/';
   private readonly CONTENT_ADMIN_BASE_URL = 'Api/ContentAdmin/';
+  private readonly CONTACTUS_REPLY_BASE_URL = 'Api/ContactUsMessageReply/';
+  private readonly OUTGOING_EMAIL_BASE_URL = 'Api/OutgoingEmail/';
 
   private get resources() {
     return DataStore.resources;
@@ -142,4 +144,17 @@ export class AdminService {
     return this.http.put(new UrlConfig(`${this.CONTENT_ADMIN_BASE_URL}`, this.mainEndPoint), contentAdmin, showSpinner);
   }
 
+  /**********************************
+  * Contact US Reply
+  * *********************************/
+  public AddContactUsMessageReply(reply: any, showSpinner: boolean = true): Observable<Response> {
+    return this.http.post(new UrlConfig(`${this.CONTACTUS_REPLY_BASE_URL}`, this.mainEndPoint), reply, showSpinner);
+  }
+
+  /**********************************
+   * Outgoing Email API
+   * *********************************/
+  public AddOutgoingEmail(email: any, showSpinner: boolean = true): Observable<Response> {
+    return this.http.post(new UrlConfig(`${this.OUTGOING_EMAIL_BASE_URL}`, this.mainEndPoint), email, showSpinner);
+  }
 }

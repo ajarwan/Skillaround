@@ -125,6 +125,9 @@
       <div class="text-center err-msg" *ngIf="Credintials.Validations.Invalid">
         {{resources?.InvalidEmailOrPassword}}
       </div>
+      <div class="text-center err-msg" *ngIf="Credintials.Validations.InActive">
+        {{resources?.UserInActive}}
+      </div>
       <div class="text-center">
         {{resources?.DontHaveAccount}}
         <a href="javascript:void(0);" (appClick)="SetActiveTab(LoginTabs.SignUp)">{{resources?.Signup}}</a>
@@ -485,7 +488,7 @@
             <div class="col-md-2 col-xs-2" style="display: flex;justify-content: center;align-items: center">
               <label> {{resources.To}} </label>
             </div>
-            <div class="col-md-5 col-xs-5" >
+            <div class="col-md-5 col-xs-5">
               <!--<ngb-timepicker [(ngModel)]="SelectedEndTime" [meridian]="true" [ngClass]="{'ctr-err': UserValidation.SelectedEndTime}"></ngb-timepicker>-->
               <shared-timepicker [(ngModel)]="SelectedEndTime" [appError]="UserValidation.SelectedEndTime"></shared-timepicker>
             </div>
@@ -572,8 +575,10 @@
               <!--NOL-->
               <div class="col-sm-12">
                 <div>
-                  <label>{{resources?.NOL}}
-                    <shared-dotSpinner class="margin-10" *ngIf="LoadingType == Files.NOL" [TextColorClass]="text-spinner-gray"></shared-dotSpinner></label>
+                  <label>
+                    {{resources?.NOL}}
+                    <shared-dotSpinner class="margin-10" *ngIf="LoadingType == Files.NOL" [TextColorClass]="text-spinner-gray"></shared-dotSpinner>
+                  </label>
                 </div>
                 <div class="upload-btn-wrapper">
                   <img class="img" src="assets/images/photo-img.png">

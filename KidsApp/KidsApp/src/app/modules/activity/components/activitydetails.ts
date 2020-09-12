@@ -5,7 +5,6 @@ import { ActivityService } from '../activity.service';
 import { AppEnums } from 'src/app/app.enums';
 import { Pager } from 'src/app/shared/classes/Pager';
 import { ActivatedRoute } from '@angular/router';
-import { environment } from 'src/environments/environment';
 import { SharedService } from 'src/app/shared/service/shared.service';
 import { Validator } from 'src/app/core/services/validator';
 import Swal from 'sweetalert2';
@@ -13,6 +12,7 @@ import { SharedSubjects } from 'src/app/shared/service/shared.subjects';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { UsersService } from '../../users/users.service';
 import { DataStore } from 'src/app/core/services/dataStrore.service';
+
 declare var $: any;
 
 enum FilterType {

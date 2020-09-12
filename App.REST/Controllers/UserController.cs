@@ -287,13 +287,17 @@ namespace App.REST.Controllers
 
                 if (user == null)
                     return Unauthorized();
-                else
+                else if (user.PasswordStatus != SharedEnums.UserPasswordStatus.Set)
                 {
                     user.PasswordStatus = SharedEnums.UserPasswordStatus.Set;
                     user.State = BaseState.Modified;
                     Unit.SaveChanges();
                 }
 
+                if (!user.IsActive)
+                {
+                    return StatusCode(HttpStatusCode.NotAcceptable);
+                }
                 user.PasswordHash = "";
                 var auth = new
                 {

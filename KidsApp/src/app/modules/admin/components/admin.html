@@ -13,7 +13,13 @@
   <div class="navbar-menu-wrapper d-flex align-items-center">
     <!--Actions-->
     <ul class="navbar-nav actions-ribbon">
-
+      <!--Add New Activity-->
+      <li (appClick)="navigate('admin/managedactivities/add')">
+        <div class="actions-ribbon-btn pointer">
+          <i class="actions-ribbon-icon fas fa-plus"></i>
+          <span class="actions-ribbon-label">{{resources.Add}}</span>
+        </div>
+      </li>
       <!--Go To System-->
       <li [routerLink]="''">
         <div class="actions-ribbon-btn pointer">
@@ -96,6 +102,13 @@
           <span class="menu-title">{{resources.Activities}}</span>
         </a>
       </li>
+      <!--Admin Activities-->
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="'managedactivities/list'">
+          <i class="menu-icon typcn typcn-shopping-bag"></i>
+          <span class="menu-title">{{resources.AdminActivities}}</span>
+        </a>
+      </li>
       <!--Categories-->
       <li class="nav-item">
         <a class="nav-link" [routerLink]="'categories'">
@@ -111,6 +124,13 @@
           <div class="msgs-count-container" *ngIf="MessagesCount">
             <span class="count-ind">{{MessagesCount}}</span>
           </div>
+        </a>
+      </li>
+      <!--About-->
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="'mailers'">
+          <i class="menu-icon typcn typcn-shopping-bag"></i>
+          <span class="menu-title">{{resources.Mailers}}</span>
         </a>
       </li>
       <!--About-->

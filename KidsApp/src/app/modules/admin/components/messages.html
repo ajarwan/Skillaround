@@ -54,10 +54,14 @@
                   {{formatDate(Msg.CreateDate,'dd MMM yyyy hh:mm')}}
                 </td>
                 <td>
-                  <button class="btn btn-app" *ngIf="!Msg.IsSeen || Msg.IsLoadingUpdate " (appClick)="SetSeen(Msg)">
-                    {{resources.Noted}}
+                  <button class="btn btn-app" *ngIf="!Msg.IsSeen || Msg.IsLoadingUpdate " (appClick)="SetSeen(Msg)" [ngbTooltip]="resources.Noted">
+                    <!--{{resources.Noted}}-->
                     <i class="far fa-eye" *ngIf="!Msg.IsLoadingUpdate"></i>
                     <shared-dotSpinner *ngIf="Msg.IsLoadingUpdate"></shared-dotSpinner>
+                  </button>
+                  <button class="btn btn-reply m-s-10" *ngIf="!Msg.IsReplied" (appClick)="OpenReplyModal(Msg,EmailMessageModal)" [ngbTooltip]="resources.Reply">
+                    <!--{{resources.Reply}}-->
+                    <i class="fa fa-reply"></i>
                   </button>
                 </td>
               </tr>
@@ -72,14 +76,36 @@
 
         <div class="col-md-12">
           <shared-pager [(pager)]="Pager" (OnPageChange)="OnPageChange($event)"></shared-pager>
-
         </div>
-
-
       </div>
-
-
-
     </div>
   </div>
 </div>
+
+
+
+<ng-template #EmailMessageModal let-modal>
+  <div class="form-loader-wrap">
+    <div class="form-loader" [ngStyle]="{'display':IsLoadingReply ? 'block' : 'none' }"></div>
+
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">
+        <span>{{resources?.SendEmail}}</span>
+      </h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body  message-popup popup-content ">
+      <!--<textarea class="messageFeild" [(ngModel)]="MsgText" [ngClass]="{'ctr-err':InvalidMessage}" [attr.placeholder]="resources.EnterText"></textarea>-->
+      <shared-richtextbox [(ngModel)]="MsgText" class="col-12" [ngClass]="{'ctr-err': InvalidMessage}"></shared-richtextbox>
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (appClick)="OnSend()">{{resources?.Send}}</button>
+      <button type="button" class="btn btn-outline-dark" (appClick)="OnCancel()">{{resources?.Cancel}}</button>
+    </div>
+
+  </div>
+
+</ng-template>

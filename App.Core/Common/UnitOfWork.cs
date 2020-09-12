@@ -9,6 +9,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.IO;
 using System.Reflection;
+using System.Web;
+using System.Configuration;
 
 namespace App.Core
 {
@@ -179,8 +181,6 @@ namespace App.Core
             }
         }
 
-
-
         public static LanguageEnum Language { set; get; }
 
         public void ContextClean()
@@ -197,14 +197,14 @@ namespace App.Core
             }
         }
 
-
         public void LogError(Exception ex, string nameSpaceString = null, List<KeyValuePair<string, object>> paramters = null,
             [CallerMemberName] string methodName = null,
             [CallerFilePath] string filePath = null,
             [CallerLineNumber] int lineNumber = 0)
         {
 
-            var path = AppDomain.CurrentDomain.BaseDirectory + @"\bin";
+            var path = ConfigurationManager.AppSettings["LogFolderPath"];
+            //var path = AppDomain.CurrentDomain.BaseDirectory + @"\bin";
             //var b = Assembly.GetExecutingAssembly().Location;
             //var c = System.IO.Directory.GetCurrentDirectory();
             ////var d = Application.ExecutablePath;
@@ -229,6 +229,8 @@ namespace App.Core
                 }
             }
         }
+
+
     }
 
     public enum LanguageEnum : int

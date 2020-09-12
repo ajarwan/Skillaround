@@ -9,6 +9,8 @@ import { CoreHelper } from './services/core.helper';
 import { AppEnums } from '../app.enums';
 declare var $: any;
 declare var jQuery: any;
+declare var fx: any;
+
 
 export abstract class BaseComponent {
 
@@ -64,6 +66,15 @@ export abstract class BaseComponent {
   get environment() {
     return environment;
   }
+
+  get Currency() {
+    return DataStore.get('Currency');
+  }
+
+  get CurrencyName() {
+    return DataStore.get('CurrencyName');
+  }
+
   /*****************************
    *    Constructor
    ****************************/
@@ -130,6 +141,27 @@ export abstract class BaseComponent {
   public formatDate(date: any, formatter: string) {
 
     return CoreHelper.formatDateForUI(new Date(date), formatter)
+
+  }
+
+  public formatMony(mony: any, withSymbol: boolean = true) {
+
+    if (!mony || !fx || !this.Currency)
+      return '';
+
+    let val = (fx.convert(mony)).toFixed(2);
+    let symbole = this.localizeData(this.Currency.symbol_native, this.Currency.symbol)
+
+    if (withSymbol)
+      return val + ' ' + symbole;
+    else
+      return val;
+  }
+
+  public getMonySymbol() {
+    if (!this.Currency)
+      return '';
+    return this.localizeData(this.Currency.symbol_native, this.Currency.symbol)
 
   }
 

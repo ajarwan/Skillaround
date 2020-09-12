@@ -10,6 +10,11 @@ import { AdminMessages } from './components/messages';
 import { AboutAdmin } from './components/aboutAdmin';
 import { TACAdmin } from './components/tac';
 import { PACAdmin } from './components/pac';
+import { Mailers } from './components/mailers';
+import { AdminManagedActivities } from './components/activities/adminactivities';
+import { AdminActivityList } from './components/activities/list/adminactivitylist';
+import { AddEditActivity } from 'src/app/shared/components/activity/addeditactivity';
+import { ActivityDetails } from 'src/app/shared/components/activity/activitydetails';
 
 
 const routes: Routes = [
@@ -25,6 +30,16 @@ const routes: Routes = [
       { path: 'aboutus', component: AboutAdmin },
       { path: 'tac', component: TACAdmin },
       { path: 'pac', component: PACAdmin },
+      { path: 'mailers', component: Mailers },
+      {
+        path: 'managedactivities', component: AdminManagedActivities, children: [
+          { path: '', redirectTo: 'list', pathMatch: 'full' },
+          { path: 'list', component: AdminActivityList },
+          { path: 'add', component: AddEditActivity },
+          { path: 'details/:id', component: ActivityDetails },
+          { path: 'edit/:id', component: AddEditActivity },
+        ]
+      }
     ]
   }
 ];

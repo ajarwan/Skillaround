@@ -174,4 +174,10 @@
   <data name="SentYouEmailSubject" xml:space="preserve">
     <value>New Message</value>
   </data>
+  <data name="ContactUsReply" xml:space="preserve">
+    <value>Reply to your inquery</value>
+  </data>
+  <data name="YourMessage" xml:space="preserve">
+    <value>Your Message</value>
+  </data>
 </root>

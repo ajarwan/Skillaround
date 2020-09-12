@@ -2,9 +2,6 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { BaseComponent } from 'src/app/core/core.base';
 import { DataStore } from 'src/app/core/services/dataStrore.service';
 import { AppEnums } from 'src/app/app.enums';
-import { SharedSubjects } from 'src/app/shared/service/shared.subjects';
-import { environment } from 'src/environments/environment';
-import { CoreEnums } from 'src/app/core/core.enums';
 import { ActivityService } from '../../activity/activity.service';
 import { Pager } from 'src/app/shared/classes/Pager';
 import Swal from 'sweetalert2';
@@ -30,7 +27,8 @@ export class AdminActivities extends BaseComponent implements OnInit, AfterViewI
 
   public Tempkeyword: any = '';
   public Cri: any = {
-    Status: AppEnums.ActivationStatus.All
+    Status: AppEnums.ActivationStatus.All,
+    ExcludeAdminActivities: false
   }
   /*************************************
    *  Constructor
@@ -60,8 +58,6 @@ export class AdminActivities extends BaseComponent implements OnInit, AfterViewI
    *************************************/
   public LoadActivities() {
     this.IsLoading = true;
-
-
 
     this.ActivitySVC.FindAllActivities(this.Cri, this.Pager.PageIndex, this.Pager.PageSize, "CreateDate DESC",
       this.ActivityIncludes.join(','), false).subscribe((res: any) => {

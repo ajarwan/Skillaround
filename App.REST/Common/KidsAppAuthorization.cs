@@ -1,5 +1,8 @@
-﻿using App.Entity.Models;
+﻿using App.Business.Extended;
+using App.Core;
+using App.Entity.Models;
 using App.REST.Common;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,16 +17,23 @@ namespace App.REST
 {
     public class KidsAppAuthorization : AuthorizationFilterAttribute
     {
+
+
         public override void OnAuthorization(HttpActionContext filterContext)
         {
             try
             {
-                
+
+                var Unit = HttpContext.Current.GetOwinContext().GetUserManager<UnitOfWork>();
+                Unit.UserId = 1;
+
                 //var x = System.Web.Http.ApiController.RequestContext.Principal.Identity.Name;
 
                 if (HttpContext.Current.Items["ActiveUser"] != null)
                 {
-                    filterContext.ControllerContext.RequestContext.Principal = (User)HttpContext.Current.Items["ActiveUser"];
+                    var tempuser = (User)HttpContext.Current.Items["ActiveUser"];
+                    filterContext.ControllerContext.RequestContext.Principal = tempuser;
+                    Unit.UserId = tempuser.Id;
                     base.OnAuthorization(filterContext);
                     return;
                 }
@@ -37,17 +47,18 @@ namespace App.REST
                     token_str = token.Value.First();
                     isValid = AuthManager.ValidateToken(token_str, out user);
 
-                    //if (!AuthManager.ValidateToken(token_str, out user))
-                    //{
-                    //    //this.ShowAuthenticationError(filterContext);
-                    //    return;
-                    //}
-                    //HttpContext.Current.Items.Add("ActiveUser", user);
+                    if (isValid && user != null)
+                    {
+                        UserManager umgr = new UserManager(Unit);
+                        if (!umgr.CheckUserActive(user.Id))
+                        {
+                            isValid = false;
+                            user = null;
+                        }
+                    }
+
 
                 }
-
-
-
                 if (filterContext.ActionDescriptor.GetCustomAttributes<KidsAppAuthorization>().Any())
                 {
                     if (!isValid || user == null || user.Id < 1)
@@ -63,6 +74,7 @@ namespace App.REST
 
                     HttpContext.Current.Items.Add("ActiveUser", user);
                     filterContext.ControllerContext.RequestContext.Principal = user;
+                    Unit.UserId = user.Id;
                 }
 
 

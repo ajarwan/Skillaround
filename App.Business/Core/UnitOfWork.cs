@@ -17,6 +17,13 @@ namespace App.Business
             return App.Data.UOW.GetInstance();
         }
 
+        public static UnitOfWork GetInstanceForJobs()
+        {
+            var u = App.Data.UOW.GetInstance();
+            u.UserId = 1;
+            return u;
+        }
+
         public void Dispose()
         {
 

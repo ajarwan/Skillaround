@@ -55,6 +55,7 @@
     <Compile Include="DTO\Payment\Customer.cs" />
     <Compile Include="DTO\Payment\Token.cs" />
     <Compile Include="DTO\PriceRange.cs" />
+    <Compile Include="Models\ContactUsMessageReply.cs" />
     <Compile Include="DTO\SupplierActivityViewStatistics.cs" />
     <Compile Include="DTO\UserDTO.cs" />
     <Compile Include="Models\Activity.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Models\Kid.cs" />
     <Compile Include="Models\MessagingQueue.cs" />
     <Compile Include="Models\Notification.cs" />
+    <Compile Include="Models\OutgoingEmail.cs" />
     <Compile Include="Models\Review.cs" />
     <Compile Include="Models\Statistic.cs" />
     <Compile Include="Models\User.cs" />

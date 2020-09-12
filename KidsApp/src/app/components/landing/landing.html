@@ -9,7 +9,7 @@
       <div class="field-wrap">
         <div class="field">
           <label>{{resources?.Keyword}}</label>
-          <input type="text" class="form-control" [(ngModel)]="Criteria.Keyword"  [attr.placeholder]="resources?.KeywordSearch" />
+          <input type="text" class="form-control" [(ngModel)]="Criteria.Keyword" [attr.placeholder]="resources?.KeywordSearch" />
         </div>
       </div>
       <div class="field-wrap">
@@ -115,6 +115,25 @@
     </div>
   </div>
 
+  <!--Mobile Only Blocks-->
+  <!--<div style="
+    width: 100%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    position: absolute;
+    z-index: 5; bottom: 10px;text-align: center;">
+    <img class="img1" style="width: 30%;height: 30%;padding:5px" src="http://localhost:4200/assets/images/slider1.jpg">
+    <img class="img1" style="width: 30%;height: 30%;padding:5px" src="http://localhost:4200/assets/images/slider2.jpg">
+    <img class="img1" style="width: 30%;height: 30%;padding:5px" src="http://localhost:4200/assets/images/slider3.jpg">
+  </div>-->
+
+  <div class="mobile-slider-wrapper d-block d-sm-none">
+    <ng-image-slider [images]="ImageObject" #nav [infinite]="true" [autoSlide]="true"
+                     [showArrow]="false" [imageSize]="{width: '100px',height: '100px', space: 4}"
+                     [manageImageRatio]="true" [animationSpeed]="3" [imagePopup]="false" [direction]="'auto'" [slideImage]="1"></ng-image-slider>
+  </div>
+
   <!--Slider-->
   <div class="banner-slider">
     <div class="banner-slide">
@@ -134,6 +153,7 @@
     </div>
   </div>
 
+
 </section>
 
 <!--Activity Lists-->
@@ -152,11 +172,20 @@
           </div>
           <div class="desc_wrap">
             <div class="info-left">
-              <h4>{{Act.Title}}</h4>
+              <span class="rating rating-container float-right d-block d-sm-none" *ngIf="Act.TotalReviews">
+                <ngb-rating [rate]="Act.AvgRate" [readonly]="true" max="5" [starTemplate]="t"></ngb-rating>
+                <ng-template #t let-fill="fill">
+                  <span class="fa fa-star empty-star" *ngIf="fill == 0"></span>
+                  <span class="fa fa-star full-star" *ngIf="fill === 100"></span>
+                  <span class="fa fa-star-half-empty" *ngIf="fill >0 && fill< 100"></span>
+                </ng-template>
+              </span>
+              <h4 class="row full-width">{{Act.Title}}</h4>
               <p class="place">
-                <i class="fas fa-building mr-2" *ngIf="Act.Supplier.UserType == AppEnums.UserTypes.CompanySupplier"></i>
-                <i class="fas fa-user-tie mr-2" *ngIf="Act.Supplier.UserType == AppEnums.UserTypes.IndividualSupplier"></i>
-                {{Act.Supplier.FullName}}
+                <i class="fas fa-building mr-2" *ngIf="Act.Supplier?.UserType == AppEnums.UserTypes.CompanySupplier"></i>
+                <i class="fas fa-user-tie mr-2" *ngIf="Act.Supplier?.UserType == AppEnums.UserTypes.IndividualSupplier"></i>
+                <i class="fas fa-building mr-2" *ngIf="!Act.Supplier"></i>
+                {{Act.SupplierNameV}}
               </p>
               <p class="place">
                 <i aria-hidden="true" class="fas fa-map-marker-alt"></i>
@@ -167,10 +196,15 @@
               </div>
             </div>
             <div class="info-right">
-              <span class="rating" *ngIf="Act.TotalReviews">
-                <i class="icon icon-star"></i>  {{Act.AvgRate}}
+              <span class="rating d-none d-sm-block" *ngIf="Act.TotalReviews">
+                <ngb-rating [rate]="Act.AvgRate" [readonly]="true" max="5" [starTemplate]="t"></ngb-rating>
+                <ng-template #t let-fill="fill">
+                  <span class="fa fa-star empty-star" *ngIf="fill == 0"></span>
+                  <span class="fa fa-star full-star" *ngIf="fill === 100"></span>
+                  <span class="fa fa-star-half-empty" *ngIf="fill >0 && fill< 100"></span>
+                </ng-template>
               </span>
-              <span class="price">{{Act.Price}}$</span>
+              <span class="price float-right" *ngIf="Act.Price">{{formatMony(Act.Price)}}</span>
             </div>
           </div>
         </div>

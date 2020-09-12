@@ -283,7 +283,7 @@
                   <span class="rating" *ngIf="Act.TotalReviews">
                     <i class="icon icon-star"></i> {{Act.AvgRate}}
                   </span>
-                  <span class="price">{{Act.Price}}$</span>
+                  <span class="price" *ngIf="Act.Price">{{formatMony(Act.Price)}}</span>
                 </div>
               </div>
             </a>

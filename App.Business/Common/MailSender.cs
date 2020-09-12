@@ -15,7 +15,7 @@ namespace App.Business
             MailMessage mail = new MailMessage();
             SmtpClient SmtpServer = new SmtpClient(ConfigurationManager.AppSettings["SMTPServer"].ToString()); //"smtp.gmail.com"
 
-            mail.From = new MailAddress(ConfigurationManager.AppSettings["MailSenderName"].ToString());// "alijarwan90@gmail.com"
+            mail.From = new MailAddress(ConfigurationManager.AppSettings["MailSenderName"].ToString(), "Skillaround");// "alijarwan90@gmail.com"
             mail.To.Add(to);
             mail.Subject = title;
             mail.Body = body;
@@ -27,7 +27,7 @@ namespace App.Business
             SmtpServer.EnableSsl = true;
             mail.BodyEncoding = Encoding.UTF8;
 
-             
+
             SmtpServer.Send(mail);
 
         }

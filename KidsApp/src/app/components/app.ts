@@ -16,7 +16,6 @@ import { CoreHelper } from '../core/services/core.helper';
 import { SharedSubjects } from '../shared/service/shared.subjects';
 import { AppEnums } from '../app.enums';
 import { SocialMedialService } from '../services/socialMedia.Service';
-
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { enGbLocale, arLocale } from 'ngx-bootstrap/locale';
 import { BsLocaleService, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
@@ -134,8 +133,44 @@ export class App extends BaseComponent implements OnInit {
     })
 
     CoreSubjects.onNavigation.subscribe((route: NavigationEnd) => {
-      console.log('navigation')
+      //console.log('navigation')
     })
+
+    CoreSubjects.onHttpError.subscribe((res: any) => {
+      if (res.status == 401) {
+        //Logout
+        if (this.ActiveUser) {
+          if (this.ActiveUser.LoginProvider == AppEnums.LoginProvider.Google) {
+            if (!DataStore.get('GoogleInitialized')) {
+              this.smSVC.gInitialize();
+              setTimeout(() => {
+                this.smSVC.gSignOut();
+              }, 250)
+            }
+            else {
+              this.smSVC.gSignOut();
+
+            }
+          }
+          else if (this.ActiveUser.LoginProvider == AppEnums.LoginProvider.Facebook) {
+            //this.smSVC.fbLogout();
+          }
+
+          DataStore.addUpdate('ActiveUser', null, CoreEnums.StorageLocation.LocalStorge);
+          DataStore.addUpdate('token', null, CoreEnums.StorageLocation.LocalStorge);
+          this.navigate('');
+          //delayed to not navigate back to the same page after refresh
+          setTimeout(() => {
+            location.reload();
+          }, 500)
+        }
+        else {
+          DataStore.addUpdate('ActiveUser', null, CoreEnums.StorageLocation.LocalStorge);
+          DataStore.addUpdate('token', null, CoreEnums.StorageLocation.LocalStorge);
+        }
+        
+      }
+    });
   }
 
   public HandleSharedSubjects() {

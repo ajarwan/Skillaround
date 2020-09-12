@@ -87,7 +87,7 @@ export class SocialMedialService {
       });
 
       request.execute((res) => {
-        console.log(res)
+        //console.log(res)
 
         //User Already Logged In
         if (DataStore.get('ActiveUser')) {

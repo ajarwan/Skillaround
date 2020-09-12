@@ -105,6 +105,10 @@
       <Project>{50824ddd-2770-43a5-a11b-4fe7cde09615}</Project>
       <Name>App.Entity</Name>
     </ProjectReference>
+    <ProjectReference Include="..\App.Service\App.Service.csproj">
+      <Project>{35227013-ec48-41c9-ac6d-b566f0723bf9}</Project>
+      <Name>App.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

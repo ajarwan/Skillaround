@@ -19,6 +19,7 @@ namespace App.Entity
         public string MobileNumber { get; set; }
 
         public bool IsSeen { get; set; }
+        public bool IsReplied { get; set; }
         #endregion
 
         #region "----Navigation Properties----"

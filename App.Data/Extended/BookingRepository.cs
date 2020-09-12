@@ -25,10 +25,10 @@ namespace App.Data.Extended
 
             BookingStatisticsDTO stat = new BookingStatisticsDTO();
 
-            stat.TotalBooking = dbSet.Count(x => !x.IsDeleted);
-            stat.PendingCount = dbSet.Count(x => !x.IsDeleted && x.Status == SharedEnums.BookingConfirmationStatus.Pending);
-            stat.CancelledCount = dbSet.Count(x => !x.IsDeleted && x.Status == SharedEnums.BookingConfirmationStatus.Cancelled);
-            stat.ConfirmedCount = dbSet.Count(x => !x.IsDeleted && x.Status == SharedEnums.BookingConfirmationStatus.Confirmed);
+            stat.TotalBooking = dbSet.Where(x=>x.ActivityId == ActivityId).Count(x => !x.IsDeleted);
+            stat.PendingCount = dbSet.Where(x => x.ActivityId == ActivityId).Count(x => !x.IsDeleted && x.Status == SharedEnums.BookingConfirmationStatus.Pending);
+            stat.CancelledCount = dbSet.Where(x => x.ActivityId == ActivityId).Count(x => !x.IsDeleted && x.Status == SharedEnums.BookingConfirmationStatus.Cancelled);
+            stat.ConfirmedCount = dbSet.Where(x => x.ActivityId == ActivityId).Count(x => !x.IsDeleted && x.Status == SharedEnums.BookingConfirmationStatus.Confirmed);
             return stat;
 
              

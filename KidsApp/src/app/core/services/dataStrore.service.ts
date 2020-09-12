@@ -83,6 +83,7 @@ export class DataStore {
     if (this.instance == null) {
       this.isCreating = true;
       this.instance = new DataStore();
+      this.instance.items = new Array<StoreItem>();
       this.isCreating = false;
     }
     return this.instance;
@@ -97,7 +98,7 @@ export class DataStore {
       this.instance._resources = reources;
     this.instance._router = router;
 
-    this.instance.items = new Array<StoreItem>();
+    //this.instance.items = new Array<StoreItem>();
     this.instance.isInitialized = true;
   }
 

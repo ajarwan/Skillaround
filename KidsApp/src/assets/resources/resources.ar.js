@@ -173,7 +173,7 @@ var _Resources = {
   TitleSearch: 'Search by title',
   TitleSearch: 'إبحث بالعنوان',
   SignUpSuccessfullMsg: 'تهانينا، لقد قمت بتسجيل الدخول بنجاح، يرجى تأكيد بريدك الألكتروني.',
-  SupplierShouldPovideDetailsMsg: 'لكي تصبح مورداً عليك ملأ الخانات التالية',
+  SupplierShouldPovideDetailsMsg: 'لكي تصبح مزوداً عليك ملأ الخانات التالية',
   Day: 'اليوم',
   Directions: 'الإتجاه',
   Details: 'التفاصيل',
@@ -342,7 +342,27 @@ var _Resources = {
   Pending2: 'في الإنتظار',
   TotalBookings: 'عدد الحجوزات',
   BookingConfirmationStatus: 'حالة التأكيد',
-  PACShort: 'الخصوصية'
+  PACShort: 'الخصوصية',
+  Reply: 'رد',
+  ClickToGoToCurrentLocation: 'الذهاب للموقع الحالي',
+  CurrentLocation: 'الموقع الحالي',
+  Mailers: 'الإيميلات',
+  SendEmailToAll: 'إرسال للجميع',
+  SendEmailToUsers: 'إرسال للمستخدمين فقط',
+  SendEmailToSuppliers: 'إرسال للمزودين فقط',
+  EmailArabic: 'الإيميل بالعربية',
+  EmailEnglish: 'الإيميل بالإنجليزية',
+  EmailSubject:'العنوان',
+  EmailQueuedUpAndWillBeSendShortly: 'تم إضافة الايميل وسيتم الإرسال قريباً',
+  UserInActive: 'تم إيقاف الحساب',
+  PriceInDollar: 'السعر (بالدولار)',
+  SendEmailToAdmins: 'إرسال للمدراء فقط',
+  AdminActivities: 'نشاطات مدير النظام',
+  SupplierInfo: 'معلومات المزود',
+  SupplierName: 'إسم المزود',
+  SupplierEmail: 'البريد الإلكتروني للمزود',
+  SupplierPhoneNumber: 'رقم هاتف المزود',
+  AdminActivitiesList: 'نشاطات مدير النظام'
 }
 
 

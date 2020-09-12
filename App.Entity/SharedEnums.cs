@@ -140,7 +140,13 @@ namespace App.Entity
             UserAccess = 2,
             ActivityViewList = 3
         }
-
+        public enum MailReceiverType : int
+        {
+            All = 1,
+            Users = 2,
+            Suppliers = 3,
+            Admins = 4
+        }
 
     }
 }

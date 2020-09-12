@@ -174,4 +174,10 @@
   <data name="SentYouEmailSubject" xml:space="preserve">
     <value> رسالة جديدة </value>
   </data>
+  <data name="ContactUsReply" xml:space="preserve">
+    <value>ردا على رسالتكم</value>
+  </data>
+  <data name="YourMessage" xml:space="preserve">
+    <value>رسالتكم</value>
+  </data>
 </root>

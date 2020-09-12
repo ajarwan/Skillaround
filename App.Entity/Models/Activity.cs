@@ -40,7 +40,7 @@ namespace App.Entity.Models
 
         public bool IsActive { get; set; } = false;
 
-        public int SupplierId { get; set; }
+        public int? SupplierId { get; set; }
         public int CategoryId { get; set; }
 
         public int? ThumbnailId { get; set; }
@@ -53,6 +53,9 @@ namespace App.Entity.Models
 
         public bool OnlineLocation { get; set; }
 
+        public string SupplierName { get; set; }
+        public string SupplierEmail { get; set; }
+        public string SupplierPhoneNumber { get; set; }
         #endregion
 
 
@@ -113,6 +116,54 @@ namespace App.Entity.Models
                     return Resources.KidsApp.OnlineLocation;
                 else
                     return this.LocationName;
+            }
+        }
+
+        [NotMapped]
+        public string SupplierNameV
+        {
+            get
+            {
+                if (this.SupplierId.HasValue)
+                {
+                    return this.Supplier != null ? this.Supplier.FullName : string.Empty;
+                }
+                else
+                {
+                    return this.SupplierName;
+                }
+            }
+        }
+
+        [NotMapped]
+        public string SupplierEmailV
+        {
+            get
+            {
+                if (this.SupplierId.HasValue)
+                {
+                    return this.Supplier != null ? this.Supplier.Email : string.Empty;
+                }
+                else
+                {
+                    return this.SupplierEmail;
+                }
+            }
+        }
+
+        [NotMapped]
+        public string SupplierPhoneNumberV
+        {
+            get
+            {
+                if (this.SupplierId.HasValue)
+                {
+                    return this.Supplier != null ? this.Supplier.PhoneNumber : string.Empty;
+                }
+                else
+                {
+                    return this.SupplierPhoneNumber;
+                }
             }
         }
         #endregion

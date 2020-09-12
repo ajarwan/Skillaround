@@ -55,6 +55,8 @@ namespace App.REST.Controllers
         {
             try
             {
+                Unit.LogError(new Exception("test log file"), this.ToString(), this.ActionContext.ActionArguments.ToList());
+
                 Pager pager = new Pager() { PageSize = pageSize, PageIndex = pageIndex }; ;
 
 

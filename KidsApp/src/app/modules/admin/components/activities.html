@@ -39,9 +39,10 @@
                   </p>
                   <p>{{Activity.Description}}</p>
                   <div class="supplier-name">
-                    <i class="fas fa-building mr-2" *ngIf="Activity.Supplier.UserType == AppEnums.UserTypes.CompanySupplier"></i>
-                    <i class="fas fa-user-tie mr-2" *ngIf="Activity.Supplier.UserType == AppEnums.UserTypes.IndividualSupplier"></i>
-                    <h5>{{Activity.Supplier.FullName}}</h5>
+                    <i class="fas fa-building mr-2" *ngIf="Activity.Supplier?.UserType == AppEnums.UserTypes.CompanySupplier"></i>
+                    <i class="fas fa-user-tie mr-2" *ngIf="Activity.Supplier?.UserType == AppEnums.UserTypes.IndividualSupplier"></i>
+                    <i class="fas fa-building mr-2" *ngIf="!Activity.Supplier"></i>
+                    <h5>{{Activity.SupplierNameV}}</h5>
                   </div>
 
                 </div>

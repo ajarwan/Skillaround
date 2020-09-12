@@ -9,11 +9,13 @@ import { DatePickerComponent, BsDaterangepickerContainerComponent } from 'ngx-bo
 import { CoreHelper } from 'src/app/core/services/core.helper';
 import { DataStore } from 'src/app/core/services/dataStrore.service';
 import { SharedService } from 'src/app/shared/service/shared.service';
+import createHTMLMapMarker from 'src/app/shared/classes/HTMLMarker';
 
 declare var $: any;
 declare var google: any;
 declare var navigator: any;
 declare var InfoBox: any;
+declare var fx: any;
 
 enum FilterType {
   Date = 1,
@@ -61,6 +63,9 @@ export class ActivityList extends BaseComponent implements OnInit, AfterViewInit
   public MaxPrice: any = 0;
   public FilterType = FilterType;
   public IsFiltersShown: boolean = false;
+
+  public MinPriceOriginal: any = 0;
+  public MaxPriceOriginal: any = 0;
 
   public Activities = [];
   public ActivityInclude: any[] = ['Thumbnail', 'Supplier'];
@@ -118,7 +123,6 @@ export class ActivityList extends BaseComponent implements OnInit, AfterViewInit
   public ngOnInit() {
 
     this.route.queryParams.subscribe((res: any) => {
-      console.log(res);
       if (res) {
         if (res.location) {
           this.Criteria.LocationId = res.location
@@ -217,10 +221,13 @@ export class ActivityList extends BaseComponent implements OnInit, AfterViewInit
 
   public LoadPriceRange() {
     this.activitySVC.FindActivityPriceRange().subscribe((res: any) => {
-      this.MinPrice = res.MinPrice;
-      this.MaxPrice = res.MaxPrice;
+      this.MinPriceOriginal = res.MinPrice; //Math.floor(this.formatMony(res.MinPrice, false));
+      this.MaxPriceOriginal = res.MaxPrice; // Math.ceil(this.formatMony(res.MaxPrice, false));
+
+      this.MinPrice = Math.floor(this.formatMony(res.MinPrice, false));
+      this.MaxPrice = Math.ceil(this.formatMony(res.MaxPrice, false));
       //debugger;
-      $("#price").val("$" + (this.Criteria.MinPrice ? this.Criteria.MinPrice : this.MinPrice) + " - $" + (this.Criteria.MaxPrice ? this.Criteria.MaxPrice : this.MaxPrice));
+      $("#price").val((this.Criteria.MinPrice ? this.Criteria.MinPrice : this.MinPrice) + " - " + (this.Criteria.MaxPrice ? this.Criteria.MaxPrice : this.MaxPrice) + " " + this.getMonySymbol());
     })
   }
 
@@ -266,6 +273,11 @@ export class ActivityList extends BaseComponent implements OnInit, AfterViewInit
         //[Reviews.Rate]
       }
     }
+
+    if (this.FinalCriteria.MaxPrice)
+      this.FinalCriteria.MaxPriceFix = Math.ceil(fx.convert(this.FinalCriteria.MaxPrice, { from: this.CurrencyName, to: "USD" }));
+    if (this.FinalCriteria.MinPrice)
+      this.FinalCriteria.MinPriceFix = Math.floor(fx.convert(this.FinalCriteria.MinPrice, { from: this.CurrencyName, to: "USD" }));
 
     this.activitySVC.FindAllActivities(this.FinalCriteria, this.Pager.PageIndex, this.Pager.PageSize, SortByStr, this.ActivityInclude.join(','), false).subscribe((res: any) => {
 
@@ -336,7 +348,7 @@ export class ActivityList extends BaseComponent implements OnInit, AfterViewInit
       max: parseInt(this.MaxPrice),
       values: [me.Criteria.MinPrice ? me.Criteria.MinPrice : this.MinPrice, me.Criteria.MaxPrice ? me.Criteria.MaxPrice : this.MaxPrice],
       slide: function (event, ui) {
-        $("#price").val("$" + ui.values[0] + " - $" + ui.values[1]);
+        $("#price").val(ui.values[0] + " - " + ui.values[1] + " " + me.getMonySymbol());
 
         me.Criteria.MaxPrice = ui.values[1];
         me.Criteria.MinPrice = ui.values[0];
@@ -840,55 +852,106 @@ export class ActivityList extends BaseComponent implements OnInit, AfterViewInit
 
     let me = this;
 
+    if (this.FinalCriteria.MaxPrice)
+      this.FinalCriteria.MaxPriceFix = Math.ceil(fx.convert(this.FinalCriteria.MaxPrice, { from: this.CurrencyName, to: "USD" }));
+    if (this.FinalCriteria.MinPrice)
+      this.FinalCriteria.MinPriceFix = Math.floor(fx.convert(this.FinalCriteria.MinPrice, { from: this.CurrencyName, to: "USD" }));
+
+
     this.activitySVC.FindAllMapMarks(this.FinalCriteria, false).subscribe((res: any) => {
       //First Clear All MArks
       if (res.d && res.d.length > 0) {
+        //debugger;
+        //this.MapMarks
+        let MarksData = res.d.filter((x: any) => this.MapMarks.find((y) => y.Id == x.Id) == null);
+        let RemovedIds = this.MapMarks.filter((x: any) => res.d.find((y) => y.Id == x.Id) == null).map((x: any) => x.Id);
 
-        let MarksData = res.d.filter((x: any) => this.CurrentMarksData.find((y) => y.Id == x.Id) == null);
-        let RemovedIds = this.CurrentMarksData.filter((x: any) => res.d.find((y) => y.Id == x.Id) == null).map((x: any) => x.Id);
         this.RemoveAllMapMarks(RemovedIds);
 
         MarksData.forEach((x: any) => {
 
-          let marker = new google.maps.Marker({
-            position: new google.maps.LatLng(x.Lat, x.Lng),
-            map: this.GmapVisible,
-            icon: 'assets/app-images/' + x.Pin,
-            Id: x.Id
-          });
+          //let marker = new google.maps.Marker({
+          //  position: new google.maps.LatLng(x.Lat, x.Lng),
+          //  map: this.GmapVisible,
+          //  icon: 'assets/app-images/' + x.Pin,
+          //  Id: x.Id
+          //});
 
           //marker.setAnimation(google.maps.Animation.DROP);
-          me.MapMarks.push(marker);
+          //me.MapMarks.push(marker);
 
-          google.maps.event.addListener(marker, 'click', function () {
+          //google.maps.event.addListener(marker, 'click', function () {
+          //  me.FromPinClick = true;
+          //  console.log(event);
+          //  me.CloseMapMark();
+          //  me.OpenMapMark(x, this);
+          //  //getInfoBox(item).open(mapObject, this);
+
+          //  me.GmapVisible.setCenter(new google.maps.LatLng(x.Lat, x.Lng));
+
+          //});
+
+          let htmlTemplate = '';
+          if (x.Price > 0) {
+            htmlTemplate = `<div>
+                              <img src="assets/app-images/${x.Pin}">
+                              <div class="map-price-wrapper">${this.formatMony(x.Price)}</div>
+                            </div>`;
+          }
+          else {
+            htmlTemplate = `<div>
+                              <img src="assets/app-images/${x.Pin}">
+                             </div>`;
+          }
+
+          let marker2 = createHTMLMapMarker({
+            latlng: new google.maps.LatLng(x.Lat, x.Lng),
+            map: this.GmapVisible,
+            html: htmlTemplate,
+            id: x.Id
+          });
+          me.MapMarks.push(marker2);
+          marker2.addListener("click", function () {
             me.FromPinClick = true;
-            console.log(event);
             me.CloseMapMark();
             me.OpenMapMark(x, this);
-            //getInfoBox(item).open(mapObject, this);
-
             me.GmapVisible.setCenter(new google.maps.LatLng(x.Lat, x.Lng));
-
           });
+
         });
 
-        this.CurrentMarksData = res.d;
+        //this.CurrentMarksData = res.d;
       }
       else {
-        this.RemoveAllMapMarks([]);
+        this.RemoveAllMapMarks([], true);
       }
 
     })
 
   }
 
-  public RemoveAllMapMarks(Ids: number[]) {
+  public RemoveAllMapMarks(Ids: number[], removeAll: boolean = false) {
+
+    if (removeAll) {
+      this.MapMarks.forEach((x: any) => {
+        //console.log(x);
+        //x.setMap(null);
+        x.delete();
+      });
+
+      this.MapMarks = [];
+    }
+    else {
+      this.MapMarks.filter((x: any) => Ids.indexOf(x.Id) > -1).forEach((x: any) => {
+        //console.log(x);
+        //x.setMap(null);
+        x.delete();
+      });
+
+      this.MapMarks = this.MapMarks.filter((x: any) => !x.IsDeleted);
+    }
 
 
-    this.MapMarks.filter((x: any) => Ids.indexOf(x.Id) > -1).forEach((x: any) => {
-      console.log(x);
-      x.setMap(null);
-    });
   }
 
   public CloseMapMark() {
@@ -903,7 +966,7 @@ export class ActivityList extends BaseComponent implements OnInit, AfterViewInit
         '<div class="marker_info_2">' +
         '<img style="width:240px;height:140px" src="' + item.Image + '" alt="Image"/>' +
         '<h3>' + item.Title + '</h3>' +
-        (item.Price ? '<span>' + item.Price + '$</span>' : '<span>' + CoreHelper.TruncateText(item.Description) + '</span>') +
+        (item.Price ? '<span>' + this.formatMony(item.Price) + '</span>' : '<span>' + CoreHelper.TruncateText(item.Description) + '</span>') +
         '<div class="marker_tools">' +
         '<a href="https://www.google.com/maps/dir//' + item.Lat + ',' + item.Lng + '" value="Get directions" class="btn_infobox_get_directions" target="_blank">' + this.resources.Directions + '</a>' +
         '<a href="tel://' + item.SupplierPhoneNumber + '" class="btn_infobox_phone">' + item.SupplierPhoneNumber + '</a>' +
@@ -934,15 +997,19 @@ export class ActivityList extends BaseComponent implements OnInit, AfterViewInit
     this.CloseMapMark();
   }
 
-
-
   public ClearFilter() {
     this.Criteria = {
       TransportationStatus: AppEnums.TransportationFilter.All
     };
+
+    this.MinPrice = Math.floor(this.formatMony(this.MinPriceOriginal, false));
+    this.MaxPrice = Math.ceil(this.formatMony(this.MaxPriceOriginal, false));
+    //debugger;
+    $("#price").val((this.Criteria.MinPrice ? this.Criteria.MinPrice : this.MinPrice) + " - " + (this.Criteria.MaxPrice ? this.Criteria.MaxPrice : this.MaxPrice) + " " + this.getMonySymbol());
+
     this.FinalCriteria = this.clone(this.Criteria);
     this.LoadActivities();
-
+    this.FindAllBordersMarks();
   }
 
   public AddStatistics() {

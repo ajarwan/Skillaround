@@ -5,10 +5,11 @@ import { RouterModule } from '@angular/router';
 import { NgInviewModule } from 'angular-inport';
 import { RatingModule } from 'ng-starrating';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 //import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 //import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppClick, AppHidden, AppCharLimit, AppEnter, AppImageError } from './directives/core.directives';
 import { PopoverModule } from 'ngx-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
@@ -17,6 +18,7 @@ import { BsDropdownModule } from 'ngx-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { DotSpinner } from '../shared/components/dotspinner';
 import { FullCalendarModule } from '@fullcalendar/angular'; // for FullCalendar!
+import { NgImageSliderModule } from 'ng-image-slider';
 
 import {
   AppEmptyReplacer,
@@ -68,7 +70,9 @@ const CORE_DECLARATIONS = [
     NgSelectModule,
     BsDropdownModule.forRoot(),
     NgxIntlTelInputModule,
-    FullCalendarModule
+    FullCalendarModule,
+    TooltipModule.forRoot(),
+    NgImageSliderModule
   ],
   exports: [
     CommonModule,
@@ -86,7 +90,9 @@ const CORE_DECLARATIONS = [
     NgSelectModule,
     BsDropdownModule,
     NgxIntlTelInputModule,
-    FullCalendarModule
+    FullCalendarModule,
+    TooltipModule,
+    NgImageSliderModule
   ],
   providers: []
 })

@@ -39,13 +39,46 @@ export class Landing extends BaseComponent implements OnInit, AfterViewInit, OnD
   public Categories: any[] = [];
 
   public Activities: any[] = [];
-  public ActivityInclude: any[] = ['Thumbnail','Supplier'];
+  public ActivityInclude: any[] = ['Thumbnail', 'Supplier'];
 
   public Criteria: any = {};
   public PlaceKeywod: string = '';
 
   public Ages = SharedService.Lookups.Ages;
 
+  public ImageObject: Array<object> = [
+    {
+      image: '/assets/images/slider1.jpg',
+      thumbImage: '/assets/images/slider1.jpg',
+      alt: 'alt of image',
+
+    },
+    {
+      image: '/assets/images/slider2.jpg',
+      thumbImage: '/assets/images/slider2.jpg',
+      alt: 'alt of image',
+
+    },
+    {
+      image: '/assets/images/slider3.jpg',
+      thumbImage: '/assets/images/slider3.jpg',
+      alt: 'alt of image',
+
+    },
+    {
+      image: '/assets/images/slider4.jpg',
+      thumbImage: '/assets/images/slider4.jpg',
+      alt: 'alt of image',
+
+    }
+    ,
+    {
+      image: '/assets/images/slider5.jpg',
+      thumbImage: '/assets/images/slider5.jpg',
+      alt: 'alt of image',
+
+    }
+  ];
   /******************************************
    * Constructor
    * ***************************************/
@@ -129,7 +162,7 @@ export class Landing extends BaseComponent implements OnInit, AfterViewInit, OnD
       this.LocationsList = [];
       return;
     }
-     
+
 
     var sessionToken = new google.maps.places.AutocompleteSessionToken();
     var displaySuggestions = (predictions, status) => {
@@ -165,7 +198,7 @@ export class Landing extends BaseComponent implements OnInit, AfterViewInit, OnD
     if (!this.Criteria.SelectdLocation)
       return;
 
- 
+
     let service = new google.maps.places.PlacesService(this.gmapHidden);
     var request = {
       placeId: this.Criteria.SelectdLocation.place_id,

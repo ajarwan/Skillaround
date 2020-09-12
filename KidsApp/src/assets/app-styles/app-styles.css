@@ -42,7 +42,9 @@ body {
   z-index: 99995 !important;
 }
 
-
+.full-width {
+  width: 100%;
+}
 
 @-webkit-keyframes spinner-border {
   to {
@@ -431,7 +433,15 @@ body {
 }
 
 .empty-star {
-  color: #b0c4de;
+  color: #b0c4de !important;
+}
+
+/*.fa-star {
+  color: #b0c4de !important;
+}*/
+
+.full-star, .fa-star-half-empty {
+  color: #f79f00;
 }
 
 .d-inline-flex {
@@ -1949,7 +1959,7 @@ a.fc-event.posted:before {
 }
 
 .notification-drop-down {
-  overflow: scroll !important;
+  overflow: auto !important;
   overflow-x: hidden !important;
 }
 
@@ -2246,6 +2256,53 @@ td.fc-day-top.fc-tue.fc-today {
   display: none !important;
 }
 
+.map-price-wrapper {
+  background-color: #fff;
+  border-radius: 10px;
+  text-align: center;
+  padding: 5px;
+  margin-top: 5px;
+  font-size: 13px
+}
+
+.btn-reply {
+  background-color: #cc3b6a !important;
+  border-color: #cc3b6a !important;
+  color: #fff !important;
+}
+
+
+
+
+.act-table td:nth-child(1), .act-table th:nth-child(1) {
+  width: 5% !important;
+}
+
+.act-table td:nth-child(2), .act-table th:nth-child(2) {
+  width: 40% !important;
+}
+
+.act-table td:nth-child(3), .act-table th:nth-child(3) {
+  width: 20% !important;
+}
+
+.act-table td:nth-child(4), .act-table th:nth-child(4) {
+  width: 10% !important;
+}
+
+.act-table td:nth-child(5), .act-table th:nth-child(5) {
+  width: 10% !important;
+}
+
+.act-table td:nth-child(6), .act-table th:nth-child(6) {
+  width: 15% !important;
+}
+
+.act-table td {
+  vertical-align: middle !important;
+  white-space: pre-line !important;
+}
+
 
 /**************************
   Start Mobile
@@ -2293,9 +2350,54 @@ td.fc-day-top.fc-tue.fc-today {
   .sign-in-wrapper .form-group  {
     margin-bottom: 0 !important;
   }*/
+
+  .banner .banner-title {
+    width: 76% !important;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    top: 60px !important;
+    bottom: auto !important;
+    text-align: center;
+  }
+
+  .banner .main-search-widget {
+    top: 135px !important;
+  }
+
+  .image-popup, .img-div {
+    border: 0px !important;
+    box-shadow: none !important;
+  }
+
+  .mobile-slider-wrapper {
+    width: 100%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    position: absolute;
+    z-index: 5;
+    bottom: 0px;
+    text-align: center;
+  }
+
+  .activity_Block .desc_wrap {
+    padding: 10px 10px !important;
+  }
+
+    .activity_Block .desc_wrap .info-right {
+      padding: 5px !important;
+    }
+
+  .rating-container {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .banner .slick-arrow {
+    display: none !important;
+  }
 }
-
-
 /**************************
   End Mobile 
   Dont Write under this line

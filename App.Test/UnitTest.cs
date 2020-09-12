@@ -9,6 +9,7 @@ using App.Business;
 using App.Business.Core;
 using App.Core;
 using App.Entity.Models;
+using App.Service;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace App.Test
@@ -336,8 +337,8 @@ namespace App.Test
             MailMessage mail = new MailMessage();
             SmtpClient SmtpServer = new SmtpClient("smtp.fastmail.com"); //"smtp.gmail.com"
 
-            mail.From = new MailAddress("support@ajdev.net","Skillaround");// "alijarwan90@gmail.com"
-            mail.To.Add("alijarwan90@gmail.com");
+            mail.From = new MailAddress("support@ajdev.net", "Skillaround");// "alijarwan90@gmail.com"
+            mail.To.Add("ajarwan@epyasolutions.com");
             mail.Subject = "Test From Code";
             mail.Body = "Test From Code";
             mail.IsBodyHtml = true;
@@ -347,13 +348,33 @@ namespace App.Test
                     , "k5wmemg8mtzvttkt");
             SmtpServer.EnableSsl = true;
             mail.BodyEncoding = Encoding.UTF8;
-             
+
 
             SmtpServer.Send(mail);
 
         }
 
-       
+
+        [TestMethod]
+        public void TestSendingService()
+        {
+
+            //EmailsSenderJob esj = new EmailsSenderJob();
+
+            //using (var Unit = new UnitOfWork(new App.Data.AppContext()))
+            //{
+            //    Manager<OutgoingEmail> Mgr = new Manager<OutgoingEmail>(Unit);
+            //    var oge = Mgr.FindById(1);
+            //    var text = esj.GetEmailTemplateBody(oge);
+            //}
+
+            EmailsSenderJob esj = new EmailsSenderJob();
+            esj.StartSending(null,null);
+
+
+
+        }
+
 
 
     }

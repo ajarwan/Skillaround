@@ -12,6 +12,9 @@ import { AdminMessages } from './components/messages';
 import { AboutAdmin } from './components/aboutAdmin';
 import { TACAdmin } from './components/tac';
 import { PACAdmin } from './components/pac';
+import { Mailers } from './components/mailers';
+import { AdminManagedActivities } from './components/activities/adminactivities';
+import { AdminActivityList } from './components/activities/list/adminactivitylist';
 
 
 @NgModule({
@@ -25,7 +28,10 @@ import { PACAdmin } from './components/pac';
     AdminMessages,
     AboutAdmin,
     TACAdmin,
-    PACAdmin
+    PACAdmin,
+    Mailers,
+    AdminManagedActivities,
+    AdminActivityList
   ],
   imports: [
     AdminRoutingModule,
