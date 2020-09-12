@@ -35,7 +35,7 @@
     "bootstrap": "4.1.1",
     "google-libphonenumber": "^3.2.6",
     "intl-tel-input": "^14.1.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "ng-starrating": "^1.0.7",
     "ngx-bootstrap": "^5.2.0",
     "ngx-intl-tel-input": "^2.3.1",
